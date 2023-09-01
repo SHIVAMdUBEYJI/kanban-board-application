@@ -3,8 +3,8 @@ package com.niit.bej.user.auth.model;
 import java.util.Objects;
 
 public class User {
-   private String username;
-   private String password;
+    private String username;
+    private String password;
 
     public User() {
     }
@@ -41,5 +41,10 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(username, password);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "username='" + username + '\'' + ", password='" + password + '\'' + '}';
     }
 }
