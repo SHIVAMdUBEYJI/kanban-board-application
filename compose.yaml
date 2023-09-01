@@ -7,7 +7,7 @@ services:
       - "3307:3306"
     networks: [ kanban-board-application-network ]
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: Saraneswar4896
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
 
   user-auth-service:
