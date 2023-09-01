@@ -1,8 +1,12 @@
 package com.niit.bej.user.auth.model;
 
-import java.util.Objects;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+import java.util.Objects;
+@Entity
 public class User {
+    @Id
     private String username;
     private String password;
 
