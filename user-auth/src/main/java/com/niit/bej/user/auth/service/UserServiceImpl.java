@@ -6,6 +6,7 @@ import com.niit.bej.user.auth.model.User;
 import com.niit.bej.user.auth.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,6 +37,15 @@ public class UserServiceImpl implements UserService {
             return user.getUsername().equals(userFromDatabase.getUsername()) && user.getPassword().equals(userFromDatabase.getPassword());
 
         }
+    }
+
+    @Override
+    public List<User> getAllUsers() throws UserNotFoundException {
+        List<User> userList = this.userRepository.findAll();
+        if(userList.isEmpty()){
+            throw new UserNotFoundException("User does not exist !!");
+        }
+        return userList;
     }
 
 
