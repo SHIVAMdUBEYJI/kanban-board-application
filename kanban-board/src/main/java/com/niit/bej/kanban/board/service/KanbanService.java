@@ -1,5 +1,6 @@
 package com.niit.bej.kanban.board.service;
 
+import com.niit.bej.kanban.board.exception.KanbanDoesNotExistsException;
 import com.niit.bej.kanban.board.exception.TitleNotFoundException;
 import com.niit.bej.kanban.board.model.Kanban;
 
@@ -9,6 +10,8 @@ import java.util.Optional;
 public interface KanbanService {
     Optional<Kanban> getByTitle(String title) throws TitleNotFoundException;
 
-    List<Kanban> getAllKanban();
+    List<Kanban> getAllKanban() throws KanbanDoesNotExistsException;
+
+    Kanban saveKanban(Kanban kanban)
 
 }
