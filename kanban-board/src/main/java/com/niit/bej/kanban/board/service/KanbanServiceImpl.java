@@ -5,12 +5,20 @@ import com.niit.bej.kanban.board.exception.KanbanDoesNotExistsException;
 import com.niit.bej.kanban.board.exception.TitleNotFoundException;
 import com.niit.bej.kanban.board.model.Kanban;
 import com.niit.bej.kanban.board.model.Tasks;
+import com.niit.bej.kanban.board.repository.KanbanRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 @Service
 public class KanbanServiceImpl implements KanbanService {
+
+    private final KanbanRepository kanbanRepository;
+
+    public KanbanServiceImpl(KanbanRepository kanbanRepository) {
+        this.kanbanRepository = kanbanRepository;
+    }
+
     @Override
     public Optional<Kanban> getByTitle(String title) throws TitleNotFoundException {
         return Optional.empty();
