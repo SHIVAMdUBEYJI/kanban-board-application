@@ -52,4 +52,9 @@ public class Kanban {
     public int hashCode() {
         return Objects.hash(id, title, tasks);
     }
+
+    @Override
+    public String toString() {
+        return "Kanban{" + "id=" + id + ", title='" + title + '\'' + ", tasks=" + tasks + '}';
+    }
 }
