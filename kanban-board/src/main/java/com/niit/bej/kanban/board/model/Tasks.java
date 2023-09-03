@@ -1,15 +1,16 @@
 package com.niit.bej.kanban.board.model;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Tasks {
     private TaskStatus status;
-    private Cards cards;
+    private List<Cards> cards;
 
     public Tasks() {
     }
 
-    public Tasks(TaskStatus status, Cards cards) {
+    public Tasks(TaskStatus status, List<Cards> cards) {
         this.status = status;
         this.cards = cards;
     }
@@ -22,11 +23,11 @@ public class Tasks {
         this.status = status;
     }
 
-    public Cards getCards() {
+    public List<Cards> getCards() {
         return cards;
     }
 
-    public void setCards(Cards cards) {
+    public void setCards(List<Cards> cards) {
         this.cards = cards;
     }
 
@@ -45,6 +46,9 @@ public class Tasks {
 
     @Override
     public String toString() {
-        return "Tasks{" + "status=" + status + ", cards=" + cards + '}';
+        return "Tasks{" +
+                "status=" + status +
+                ", cards=" + cards +
+                '}';
     }
 }

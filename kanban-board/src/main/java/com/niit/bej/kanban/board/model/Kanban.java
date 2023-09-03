@@ -1,16 +1,21 @@
 package com.niit.bej.kanban.board.model;
 
-import java.util.Objects;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import java.util.List;
+import java.util.Objects;
+@Document(collection = "kanban-board")
 public class Kanban {
+    @MongoId
     private int id;
     private String title;
-    private Tasks tasks;
+    private List<Tasks> tasks;
 
     public Kanban() {
     }
 
-    public Kanban(int id, String title, Tasks tasks) {
+    public Kanban(int id, String title, List<Tasks> tasks) {
         this.id = id;
         this.title = title;
         this.tasks = tasks;
@@ -32,11 +37,11 @@ public class Kanban {
         this.title = title;
     }
 
-    public Tasks getTasks() {
+    public List<Tasks> getTasks() {
         return tasks;
     }
 
-    public void setTasks(Tasks tasks) {
+    public void setTasks(List<Tasks> tasks) {
         this.tasks = tasks;
     }
 
@@ -55,6 +60,10 @@ public class Kanban {
 
     @Override
     public String toString() {
-        return "Kanban{" + "id=" + id + ", title='" + title + '\'' + ", tasks=" + tasks + '}';
+        return "Kanban{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", tasks=" + tasks +
+                '}';
     }
 }
