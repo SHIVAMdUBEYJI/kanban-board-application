@@ -1,11 +1,13 @@
 package com.niit.bej.kanban.board.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.List;
 import java.util.Objects;
 @Document(collection = "tasks")
 public class Tasks {
+    @MongoId
     private String title;
     private TaskStatus status;
     private List<Cards> cards;
