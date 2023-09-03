@@ -19,6 +19,22 @@ services:
     depends_on: [ mysql-database-service]
     restart: always
 
+  mongodb-database-service:
+    image: mongo
+    container_name: mongodb-container
+    ports:
+      - "27018:27017"
+    networks: [ kanban-board-application-network ]
+
+  gaming-service:
+    build: gaming-service/
+    container_name: gaming-service-container
+    ports:
+      - "8083:8083"
+    networks: [ gaming-application-network ]
+    depends_on: [ mongodb-database-service ,eureka-server-service ]
+    restart: always
+
 networks:
   kanban-board-application-network:
     driver: bridge
