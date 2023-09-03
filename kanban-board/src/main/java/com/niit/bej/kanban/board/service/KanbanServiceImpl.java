@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class KanbanServiceImpl implements KanbanService {
 
@@ -21,17 +22,25 @@ public class KanbanServiceImpl implements KanbanService {
 
     @Override
     public Optional<Kanban> getByTitle(String title) throws TitleNotFoundException {
-        return Optional.empty();
+        Optional<Kanban> optionalKanban = this.kanbanRepository.findKanbanByTitle(title);
+        if (optionalKanban.isEmpty()) {
+            throw new TitleNotFoundException("Title not found");
+        }
+        return optionalKanban;
     }
 
     @Override
     public List<Kanban> getAllKanban() throws KanbanDoesNotExistsException {
-        return null;
+        List<Kanban> kanbanList = this.kanbanRepository.findAll();
+        if (kanbanList.isEmpty()) {
+            throw new KanbanDoesNotExistsException("Kanban does not exist");
+        }
+        return kanbanList;
     }
 
     @Override
     public Kanban saveKanban(Kanban kanban) throws KanbanAlreadyExistsException {
-        return null;
+        return this.kanbanRepository.save(kanban);
     }
 
     @Override
