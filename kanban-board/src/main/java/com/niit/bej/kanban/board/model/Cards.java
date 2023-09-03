@@ -1,6 +1,7 @@
 package com.niit.bej.kanban.board.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Cards {
     private String title;
@@ -58,5 +59,29 @@ public class Cards {
 
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cards cards = (Cards) o;
+        return Objects.equals(title, cards.title) && Objects.equals(description, cards.description) && Objects.equals(colors, cards.colors) && Objects.equals(members, cards.members) && Objects.equals(dueDate, cards.dueDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description, colors, members, dueDate);
+    }
+
+    @Override
+    public String toString() {
+        return "Cards{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", colors='" + colors + '\'' +
+                ", members='" + members + '\'' +
+                ", dueDate=" + dueDate +
+                '}';
     }
 }
