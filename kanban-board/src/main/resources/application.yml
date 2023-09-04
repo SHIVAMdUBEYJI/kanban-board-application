@@ -11,3 +11,10 @@ spring:
   data:
     mongodb:
       uri: mongodb://mongodb-container:27017/kanban-board
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka-server-service:8761/eureka

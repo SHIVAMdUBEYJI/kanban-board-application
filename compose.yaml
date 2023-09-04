@@ -1,5 +1,12 @@
 version: "3"
 services:
+  eureka-server-service:
+    build: eureka-server/
+    container_name: eureka-server-service-container
+    networks: [ gaming-application-network ]
+    ports:
+      - "8761:8761"
+
   mysql-database-service:
     image: mysql
     container_name: mysql-database-container
@@ -16,7 +23,7 @@ services:
     ports:
       - "8081:8081"
     networks: [ kanban-board-application-network ]
-    depends_on: [ mysql-database-service ]
+    depends_on: [ mysql-database-service,eureka-server-service ]
     restart: always
 
   mongodb-database-service:
@@ -32,8 +39,16 @@ services:
     ports:
       - "8082:8082"
     networks: [ kanban-board-application-network ]
-    depends_on: [ mongodb-database-service ]
+    depends_on: [ mongodb-database-service ,eureka-server-service]
     restart: always
+
+  api-gateway-service:
+    build: api-gateway/
+    container_name: api-gateway-service-container
+    ports:
+      - "9000:9000"
+    networks: [ kanban-board-application-network ]
+    depends_on: [ eureka-server-service ]
 
 networks:
   kanban-board-application-network:
