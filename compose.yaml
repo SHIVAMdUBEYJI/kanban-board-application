@@ -2,8 +2,8 @@ version: "3"
 services:
   eureka-server-service:
     build: eureka-server/
-    container_name: eureka-server-service-container
-    networks: [ gaming-application-network ]
+    container_name: eureka-service-container
+    networks: [ kanban-board-application-network ]
     ports:
       - "8761:8761"
 
@@ -49,6 +49,9 @@ services:
       - "9000:9000"
     networks: [ kanban-board-application-network ]
     depends_on: [ eureka-server-service ]
+
+
+
 
 networks:
   kanban-board-application-network:

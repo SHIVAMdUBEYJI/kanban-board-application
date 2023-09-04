@@ -1,5 +1,7 @@
 package com.niit.bej.kanban.board.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -8,17 +10,15 @@ public class Cards {
     private String description;
     private String colors;
     private String members;
-    private Date dueDate;
 
     public Cards() {
     }
 
-    public Cards(String title, String description, String colors, String members, Date dueDate) {
+    public Cards(String title, String description, String colors, String members) {
         this.title = title;
         this.description = description;
         this.colors = colors;
         this.members = members;
-        this.dueDate = dueDate;
     }
 
     public String getTitle() {
@@ -53,25 +53,17 @@ public class Cards {
         this.members = members;
     }
 
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cards cards = (Cards) o;
-        return Objects.equals(title, cards.title) && Objects.equals(description, cards.description) && Objects.equals(colors, cards.colors) && Objects.equals(members, cards.members) && Objects.equals(dueDate, cards.dueDate);
+        return Objects.equals(title, cards.title) && Objects.equals(description, cards.description) && Objects.equals(colors, cards.colors) && Objects.equals(members, cards.members);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, description, colors, members, dueDate);
+        return Objects.hash(title, description, colors, members);
     }
 
     @Override
@@ -81,7 +73,6 @@ public class Cards {
                 ", description='" + description + '\'' +
                 ", colors='" + colors + '\'' +
                 ", members='" + members + '\'' +
-                ", dueDate=" + dueDate +
                 '}';
     }
 }

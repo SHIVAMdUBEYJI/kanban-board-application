@@ -14,7 +14,7 @@ public class KanbanBoardServiceRouteConfig {
     @Bean
     @LoadBalanced
     public RouteLocator locateKanbanMicroserviceRoutes(RouteLocatorBuilder routeLocatorBuilder) {
-        return routeLocatorBuilder.routes().route(routePredicate -> routePredicate.path("/api/v1/users/**").uri("lb://kanban-board-service")).build();
+        return routeLocatorBuilder.routes().route(routePredicate -> routePredicate.path("/api/v1/**").uri("lb://kanban-board-service")).build();
     }
 
 }

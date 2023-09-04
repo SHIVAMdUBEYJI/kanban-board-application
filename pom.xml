@@ -26,6 +26,7 @@
         <module>kanban-board</module>
         <module>api-gateway</module>
         <module>eureka-server</module>
+        <module>notification-service</module>
     </modules>
 
     <dependencies>
