@@ -24,6 +24,7 @@
     <modules>
         <module>user-auth</module>
         <module>kanban-board</module>
+        <module>api-gateway</module>
     </modules>
 
     <dependencies>
