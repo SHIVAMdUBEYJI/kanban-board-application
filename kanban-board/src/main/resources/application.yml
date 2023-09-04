@@ -8,8 +8,6 @@ spring:
   application:
     name: kanban-board-service
 
-
-
   data:
     mongodb:
       uri: mongodb://mongodb-container:27017/kanban-board

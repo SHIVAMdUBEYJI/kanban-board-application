@@ -8,5 +8,5 @@ COPY target/*.jar /kanban-board-service.jar
 
 EXPOSE 8082
 
-ENTRYPOINT ["java", "-jar", "/kanban-board-service.jar"]
+ENTRYPOINT ["java", "-jar", "kanban-board-service.jar"]
 
