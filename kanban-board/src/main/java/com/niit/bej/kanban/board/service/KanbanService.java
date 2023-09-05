@@ -16,7 +16,7 @@ public interface KanbanService {
 
     Kanban saveKanban(Kanban kanban) throws KanbanAlreadyExistsException;
 
-    Kanban updateKanban(Kanban kanban) throws KanbanDoesNotExistsException;
+    Kanban updateKanban(String title ,Kanban kanban ,Kanban updatedKanban) throws KanbanDoesNotExistsException;
 
     void deleteKanban() throws KanbanDoesNotExistsException;
 

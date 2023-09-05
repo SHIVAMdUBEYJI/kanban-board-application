@@ -43,18 +43,30 @@ public class KanbanServiceImpl implements KanbanService {
         return this.kanbanRepository.save(kanban);
     }
 
-    public Kanban getKanbanFromDatabase(String title) throws KanbanDoesNotExistsException{
-      Optional<Kanban> optionalKanban = this.kanbanRepository.findKanbanByTitle(title);
-        if(optionalKanban.isEmpty()){
+    @Override
+    public Kanban updateKanban(String title, Kanban kanban, Kanban updatedKanban) throws KanbanDoesNotExistsException {
+        Kanban kanbanFromDatabase = getKanbanFromDatabase(title);
+        List<Tasks> optionalTasks = kanbanFromDatabase.getTasks();
+        if (optionalTasks.isEmpty()) {
+            throw new KanbanDoesNotExistsException("Does not exist");
+        }
+
+    }
+
+
+    public Kanban getKanbanFromDatabase(String title) throws KanbanDoesNotExistsException {
+        Optional<Kanban> optionalKanban = this.kanbanRepository.findKanbanByTitle(title);
+        if (optionalKanban.isEmpty()) {
             throw new KanbanDoesNotExistsException("not found");
         }
         return optionalKanban.get();
     }
 
-    @Override
-    public Kanban updateKanban(Kanban kanban) throws KanbanDoesNotExistsException {
-        return null;
+    private Kanban findKanbanByTitle(List<Kanban> kanbanList, String title) throws KanbanDoesNotExistsException {
+        Optional<Kanban> optionalKanban = kanbanList.stream().filter(kanban -> kanban.getTitle().trim().equals(title)).findFirst();
+        return optionalKanban.orElseThrow(() -> new KanbanDoesNotExistsException("Could not find kanban" + title + "!"));
     }
+
 
     @Override
     public void deleteKanban() throws KanbanDoesNotExistsException {
