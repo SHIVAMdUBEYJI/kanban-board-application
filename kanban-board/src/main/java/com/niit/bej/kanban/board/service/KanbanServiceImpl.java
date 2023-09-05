@@ -43,6 +43,14 @@ public class KanbanServiceImpl implements KanbanService {
         return this.kanbanRepository.save(kanban);
     }
 
+    public Kanban getKanbanFromDatabase(String title) throws KanbanDoesNotExistsException{
+      Optional<Kanban> optionalKanban = this.kanbanRepository.findKanbanByTitle(title);
+        if(optionalKanban.isEmpty()){
+            throw new KanbanDoesNotExistsException("not found");
+        }
+        return optionalKanban.get();
+    }
+
     @Override
     public Kanban updateKanban(Kanban kanban) throws KanbanDoesNotExistsException {
         return null;
