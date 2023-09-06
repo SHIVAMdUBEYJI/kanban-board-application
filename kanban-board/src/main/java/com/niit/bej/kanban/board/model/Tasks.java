@@ -8,25 +8,25 @@ import java.util.Objects;
 @Document(collection = "tasks")
 public class Tasks {
     @MongoId
-    private String title;
+    private String taskTitle;
     private TaskStatus status;
     private List<Cards> cards;
 
     public Tasks() {
     }
 
-    public Tasks(String title,TaskStatus status, List<Cards> cards) {
-        this.title = title;
+    public Tasks(String taskTitle, TaskStatus status, List<Cards> cards) {
+        this.taskTitle = taskTitle;
         this.status = status;
         this.cards = cards;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTaskTitle() {
+        return taskTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTaskTitle(String taskTitle) {
+        this.taskTitle = taskTitle;
     }
 
     public TaskStatus getStatus() {
@@ -50,18 +50,18 @@ public class Tasks {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tasks tasks = (Tasks) o;
-        return Objects.equals(title, tasks.title) && Objects.equals(status, tasks.status) && Objects.equals(cards, tasks.cards);
+        return Objects.equals(taskTitle, tasks.taskTitle) && Objects.equals(status, tasks.status) && Objects.equals(cards, tasks.cards);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, status, cards);
+        return Objects.hash(taskTitle, status, cards);
     }
 
     @Override
     public String toString() {
         return "Tasks{" +
-                "title='" + title + '\'' +
+                "taskTitle='" + taskTitle + '\'' +
                 ", status=" + status +
                 ", cards=" + cards +
                 '}';

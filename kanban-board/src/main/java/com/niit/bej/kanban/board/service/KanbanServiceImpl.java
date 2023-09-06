@@ -3,7 +3,9 @@ package com.niit.bej.kanban.board.service;
 import com.niit.bej.kanban.board.exception.KanbanAlreadyExistsException;
 import com.niit.bej.kanban.board.exception.KanbanDoesNotExistsException;
 import com.niit.bej.kanban.board.exception.TitleNotFoundException;
+import com.niit.bej.kanban.board.model.Cards;
 import com.niit.bej.kanban.board.model.Kanban;
+import com.niit.bej.kanban.board.model.TaskStatus;
 import com.niit.bej.kanban.board.model.Tasks;
 import com.niit.bej.kanban.board.repository.KanbanRepository;
 import org.springframework.stereotype.Service;
@@ -44,29 +46,9 @@ public class KanbanServiceImpl implements KanbanService {
     }
 
     @Override
-    public Kanban updateKanban(String title, Kanban kanban, Kanban updatedKanban) throws KanbanDoesNotExistsException {
-        Kanban kanbanFromDatabase = getKanbanFromDatabase(title);
-        List<Tasks> optionalTasks = kanbanFromDatabase.getTasks();
-        if (optionalTasks.isEmpty()) {
-            throw new KanbanDoesNotExistsException("Does not exist");
-        }
-
+    public Kanban updateKanban(int id, String taskTitle, Kanban updatedKanban) throws KanbanDoesNotExistsException {
+        return null;
     }
-
-
-    public Kanban getKanbanFromDatabase(String title) throws KanbanDoesNotExistsException {
-        Optional<Kanban> optionalKanban = this.kanbanRepository.findKanbanByTitle(title);
-        if (optionalKanban.isEmpty()) {
-            throw new KanbanDoesNotExistsException("not found");
-        }
-        return optionalKanban.get();
-    }
-
-    private Kanban findKanbanByTitle(List<Kanban> kanbanList, String title) throws KanbanDoesNotExistsException {
-        Optional<Kanban> optionalKanban = kanbanList.stream().filter(kanban -> kanban.getTitle().trim().equals(title)).findFirst();
-        return optionalKanban.orElseThrow(() -> new KanbanDoesNotExistsException("Could not find kanban" + title + "!"));
-    }
-
 
     @Override
     public void deleteKanban() throws KanbanDoesNotExistsException {
@@ -78,3 +60,58 @@ public class KanbanServiceImpl implements KanbanService {
         return null;
     }
 }
+
+    //  @Override
+   // public Kanban updateKanban(int id, String taskTitle, TaskStatus taskStatus, List<Cards> cardsList, Kanban updatedKanban) throws KanbanDoesNotExistsException {
+//        Optional<Kanban> kanbanFromDatabase = kanbanRepository.findById(id);
+//        List<Tasks> tasksList = kanbanFromDatabase.get().getTasks();
+//        if(tasksList.isEmpty()){
+//            throw new KanbanDoesNotExistsException("Empty");
+//        }
+//        Tasks kanbanToUpdate = findKanbanById(tasksList,taskTitle);
+//        kanbanToUpdate.setTaskTitle(updatedKanban.getTitle());
+//
+//        TaskStatus taskStatusUpdate = findById(taskStatus,taskTitle);
+//        taskStatusUpdate.setTodo(taskStatusUpdate.getTodo());
+//        taskStatusUpdate.setInProgress(taskStatusUpdate.getInProgress());
+//        taskStatusUpdate.setCompleted(taskStatusUpdate.getCompleted());
+//
+//        Cards updateCards = findByCardTitle(cardsList,taskTitle);
+//        updateCards.setTitle(updatedKanban.getTitle());
+//        updateCards.setDescription(updateCards.getDescription());
+//        updateCards.setColors(updateCards.getColors());
+//        updateCards.setMembers(updateCards.getMembers());
+//    }
+
+
+//    public Kanban getKanbanFromDatabase(String title) throws KanbanDoesNotExistsException {
+//        Optional<Kanban> optionalKanban = this.kanbanRepository.findKanbanByTitle(title);
+//        if (optionalKanban.isEmpty()) {
+//            throw new KanbanDoesNotExistsException("not found");
+//        }
+//        return optionalKanban.get();
+//    }
+
+//    private Tasks findKanbanById(List<Tasks> kanbanList, String title) throws KanbanDoesNotExistsException {
+//        Optional<Tasks> optionalKanban = kanbanList.stream().filter(kanban -> kanban.getTaskTitle().trim().equals(title)).findFirst();
+//        return optionalKanban.orElseThrow(() -> new KanbanDoesNotExistsException("Could not find kanban" + title + "!"));
+//    }
+//    private TaskStatus findById(TaskStatus taskStatus ,String title) throws KanbanDoesNotExistsException{
+//       return null;
+//    }
+//    private Cards findByCardTitle(List<Cards> cardsList, String title) throws KanbanDoesNotExistsException {
+//        Optional<Cards> optionalCards = cardsList.stream().filter(cards -> cards.getTitle().trim().equals(title)).findFirst();
+//        return optionalCards.orElseThrow(()-> new KanbanDoesNotExistsException("not" + title));
+//    }
+//
+//    @Override
+//    public void deleteKanban() throws KanbanDoesNotExistsException {
+//
+//    }
+//
+//    @Override
+//    public Kanban addNewTask(int kanbanId, Tasks tasks) {
+//        return null;
+//    }
+//}
+

@@ -2,6 +2,7 @@ package com.niit.bej.kanban.board.controller;
 
 import com.niit.bej.kanban.board.exception.KanbanAlreadyExistsException;
 import com.niit.bej.kanban.board.exception.KanbanDoesNotExistsException;
+import com.niit.bej.kanban.board.exception.TitleNotFoundException;
 import com.niit.bej.kanban.board.model.Kanban;
 import com.niit.bej.kanban.board.service.KanbanService;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -38,5 +40,4 @@ public class KanbanController {
         } catch (KanbanDoesNotExistsException exception) {
             return new ResponseEntity<>(exception.getMessage(), HttpStatus.CONFLICT);
         }
-    }
-}
+    }}
