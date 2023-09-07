@@ -11,12 +11,16 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {RouterOutlet} from "@angular/router";
+import { RegisterComponent } from './components/register/register.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    RegisterComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
