@@ -1,1 +1,62 @@
-<p>register-form works!</p>
+<div class="container">
+	<div class="row mt-4">
+		<div class="col">
+			<h2 class="fs-4 text-center">
+				Registration Form
+			</h2>
+			<form [formGroup]="registerForm" (ngSubmit)="register()"
+				  class="needs-validation" novalidate
+			>
+				<div class="m-2">
+					<mat-form-field class="col-12">
+						<mat-label>username</mat-label>
+						<input class="form-control"
+							   formControlName="username"
+							   id="user-name"
+							   matInput
+							   name="username"
+							   placeholder="username"
+							   required
+							   type="text"/>
+						<mat-error
+							*ngIf="registerForm.controls['username'].hasError('required')"
+							class="invalid-feedback">
+							User Name cannot be Empty
+						</mat-error>
+					</mat-form-field>
+				</div>
+				<div class="m-2">
+					<mat-form-field class="col-12">
+						<mat-label>password</mat-label>
+						<input class="form-control"
+							   formControlName="password"
+							   id="password"
+							   matInput
+							   minlength="8"
+							   name="password"
+							   placeholder="password"
+							   required
+							   type="password"/>
+						<mat-error
+							*ngIf="registerForm.controls['password'].hasError('minlength')"
+						>
+							Password cannot be less than 8 characters
+						</mat-error>
+						<mat-error
+							*ngIf="registerForm.controls['password'].hasError('required')"
+						>
+							Password cannot be Empty
+						</mat-error>
+					</mat-form-field>
+				</div>
+				<div class="mt-4 d-flex justify-content-around">
+					<button [disabled]="registerForm.invalid" class="col-2 rounded-pill" color="primary"
+							mat-raised-button type="submit">Register
+					</button>
+				</div>
+			</form>
+			<a routerLink="/login">Already registered ? Click to Login!!</a>
+		</div>
+	</div>
+</div>
+
