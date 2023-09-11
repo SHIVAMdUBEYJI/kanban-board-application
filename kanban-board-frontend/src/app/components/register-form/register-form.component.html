@@ -4,7 +4,7 @@
             <h2 class="fs-4 text-center">
                 Registration Form
             </h2>
-            <form [formGroup]="registerForm" class="needs-validation" novalidate>
+            <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
                 <div class="m-2">
                     <mat-form-field class="col-12">
                         <mat-label>username</mat-label>
@@ -32,7 +32,6 @@
                                id="password"
                                matInput
                                name="password"
-                               placeholder="password"
                                required
                                type="password"
                         >

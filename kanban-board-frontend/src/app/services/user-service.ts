@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 })
 export class UserService implements OnInit {
 
-    userURL: string = `http://localhost:3000/users`
+    userURL: string = `http://localhost:8081/home/register`
 
     constructor(private httpClient: HttpClient) {
         this.httpClient = httpClient;
@@ -18,6 +18,6 @@ export class UserService implements OnInit {
     }
 
     registerUser(user: User): Observable<User> {
-        return this.httpClient.post<User>(this.userURL, user);
+        return this.httpClient.post<User>(`${this.userURL}`, user);
     }
 }

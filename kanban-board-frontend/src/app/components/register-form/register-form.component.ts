@@ -9,7 +9,22 @@ import {UserService} from "../../services/user-service";
 export class RegisterFormComponent implements OnInit {
     registerForm!: FormGroup;
 
-    ngOnInit(): void {
+    constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService) {
+        this.userService = userService;
     }
 
+    ngOnInit(): void {
+        this.registerForm = this.formBuilder.group({
+            username: [''], password: ['']
+        })
+    }
+
+    register(): void {
+        //console.log("working")
+        this.userService.registerUser(this.registerForm.value).subscribe(response => {
+            alert("Registered successfully");
+           // this.registerForm.reset();
+          //  this.router.navigate(['login']);
+        }, error => alert("Something wrong"))
+    }
 }
