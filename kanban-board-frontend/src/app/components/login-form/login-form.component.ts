@@ -35,6 +35,5 @@ export class LoginFormComponent implements OnInit {
 				}
 			}, error => {
 				alert("Something went wrong");
-			})
-	}
+			})}
 }
