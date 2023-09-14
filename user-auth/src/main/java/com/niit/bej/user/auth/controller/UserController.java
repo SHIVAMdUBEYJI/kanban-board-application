@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/home")
-@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     private final UserService userService;
     private final SecurityTokenGenerator securityTokenGenerator;

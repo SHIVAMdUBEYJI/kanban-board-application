@@ -1,15 +1,15 @@
 package com.niit.bej.user.auth.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 @Entity
-@Table(name = "users")
+@Table(name = "user_table")
 public class User {
     @Id
+    @Column(name = "user_name",length = 25,unique = true,nullable = false)
     private String username;
+    @Column(name = "user_password",length = 25,unique = true,nullable = false)
     private String password;
 
     public User() {

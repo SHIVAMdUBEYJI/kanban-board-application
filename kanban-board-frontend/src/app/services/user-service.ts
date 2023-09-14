@@ -4,24 +4,25 @@ import {User} from "../models/user.model";
 import {Observable} from "rxjs";
 
 @Injectable({
-    providedIn: 'root'
+	providedIn: 'root'
 })
 export class UserService implements OnInit {
 
-    userURL: string = `http://localhost:8081/home/register`
+	registerURL: string = `http://localhost:8081/home/register`
+	loginURL: string = `http://localhost:8081/home/login`
 
-    constructor(private httpClient: HttpClient) {
-        this.httpClient = httpClient;
-    }
+	constructor(private httpClient: HttpClient) {
+		this.httpClient = httpClient;
+	}
 
-    ngOnInit(): void {
-    }
+	ngOnInit(): void {
+	}
 
-    registerUser(user: User): Observable<User> {
-        return this.httpClient.post<User>(`${this.userURL}`, user);
-    }
+	registerUser(user: User): Observable<User> {
+		return this.httpClient.post<User>(`${this.registerURL}`, user);
+	}
 
 	loginUser(): Observable<User[]> {
-		return this.httpClient.get<User[]>(this.userURL);
+		return this.httpClient.get<User[]>(this.loginURL);
 	}
 }
