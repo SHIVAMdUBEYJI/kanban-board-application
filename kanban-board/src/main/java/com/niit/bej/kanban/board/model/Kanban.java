@@ -1,69 +1,36 @@
 package com.niit.bej.kanban.board.model;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
+import io.swagger.annotations.ApiModelProperty;
+import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.messaging.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-@Document(collection = "kanban-board")
+
 public class Kanban {
-    @MongoId
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(position = 1)
+    private Long id;
+
+    @ApiModelProperty(position = 2)
     private String title;
-    private List<Tasks> tasks;
 
-    public Kanban() {
-    }
+    @OneToMany(
+            cascade = {CascadeType.ALL},
+            fetch = FetchType.EAGER)
+    @JoinColumn(name = "kanban_id")
+    @ApiModelProperty(position = 3)
+    private List<Task> tasks;
 
-    public Kanban(int id, String title, List<Tasks> tasks) {
-        this.id = id;
-        this.title = title;
-        this.tasks = tasks;
-    }
+    public void addTask(Task task) {
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public List<Tasks> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Tasks> tasks) {
-        this.tasks = tasks;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Kanban kanban = (Kanban) o;
-        return id == kanban.id && Objects.equals(title, kanban.title) && Objects.equals(tasks, kanban.tasks);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, tasks);
-    }
-
-    @Override
-    public String toString() {
-        return "Kanban{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", tasks=" + tasks +
-                '}';
+        if (Objects.isNull(tasks)) {
+            tasks = new ArrayList<>();
+        }
+        tasks.add(task);
     }
 }
