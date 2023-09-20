@@ -12,7 +12,7 @@ import java.util.Objects;
 
 public class Kanban {
 
-    @MongoId
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(position = 1)
     private Long id;

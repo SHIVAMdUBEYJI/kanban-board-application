@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TaskDTO {
 
-    @ApiModelProperty(position = 1)
+     @ApiModelProperty(position = 1)
     private String title;
 
     @ApiModelProperty(position = 2)
@@ -23,4 +23,6 @@ public class TaskDTO {
 
     @ApiModelProperty(position = 4)
     private TaskStatus status;
+
 }
+

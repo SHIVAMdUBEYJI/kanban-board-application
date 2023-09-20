@@ -8,10 +8,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Data
+@Entity
 @NoArgsConstructor
-@Document
+@Table(name = "task")
 public class Task {
-    @MongoId
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @ApiModelProperty(position = 1)
