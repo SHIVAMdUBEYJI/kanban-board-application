@@ -2,14 +2,16 @@ package com.niit.bej.kanban.board.model;
 
 import io.swagger.annotations.ApiModelProperty;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.data.mongodb.core.messaging.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+@Getter
+@Setter
 public class Kanban {
 
     @Id

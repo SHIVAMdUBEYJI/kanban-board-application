@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,31 +25,35 @@ public class KanbanServiceImpl implements KanbanService {
     @Override
     @Transactional
     public List<Kanban> getAllKanbanBoards() {
-        List<Kanban> kanbanList = return null;
+        List<Kanban> kanbanList = new ArrayList<>();
+        this.kanbanRepository.findAll().forEach(kanbanList::add);
+        return kanbanList;
     }
 
     @Override
     @Transactional
     public Optional<Kanban> getKanbanById(Long id) {
-        return Optional.empty();
+        return this.kanbanRepository.findById(id);
     }
 
     @Override
     @Transactional
     public Optional<Kanban> getKanbanByTitle(String title) {
-        return Optional.empty();
+        return this.kanbanRepository.findByTitle(title);
     }
 
     @Override
     @Transactional
     public Kanban saveKanban(KanbanDTO kanbanDTO) {
-        return null;
+        return this.kanbanRepository.save(convertDTOToKanban(kanbanDTO));
     }
+
 
     @Override
     @Transactional
     public Kanban updateKanban(Kanban oldKanban, KanbanDTO newKanbanDTO) {
-        return null;
+        oldKanban.setTitle(newKanbanDTO.getTitle());
+        return this.kanbanRepository.save(oldKanban);
     }
 
     @Override
@@ -60,6 +65,12 @@ public class KanbanServiceImpl implements KanbanService {
     @Override
     @Transactional
     public Kanban addNewTaskToKanban(Long kanbanId, TaskDTO taskDTO) {
+        return null;
+    }
+
+
+    public Kanban convertDTOToKanban(KanbanDTO kanbanDTO){
+        Kanban kanban = new Kanban();
         return null;
     }
 }
