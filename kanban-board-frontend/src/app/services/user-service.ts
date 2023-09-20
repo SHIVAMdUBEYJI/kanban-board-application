@@ -22,7 +22,7 @@ export class UserService implements OnInit {
 		return this.httpClient.post<User>(`${this.registerURL}`, user);
 	}
 
-	loginUser(): Observable<User[]> {
-		return this.httpClient.get<User[]>(this.loginURL);
+	loginUser(user: User): Observable<User> {
+		return this.httpClient.post<User>(`${this.loginURL}`,user);
 	}
 }

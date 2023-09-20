@@ -29,13 +29,13 @@ public class UserController {
     public ResponseEntity<?> register(@RequestBody User user) {
         try {
             User registeredUser = this.userService.register(user);
-            return new ResponseEntity<>(registeredUser + "created", HttpStatus.CREATED);
+            return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
         } catch (UserAlreadyExistsException exception) {
             return new ResponseEntity<>(exception.getMessage(), HttpStatus.CONFLICT);
         }
     }
 
-    @PostMapping("/login")
+  @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         try {
             boolean loginUser = this.userService.login(user);

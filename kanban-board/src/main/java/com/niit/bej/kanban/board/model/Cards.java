@@ -6,10 +6,20 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Cards {
-    private String title;
-    private String description;
-    private String colors;
-    private String members;
+    private String title; //Help saran
+    private String description; // helping saran on his capstone project
+    private String colors; // inprogress blue
+    private String members; // kishore - assignee , // saran - created by
+
+   // private string currentStatus
+    //assignee
+    //created user
+    // transition history -
+    // 1.saranyan created this ticket
+    // 2. assigned to kishore
+    // 3. kishore transistion the status from todo to inprogress
+    // 4. kishore transistion the status from inprogress to QA
+    // 5. kishore transistion the status from QA to DONE
 
     public Cards() {
     }

@@ -16,6 +16,7 @@ import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,10 @@ import { KanbanBoardComponent } from './components/kanban-board/kanban-board.com
 		MatListModule,
 		MatInputModule,
 		ReactiveFormsModule,
-		HttpClientModule
+		HttpClientModule,
+		ToastrModule.forRoot({
+			positionClass :'toast-top-right'
+		})
 	],
   providers: [],
   bootstrap: [AppComponent]

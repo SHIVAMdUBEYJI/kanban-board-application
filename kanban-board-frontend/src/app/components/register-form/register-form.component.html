@@ -32,14 +32,15 @@
                                id="password"
                                matInput
                                name="password"
+							   minlength="8"
                                required
                                type="password"
                         >
-                        <mat-error
-                                *ngIf="registerForm.controls['password'].hasError('required')"
-                                class="invalid-feedback">
-                            Password cannot be Empty
-                        </mat-error>
+						<mat-error
+							*ngIf="registerForm.controls['password'].hasError('minlength')"
+						>
+							Password cannot be less than 8 characters
+						</mat-error>
                         <mat-error
                                 *ngIf="registerForm.controls['password'].hasError('required')"
                         >

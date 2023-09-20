@@ -21,19 +21,10 @@ export class LoginFormComponent implements OnInit {
 	}
 
 	login() {
-		this.userService.loginUser()
-			.subscribe(response => {
-				const user = response.find((user: any) => {
-					return user.username === this.loginForm.value.username && user.password === this.loginForm.value.password
-				});
-				if (user) {
-					alert("Login Success");
-					this.loginForm.reset();
-					//this.router.navigate([''])
-				} else {
-					alert("User not found !!");
-				}
-			}, error => {
-				alert("Something went wrong");
-			})}
+		this.userService.loginUser(this.loginForm.value).subscribe(response => {
+			alert("login successfully")
+		}, error => {
+			alert("Invalid access")
+		})
+	}
 }
