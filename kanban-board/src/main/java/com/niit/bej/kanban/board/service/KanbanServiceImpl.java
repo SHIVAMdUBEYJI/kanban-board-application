@@ -3,17 +3,28 @@ package com.niit.bej.kanban.board.service;
 import com.niit.bej.kanban.board.model.Kanban;
 import com.niit.bej.kanban.board.model.KanbanDTO;
 import com.niit.bej.kanban.board.model.TaskDTO;
+import com.niit.bej.kanban.board.repository.KanbanRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class KanbanServiceImpl implements KanbanService {
+
+    private final KanbanRepository kanbanRepository;
+
+    @Autowired
+    public KanbanServiceImpl(KanbanRepository kanbanRepository) {
+        this.kanbanRepository = kanbanRepository;
+    }
+
     @Override
     @Transactional
     public List<Kanban> getAllKanbanBoards() {
-        return null;
+        List<Kanban> kanbanList = return null;
     }
 
     @Override
@@ -47,7 +58,7 @@ public class KanbanServiceImpl implements KanbanService {
     }
 
     @Override
-    @Transactionaladd
+    @Transactional
     public Kanban addNewTaskToKanban(Long kanbanId, TaskDTO taskDTO) {
         return null;
     }
