@@ -1,4 +1,8 @@
 package com.niit.bej.kanban.board.model;
 
-public class TaskStatus {
+import io.swagger.annotations.ApiModel;
+
+@ApiModel
+public enum TaskStatus {
+    TODO, INPROGRESS, DONE
 }
