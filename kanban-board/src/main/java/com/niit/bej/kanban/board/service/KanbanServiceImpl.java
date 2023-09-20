@@ -59,18 +59,21 @@ public class KanbanServiceImpl implements KanbanService {
     @Override
     @Transactional
     public void deleteKanban(Kanban kanban) {
-
+        this.kanbanRepository.delete(kanban);
     }
 
     @Override
     @Transactional
     public Kanban addNewTaskToKanban(Long kanbanId, TaskDTO taskDTO) {
-        return null;
+        Kanban kanban = this.kanbanRepository.findById(kanbanId).get();
+        kanban.addTask(convertDTOToTask(taskDTO));
+        return this.kanbanRepository.save(kanban);
     }
 
 
-    public Kanban convertDTOToKanban(KanbanDTO kanbanDTO){
+    public Kanban convertDTOToKanban(KanbanDTO kanbanDTO) {
         Kanban kanban = new Kanban();
-        return null;
+        kanban.setTitle(kanban.getTitle());
+        return kanban;
     }
 }
