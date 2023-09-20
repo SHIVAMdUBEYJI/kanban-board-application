@@ -2,8 +2,10 @@ package com.niit.bej.kanban.board.service;
 
 import com.niit.bej.kanban.board.model.Kanban;
 import com.niit.bej.kanban.board.model.KanbanDTO;
+import com.niit.bej.kanban.board.model.Task;
 import com.niit.bej.kanban.board.model.TaskDTO;
 import com.niit.bej.kanban.board.repository.KanbanRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,14 +68,24 @@ public class KanbanServiceImpl implements KanbanService {
     @Transactional
     public Kanban addNewTaskToKanban(Long kanbanId, TaskDTO taskDTO) {
         Kanban kanban = this.kanbanRepository.findById(kanbanId).get();
-        kanban.addTask(convertDTOToTask(taskDTO));
+       // kanban.addTask(convertDTOToTask(taskDTO));
         return this.kanbanRepository.save(kanban);
     }
 
 
-    public Kanban convertDTOToKanban(KanbanDTO kanbanDTO) {
+    private Kanban convertDTOToKanban(KanbanDTO kanbanDTO) {
         Kanban kanban = new Kanban();
-        kanban.setTitle(kanban.getTitle());
+        kanban.setTitle(kanbanDTO.getTitle());
         return kanban;
     }
+
+    private Task convertDTOToTask(TaskDTO taskDTO) {
+        Task task = new Task();
+        task.setTitle(taskDTO.getTitle());
+        task.setDescription(taskDTO.getDescription());
+        task.setColor(taskDTO.getColor());
+        task.setStatus(taskDTO.getStatus());
+        return task;
+    }
+
 }
