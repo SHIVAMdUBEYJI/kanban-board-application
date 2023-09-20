@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 @Repository
-public interface KanbanRepository extends MongoRepository<Kanban,Integer> {
+public interface KanbanRepository extends MongoRepository<Kanban ,Long> {
     Optional<Kanban> findKanbanByTitle(String title);
 }

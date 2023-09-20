@@ -4,13 +4,14 @@ import io.swagger.annotations.ApiModelProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Data
-@Entity
 @NoArgsConstructor
-@Table(name = "task")
+@Document
 public class Task {
-    @Id
+    @MongoId
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @ApiModelProperty(position = 1)

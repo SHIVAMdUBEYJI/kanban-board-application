@@ -3,6 +3,7 @@ package com.niit.bej.kanban.board.model;
 import io.swagger.annotations.ApiModelProperty;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.data.mongodb.core.messaging.Task;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.Objects;
 
 public class Kanban {
 
-    @Id
+    @MongoId
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(position = 1)
     private Long id;
