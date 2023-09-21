@@ -44,18 +44,18 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public Task saveTask(TaskDTO taskDTO) {
-        return null;
+        return this.taskRepository.save(convertDTOToTask(taskDTO));
     }
 
     @Override
     @Transactional
     public Task updateTask(Task oldTask, TaskDTO newTaskDTO) {
-        return null;
+        return this.taskRepository.save(updateTaskFromDTO(oldTask,newTaskDTO));
     }
 
     @Override
     @Transactional
     public void deleteTask(Task task) {
-
+        this.taskRepository.delete(task);
     }
 }
