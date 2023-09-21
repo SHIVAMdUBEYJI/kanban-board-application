@@ -25,20 +25,20 @@ public class TaskServiceImpl implements TaskService {
     @Transactional
     public List<Task> getAllTasks() {
         List<Task> taskList = new ArrayList<>();
-        this.taskRepository.findAll().forEach(taskList::add);
+        this.taskRepository.findAll().forEach(taskList::add);//method reference(here add is method called by class taskList)
         return taskList;
     }
 
     @Override
     @Transactional
     public Optional<Task> getTaskById(Long id) {
-        return Optional.empty();
+        return this.taskRepository.findById(id);
     }
 
     @Override
     @Transactional
     public Optional<Task> getTaskByTitle(String title) {
-        return Optional.empty();
+        return this.taskRepository.findByTitle(title);
     }
 
     @Override
