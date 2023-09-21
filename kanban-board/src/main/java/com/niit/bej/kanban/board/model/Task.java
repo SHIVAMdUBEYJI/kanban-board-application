@@ -3,9 +3,9 @@ package com.niit.bej.kanban.board.model;
 import io.swagger.annotations.ApiModelProperty;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
+import lombok.Setter;
 
 @Data
 @Entity
@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 @Table(name = "task")
 public class Task {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+  //  @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @ApiModelProperty(position = 1)
     private Long id;

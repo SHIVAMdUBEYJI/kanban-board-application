@@ -5,7 +5,6 @@ import com.niit.bej.kanban.board.model.KanbanDTO;
 import com.niit.bej.kanban.board.model.Task;
 import com.niit.bej.kanban.board.model.TaskDTO;
 import com.niit.bej.kanban.board.repository.KanbanRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +27,9 @@ public class KanbanServiceImpl implements KanbanService {
     @Transactional
     public List<Kanban> getAllKanbanBoards() {
         List<Kanban> kanbanList = new ArrayList<>();
-        this.kanbanRepository.findAll().forEach(kanbanList::add);
+        kanbanRepository.findAll().forEach(kanbanList::add);
         return kanbanList;
+
     }
 
     @Override
@@ -50,7 +50,6 @@ public class KanbanServiceImpl implements KanbanService {
         return this.kanbanRepository.save(convertDTOToKanban(kanbanDTO));
     }
 
-
     @Override
     @Transactional
     public Kanban updateKanban(Kanban oldKanban, KanbanDTO newKanbanDTO) {
@@ -65,17 +64,15 @@ public class KanbanServiceImpl implements KanbanService {
     }
 
     @Override
-    @Transactional
     public Kanban addNewTaskToKanban(Long kanbanId, TaskDTO taskDTO) {
         Kanban kanban = this.kanbanRepository.findById(kanbanId).get();
-       // kanban.addTask(convertDTOToTask(taskDTO));
+        kanban.addTask(convertDTOToTask(taskDTO));
         return this.kanbanRepository.save(kanban);
     }
 
-
     private Kanban convertDTOToKanban(KanbanDTO kanbanDTO) {
         Kanban kanban = new Kanban();
-        kanban.setTitle(kanbanDTO.getTitle());
+        kanban.setTitle(kanban.getTitle());
         return kanban;
     }
 
@@ -87,5 +84,4 @@ public class KanbanServiceImpl implements KanbanService {
         task.setStatus(taskDTO.getStatus());
         return task;
     }
-
 }

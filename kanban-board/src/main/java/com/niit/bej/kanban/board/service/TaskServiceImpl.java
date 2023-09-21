@@ -1,9 +1,9 @@
 package com.niit.bej.kanban.board.service;
 
+import com.niit.bej.kanban.board.model.Task;
 import com.niit.bej.kanban.board.model.TaskDTO;
 import com.niit.bej.kanban.board.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.messaging.Task;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,14 +25,14 @@ public class TaskServiceImpl implements TaskService {
     @Transactional
     public List<Task> getAllTasks() {
         List<Task> taskList = new ArrayList<>();
-        this.taskRepository.findAll().forEach(taskList::add);//method reference(here add is method called by class taskList)
+        this.taskRepository.findAll().forEach(taskList::add);
         return taskList;
     }
 
     @Override
     @Transactional
     public Optional<Task> getTaskById(Long id) {
-        return this.taskRepository.findById(id);
+        return taskRepository.findById(id);
     }
 
     @Override
@@ -50,12 +50,37 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public Task updateTask(Task oldTask, TaskDTO newTaskDTO) {
-        return this.taskRepository.save(updateTaskFromDTO(oldTask,newTaskDTO));
+        return this.taskRepository.save(updateTaskFromDTO(oldTask, newTaskDTO));
     }
 
     @Override
     @Transactional
     public void deleteTask(Task task) {
         this.taskRepository.delete(task);
+    }
+
+    private Task convertDTOToTask(TaskDTO taskDTO) {
+        Task task = new Task();
+        task.setTitle(taskDTO.getTitle());
+        task.setDescription(taskDTO.getDescription());
+        task.setColor(taskDTO.getColor());
+        task.setColor(taskDTO.getColor());
+        return task;
+    }
+
+    private Task updateTaskFromDTO(Task task, TaskDTO taskDTO) {
+        if (Optional.ofNullable(taskDTO.getTitle()).isPresent()) {
+            task.setTitle(taskDTO.getTitle());
+        }
+        if (Optional.ofNullable((taskDTO.getDescription())).isPresent()) {
+            task.setDescription(taskDTO.getDescription());
+        }
+        if (Optional.ofNullable((taskDTO.getColor())).isPresent()) {
+            task.setColor(taskDTO.getColor());
+        }
+        if (Optional.ofNullable((taskDTO.getStatus())).isPresent()) {
+            task.setStatus(taskDTO.getStatus());
+        }
+        return task;
     }
 }

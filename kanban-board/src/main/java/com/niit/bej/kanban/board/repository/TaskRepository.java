@@ -1,6 +1,7 @@
 package com.niit.bej.kanban.board.repository;
 
-import org.springframework.data.mongodb.core.messaging.Task;
+import com.niit.bej.kanban.board.model.Task;
+
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
