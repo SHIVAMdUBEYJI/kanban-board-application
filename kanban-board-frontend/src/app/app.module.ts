@@ -20,6 +20,7 @@ import { KanbanComponent } from './components/kanban-board/kanban/kanban.compone
 import { KanbanDialogComponent } from './components/kanban-board/kanban-dialog/kanban-dialog.component';
 import { TaskDialogComponent } from './components/kanban-board/task-dialog/task-dialog.component';
 import { KanbanHomeComponent } from './components/kanban-board/kanban-home/kanban-home.component';
+import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
@@ -45,8 +46,10 @@ import { KanbanHomeComponent } from './components/kanban-board/kanban-home/kanba
 		ReactiveFormsModule,
 		HttpClientModule,
 		ToastrModule.forRoot({
-			positionClass :'toast-top-right'
-		})
+			positionClass: 'toast-top-right'
+		}),
+		CdkDropList,
+		CdkDrag
 	],
   providers: [],
   bootstrap: [AppComponent]
