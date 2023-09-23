@@ -40,4 +40,33 @@ export class KanbanComponent implements OnInit{
 		}
 	}
 
+	openDialogForNewTask():void{
+		this.openDialog('Create New Task',new Task())
+	}
+	openTaskDialog(event):void{
+		let taskId = event.srcElement.id;
+
+		this.taskService.getTaskById(taskId).subscribe(
+			response => {
+				this.openDialog('Update Task',response);
+			}
+		);
+	}
+	private getKanban():void{
+		const id = this.route.snapshot.paramMap.get('id');
+
+		this.kanbanService.retrieveKanbanById(id).subscribe(
+			response => {
+				this.kanban =response ;
+				this.splitTaskByStatus(response);
+			}
+		)
+	}
+
+	private splitTaskByStatus(kanban:Kanban):void {
+		this.todos = kanban.tasks.filter(t =>t.status === 'TODO');
+		this.inProgress = kanban.tasks.filter(t=>t.status ==='INPROGRESS');
+		this.dones =kanban.tasks.filter(t=>t.status === 'DONE')
+	}
+
 }
