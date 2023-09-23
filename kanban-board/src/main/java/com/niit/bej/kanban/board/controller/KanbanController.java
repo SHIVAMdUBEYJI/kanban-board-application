@@ -4,7 +4,7 @@ import com.niit.bej.kanban.board.model.Kanban;
 import com.niit.bej.kanban.board.model.KanbanDTO;
 import com.niit.bej.kanban.board.model.TaskDTO;
 import com.niit.bej.kanban.board.service.KanbanService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/kanbans")
-@RequiredArgsConstructor
+@RequestMapping("api/v1/kanbans")
 @CrossOrigin(origins = "http://localhost:4200")
 public class KanbanController {
 
     private final KanbanService kanbanService;
+
+    @Autowired
+    public KanbanController(KanbanService kanbanService) {
+        this.kanbanService = kanbanService;
+    }
 
     @GetMapping("/")
     public ResponseEntity<?> getAllKanbans() {
@@ -52,11 +56,11 @@ public class KanbanController {
                 return new ResponseEntity<>("No kanban found with a title" + title, HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
-           return errorResponse();
+            return errorResponse();
         }
     }
 
-    @PostMapping("/")
+    @PostMapping("/create")
     public ResponseEntity<?> createKanban(@RequestBody KanbanDTO kanbanDTO) {
         try {
             return new ResponseEntity<>(kanbanService.saveKanban(kanbanDTO), HttpStatus.CREATED);
@@ -107,6 +111,7 @@ public class KanbanController {
             return errorResponse();
         }
     }
+
     @PostMapping("/{kanbanId}/tasks/")
     public ResponseEntity<?> createTaskAssignedToKanban(@PathVariable Long kanbanId, @RequestBody TaskDTO taskDTO) {
         try {

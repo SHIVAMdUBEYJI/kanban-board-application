@@ -27,12 +27,17 @@ services:
     depends_on: [ mysql-database-service,eureka-server-service ]
     restart: always
 
-  mongodb-database-service:
-    image: mongo
-    container_name: mongodb-container
+  kanban-database-service:
+    image: mysql
+    container_name: kanban-database-container
     ports:
-      - "27018:27017"
+      - "3308:3306"
     networks: [ kanban-board-application-network ]
+    environment:
+      MYSQL_DATABASE: kanban_database
+      MYSQL_ROOT_PASSWORD: Saraneswar4896
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
 
   kanban-board-service:
     build: kanban-board/
@@ -40,7 +45,7 @@ services:
     ports:
       - "8082:8082"
     networks: [ kanban-board-application-network ]
-    depends_on: [ mongodb-database-service ,eureka-server-service]
+    depends_on: [ kanban-database-service ,eureka-server-service]
     restart: always
 
   api-gateway-service:

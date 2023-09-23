@@ -1,5 +1,7 @@
 package com.niit.bej.kanban.board.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.ApiModelProperty;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -7,13 +9,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Data
 @Entity
 @NoArgsConstructor
 @Table(name = "task")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Task {
     @Id
-  //  @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @ApiModelProperty(position = 1)
     private Long id;

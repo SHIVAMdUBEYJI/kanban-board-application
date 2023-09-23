@@ -1,17 +1,27 @@
 package com.niit.bej.kanban.board.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.ApiModelProperty;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.messaging.Task;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 @Getter
 @Setter
+@Entity
+@Data
+@Table(name = "kanban")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id",
+        scope = Kanban.class)
 public class Kanban {
 
     @Id
@@ -26,6 +36,7 @@ public class Kanban {
             cascade = {CascadeType.ALL},
             fetch = FetchType.EAGER)
     @JoinColumn(name = "kanban_id")
+
     @ApiModelProperty(position = 3)
     private List<Task> tasks;
 
