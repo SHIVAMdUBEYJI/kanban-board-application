@@ -23,7 +23,7 @@ public class KanbanController {
         this.kanbanService = kanbanService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/getAll")
     public ResponseEntity<?> getAllKanbans() {
         try {
             return new ResponseEntity<>(this.kanbanService.getAllKanbanBoards(), HttpStatus.OK);
@@ -46,7 +46,7 @@ public class KanbanController {
         }
     }
 
-    @GetMapping("")
+    @GetMapping("/title")
     public ResponseEntity<?> getKanbanByTitle(@RequestParam String title) {
         try {
             Optional<Kanban> optionalKanban = kanbanService.getKanbanByTitle(title);
