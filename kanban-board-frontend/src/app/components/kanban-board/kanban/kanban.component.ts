@@ -4,69 +4,89 @@ import {Kanban} from "../../../models/kanban/kanban.model";
 import {KanbanServiceService} from "../../../services/kanban-service.service";
 import {TaskServiceService} from "../../../services/task-service.service";
 import {ActivatedRoute} from "@angular/router";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
 
 @Component({
-  selector: 'app-kanban',
-  templateUrl: './kanban.component.html',
-  styleUrls: ['./kanban.component.css']
+	selector: 'app-kanban', templateUrl: './kanban.component.html', styleUrls: ['./kanban.component.css']
 })
-export class KanbanComponent implements OnInit{
+export class KanbanComponent implements OnInit {
 
 	kanban: Kanban;
-	todos: Task[] =[];
-	inProgress:Task[] =[];
-	dones :Task[]=[];
+	todos: Task[] = [];
+	inProgress: Task[] = [];
+	dones: Task[] = [];
 
-	constructor(private kanbanService:KanbanServiceService,
-				private taskService:TaskServiceService,
-				private route:ActivatedRoute,
-				private dialog:MatDialog) {
+	constructor(private kanbanService: KanbanServiceService, private taskService: TaskServiceService, private route: ActivatedRoute, private dialog: MatDialog) {
 	}
+
 	ngOnInit(): void {
 		this.getKanban();
 	}
 
-	drop(event: CdkDragDrop<string[]>){
-		if(event.previousContainer === event.container){
+	drop(event: CdkDragDrop<string[]>) {
+		if (event.previousContainer === event.container) {
 			moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-		}else {
+		} else {
 			this.updateTaskStatusAfterDragDrop(event);
-			transferArrayItem(event.previousContainer.data,
-				event.container.data,
-				event.previousIndex,
-				event.currentIndex)
+			transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
 		}
 	}
 
-	openDialogForNewTask():void{
-		this.openDialog('Create New Task',new Task())
+	openDialogForNewTask(): void {
+		this.openDialog('Create New Task', new Task())
 	}
-	openTaskDialog(event):void{
+
+	openTaskDialog(event): void {
 		let taskId = event.srcElement.id;
 
-		this.taskService.getTaskById(taskId).subscribe(
-			response => {
-				this.openDialog('Update Task',response);
-			}
-		);
+		this.taskService.getTaskById(taskId).subscribe(response => {
+			this.openDialog('Update Task', response);
+		});
 	}
-	private getKanban():void{
+
+	private getKanban(): void {
 		const id = this.route.snapshot.paramMap.get('id');
 
-		this.kanbanService.retrieveKanbanById(id).subscribe(
-			response => {
-				this.kanban =response ;
-				this.splitTaskByStatus(response);
-			}
-		)
+		this.kanbanService.retrieveKanbanById(id).subscribe(response => {
+			this.kanban = response;
+			this.splitTaskByStatus(response);
+		})
 	}
 
-	private splitTaskByStatus(kanban:Kanban):void {
-		this.todos = kanban.tasks.filter(t =>t.status === 'TODO');
-		this.inProgress = kanban.tasks.filter(t=>t.status ==='INPROGRESS');
-		this.dones =kanban.tasks.filter(t=>t.status === 'DONE')
+	private splitTaskByStatus(kanban: Kanban): void {
+		this.todos = kanban.tasks.filter(t => t.status === 'TODO');
+		this.inProgress = kanban.tasks.filter(t => t.status === 'INPROGRESS');
+		this.dones = kanban.tasks.filter(t => t.status === 'DONE')
 	}
 
+	private updateTaskStatusAfterDragDrop(event: CdkDragDrop<string[], string[]>) {
+		let taskId = event.item.element.nativeElement.id;
+		let containerId = event.container.id;
+
+		this.taskService.getTaskById(taskId).subscribe(response => {
+			this.updateTaskStatus(response, containerId);
+		});
+	}
+
+	private updateTaskStatus(task: Task, containerId: string): void {
+		if (containerId === 'todo') {
+			task.status = 'TODO'
+		} else if (containerId === 'inProgress') {
+			task.status = 'INPROGRESS'
+		} else {
+			task.status = 'DONE'
+		}
+		this.taskService.updateTask(task).subscribe();
+	}
+
+	private openDialog(title: string, task: Task): void {
+		const dialogConfig = new MatDialogConfig();
+		dialogConfig.autoFocus = true;
+		dialogConfig.data = {
+			title: title, task: task, kanbanId: this.kanban.id
+		};
+		this.dialog.open(TaskDialogComponent, dialogConfig)
+	}
 }
