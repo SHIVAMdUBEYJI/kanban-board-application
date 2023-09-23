@@ -11,7 +11,8 @@ export class KanbanHomeComponent implements OnInit {
 
 	kanbanList: Kanban[] | undefined;
 
-	constructor(private kanbanService: KanbanServiceService, private dialog: MatDialog) {
+	constructor(private kanbanService: KanbanServiceService,
+				private dialog: MatDialog) {
 	}
 
 	ngOnInit(): void {
@@ -22,13 +23,14 @@ export class KanbanHomeComponent implements OnInit {
 		const dialogConfig = new MatDialogConfig();
 		dialogConfig.autoFocus = true;
 		dialogConfig.data = {
-			kanban: new Kanban()
+			kanban: new Kanban(0,"ih",[])
 		};
 		this.dialog.open(KanbanDialogComponent, dialogConfig)
 	}
 
 	private retrieveAllKanbanBoards(): void {
-		this.kanbanService.retrieveAllKanbanBoards().subscribe(response => {
+		this.kanbanService.retrieveAllKanbanBoards()
+			.subscribe(response => {
 			this.kanbanList = response;
 		})
 	}
