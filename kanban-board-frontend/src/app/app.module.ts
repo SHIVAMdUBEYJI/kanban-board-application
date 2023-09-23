@@ -17,6 +17,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
 import {ToastrModule} from "ngx-toastr";
+import { KanbanComponent } from './components/kanban-board/kanban/kanban.component';
+import { KanbanDialogComponent } from './components/kanban-board/kanban-dialog/kanban-dialog.component';
+import { TaskDialogComponent } from './components/kanban-board/task-dialog/task-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import {ToastrModule} from "ngx-toastr";
     HomeComponent,
     RegisterFormComponent,
     LoginFormComponent,
-    KanbanBoardComponent
+    KanbanBoardComponent,
+    KanbanComponent,
+    KanbanDialogComponent,
+    TaskDialogComponent
   ],
 	imports: [
 		BrowserModule,
