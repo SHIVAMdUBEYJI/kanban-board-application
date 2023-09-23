@@ -23,6 +23,8 @@ export class LoginFormComponent implements OnInit {
 	login() {
 		this.userService.loginUser(this.loginForm.value).subscribe(response => {
 			alert("login successfully")
+			this.loginForm.reset();
+			this.router.navigate(['kanban-home']);
 		}, error => {
 			alert("Invalid access")
 		})

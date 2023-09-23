@@ -1,1 +1,18 @@
 <p>kanban-home works!</p>
+
+<div class="page-container">
+	<div class="page-title">
+		<h1>Kanban Boards</h1>
+	</div>
+	<div>
+		<button (click)="openDialogForNewKanban()" mat-raised-button> +button</button>
+	</div>
+
+	<div class="main-card">
+		<mat-nav-list>
+			<a *ngFor="let kanban of kanbanList" mat-list-item routerLink="/kanbans/{{kanban.id}}}">
+				<p class="kanban-title">{{kanban.title}}</p>
+			</a>
+		</mat-nav-list>
+	</div>
+</div>

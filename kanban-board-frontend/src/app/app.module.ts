@@ -15,7 +15,6 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
 import {ToastrModule} from "ngx-toastr";
 import { KanbanComponent } from './components/kanban-board/kanban/kanban.component';
 import { KanbanDialogComponent } from './components/kanban-board/kanban-dialog/kanban-dialog.component';
@@ -28,7 +27,6 @@ import { KanbanHomeComponent } from './components/kanban-board/kanban-home/kanba
     HomeComponent,
     RegisterFormComponent,
     LoginFormComponent,
-    KanbanBoardComponent,
     KanbanComponent,
     KanbanDialogComponent,
     TaskDialogComponent,
