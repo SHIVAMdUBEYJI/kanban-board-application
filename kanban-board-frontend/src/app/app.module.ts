@@ -20,6 +20,7 @@ import {ToastrModule} from "ngx-toastr";
 import { KanbanComponent } from './components/kanban-board/kanban/kanban.component';
 import { KanbanDialogComponent } from './components/kanban-board/kanban-dialog/kanban-dialog.component';
 import { TaskDialogComponent } from './components/kanban-board/task-dialog/task-dialog.component';
+import { KanbanHomeComponent } from './components/kanban-board/kanban-home/kanban-home.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { TaskDialogComponent } from './components/kanban-board/task-dialog/task-
     KanbanBoardComponent,
     KanbanComponent,
     KanbanDialogComponent,
-    TaskDialogComponent
+    TaskDialogComponent,
+    KanbanHomeComponent
   ],
 	imports: [
 		BrowserModule,
