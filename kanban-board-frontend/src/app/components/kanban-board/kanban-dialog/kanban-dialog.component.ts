@@ -1,10 +1,41 @@
-import { Component } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import close from "$GLOBAL$";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {KanbanServiceService} from "../../../services/kanban-service.service";
 
 @Component({
-  selector: 'app-kanban-dialog',
-  templateUrl: './kanban-dialog.component.html',
-  styleUrls: ['./kanban-dialog.component.css']
+	selector: 'app-kanban-dialog',
+	templateUrl: './kanban-dialog.component.html',
+	styleUrls: ['./kanban-dialog.component.css']
 })
-export class KanbanDialogComponent {
+export class KanbanDialogComponent implements OnInit {
 
+	title: string;
+	form: FormGroup;
+	protected readonly close = close;
+
+	constructor(private formBuilder: FormBuilder, private dialogRef: MatDialogRef<KanbanDialogComponent>, @Inject(MAT_DIALOG_DATA) data, private kanbanService: KanbanServiceService) {
+		this.form = formBuilder.group({
+			title: [this.title, Validators.required]
+		});
+	}
+
+	ngOnInit(): void {
+	}
+
+	close() {
+		this.dialogRef.close();
+	}
+
+	save() {
+		this.title = this.form.get('title')?.value;
+		if (this.title) {
+			this.kanbanService.saveNewKanban(this.title).subscribe(response => {
+				console.log(response)
+			})
+		}
+		this.dialogRef.close();
+		window.location.reload();
+	}
 }

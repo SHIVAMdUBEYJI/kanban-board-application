@@ -21,6 +21,7 @@ import { KanbanDialogComponent } from './components/kanban-board/kanban-dialog/k
 import { TaskDialogComponent } from './components/kanban-board/task-dialog/task-dialog.component';
 import { KanbanHomeComponent } from './components/kanban-board/kanban-home/kanban-home.component';
 import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 			positionClass: 'toast-top-right'
 		}),
 		CdkDropList,
-		CdkDrag
+		CdkDrag,
+		MatDialogModule
 	],
   providers: [],
   bootstrap: [AppComponent]
