@@ -5,6 +5,7 @@ import {KanbanServiceService} from "../../../services/kanban-service.service";
 import {TaskServiceService} from "../../../services/task-service.service";
 import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-kanban',
@@ -24,6 +25,19 @@ export class KanbanComponent implements OnInit{
 				private dialog:MatDialog) {
 	}
 	ngOnInit(): void {
+		this.getKanban();
+	}
+
+	drop(event: CdkDragDrop<string[]>){
+		if(event.previousContainer === event.container){
+			moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+		}else {
+			this.updateTaskStatusAfterDragDrop(event);
+			transferArrayItem(event.previousContainer.data,
+				event.container.data,
+				event.previousIndex,
+				event.currentIndex)
+		}
 	}
 
 }
