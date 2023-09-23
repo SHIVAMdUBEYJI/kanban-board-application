@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Kanban} from "../models/kanban/kanban.model";
-import { environment } from 'src/environments/environment';
+import {environment} from "../../environments/environment";
+
 
 @Injectable({
 	providedIn: 'root'
