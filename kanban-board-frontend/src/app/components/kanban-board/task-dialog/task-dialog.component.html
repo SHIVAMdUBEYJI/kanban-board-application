@@ -1,1 +1,40 @@
-<p>task-dialog works!</p>
+<div class="dialog-title">
+	<h1 mat-dialog-title>{{ dialogTitle }}</h1>
+</div>
+
+
+<mat-dialog-content [formGroup]="form" class="dialog-content">
+
+	<mat-form-field>
+		<input class="task-title"
+			   formControlName="title"
+			   matInput
+			   placeholder="Title">
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-select formControlName="color"
+					placeholder="Select color">
+			<mat-option value="#feff9c">
+				YELLOW
+			</mat-option>
+			<mat-option value="#7afcff">
+				BLUE
+			</mat-option>
+			<mat-option value="#ff7eb9">
+				PINK
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+
+	<mat-form-field>
+		<textarea class="description-area" formControlName="description"
+				  matInput placeholder="Description">
+		</textarea>
+	</mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+	<button (click)="close()" class="mat-raised-button">Close</button>
+	<button (click)="save()" class="mat-raised-button mat-primary">Save</button>
+</mat-dialog-actions>

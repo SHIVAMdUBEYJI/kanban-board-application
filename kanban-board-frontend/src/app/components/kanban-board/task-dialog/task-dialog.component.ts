@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class TaskDialogComponent {
 
+	protected readonly close = close;
 }

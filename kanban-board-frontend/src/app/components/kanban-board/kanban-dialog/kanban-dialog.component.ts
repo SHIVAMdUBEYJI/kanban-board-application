@@ -1,5 +1,4 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import close from "$GLOBAL$";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {KanbanServiceService} from "../../../services/kanban-service.service";
@@ -10,11 +9,10 @@ import {KanbanServiceService} from "../../../services/kanban-service.service";
 	styleUrls: ['./kanban-dialog.component.css']
 })
 export class KanbanDialogComponent implements OnInit {
-
-	title: string;
+	private title: any;
 	form: FormGroup;
-	protected readonly close = close;
 
+	// @ts-ignore
 	constructor(private formBuilder: FormBuilder, private dialogRef: MatDialogRef<KanbanDialogComponent>, @Inject(MAT_DIALOG_DATA) data, private kanbanService: KanbanServiceService) {
 		this.form = formBuilder.group({
 			title: [this.title, Validators.required]
