@@ -13,7 +13,7 @@ import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
 })
 export class KanbanComponent implements OnInit {
 
-	kanban: Kanban;
+	kanban !: Kanban;
 	todos: Task[] = [];
 	inProgress: Task[] = [];
 	dones: Task[] = [];
@@ -35,10 +35,10 @@ export class KanbanComponent implements OnInit {
 	}
 
 	openDialogForNewTask(): void {
-		this.openDialog('Create New Task', new Task())
+		this.openDialog('Create New Task', new Task(1,"hgc","jbjk","hj","ghj"));
 	}
 
-	openTaskDialog(event): void {
+	openTaskDialog(event: { srcElement: { id: any; }; }): void {
 		let taskId = event.srcElement.id;
 
 		this.taskService.getTaskById(taskId).subscribe(response => {
@@ -48,11 +48,15 @@ export class KanbanComponent implements OnInit {
 
 	private getKanban(): void {
 		const id = this.route.snapshot.paramMap.get('id');
+		if(id !==null){
+			this.kanbanService.retrieveKanbanById(id).subscribe(response => {
+				this.kanban = response;
+				this.splitTaskByStatus(response);
+			})
+		}else {
+			console.error('No valid ID found in the route.');
+		}
 
-		this.kanbanService.retrieveKanbanById(id).subscribe(response => {
-			this.kanban = response;
-			this.splitTaskByStatus(response);
-		})
 	}
 
 	private splitTaskByStatus(kanban: Kanban): void {
@@ -85,7 +89,9 @@ export class KanbanComponent implements OnInit {
 		const dialogConfig = new MatDialogConfig();
 		dialogConfig.autoFocus = true;
 		dialogConfig.data = {
-			title: title, task: task, kanbanId: this.kanban.id
+			title: title,
+			task: task,
+			kanbanId: this.kanban.id
 		};
 		this.dialog.open(TaskDialogComponent, dialogConfig)
 	}
