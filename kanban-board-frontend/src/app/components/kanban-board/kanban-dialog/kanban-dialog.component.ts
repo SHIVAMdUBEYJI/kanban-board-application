@@ -12,8 +12,7 @@ export class KanbanDialogComponent implements OnInit {
 	private title: any;
 	form: FormGroup;
 
-	// @ts-ignore
-	constructor(private formBuilder: FormBuilder, private dialogRef: MatDialogRef<KanbanDialogComponent>, @Inject(MAT_DIALOG_DATA) data, private kanbanService: KanbanServiceService) {
+	constructor(private formBuilder: FormBuilder, private dialogRef: MatDialogRef<KanbanDialogComponent>, @Inject(MAT_DIALOG_DATA) private data:any, private kanbanService: KanbanServiceService) {
 		this.form = formBuilder.group({
 			title: [this.title, Validators.required]
 		});

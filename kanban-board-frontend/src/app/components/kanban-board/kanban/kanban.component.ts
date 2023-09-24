@@ -8,6 +8,7 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
 
+
 @Component({
 	selector: 'app-kanban', templateUrl: './kanban.component.html', styleUrls: ['./kanban.component.css']
 })
@@ -25,7 +26,7 @@ export class KanbanComponent implements OnInit {
 		this.getKanban();
 	}
 
-	drop(event: CdkDragDrop<string[]>) {
+	drop(event: CdkDragDrop<Task[]>) {
 		if (event.previousContainer === event.container) {
 			moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
 		} else {
@@ -38,13 +39,20 @@ export class KanbanComponent implements OnInit {
 		this.openDialog('Create New Task', new Task(1,"hgc","jbjk","hj","ghj"));
 	}
 
-	openTaskDialog(event: { srcElement: { id: any; }; }): void {
-		let taskId = event.srcElement.id;
-
-		this.taskService.getTaskById(taskId).subscribe(response => {
-			this.openDialog('Update Task', response);
-		});
+	// openTaskDialog(event: { srcElement: { id: any; }; }): void {
+	// 	let taskId = event.srcElement.id;
+	//
+	// 	this.taskService.getTaskById(taskId).subscribe(response => {
+	// 		this.openDialog('Update Task', response);
+	// 	});
+	// }
+	openTaskDialog(event: MouseEvent):void{
+		const taskId = (event.target as HTMLElement).id;
+		this.taskService.getTaskById(taskId).subscribe(response =>{
+			this.openDialog('Update Task',response);
+		})
 	}
+
 
 	private getKanban(): void {
 		const id = this.route.snapshot.paramMap.get('id');
@@ -65,7 +73,7 @@ export class KanbanComponent implements OnInit {
 		this.dones = kanban.tasks.filter(t => t.status === 'DONE')
 	}
 
-	private updateTaskStatusAfterDragDrop(event: CdkDragDrop<string[], string[]>) {
+	private updateTaskStatusAfterDragDrop(event: CdkDragDrop<Task[]>) {
 		let taskId = event.item.element.nativeElement.id;
 		let containerId = event.container.id;
 

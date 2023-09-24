@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Kanban} from "../models/kanban/kanban.model";
 import {environment} from "../../environments/environment";
+import {Task} from "../models/task/task.model";
 
 
 @Injectable({
@@ -29,6 +30,15 @@ export class KanbanServiceService {
 		return this.httpClient.post<string>(
 			this.kanbanAppUrl + '/kanbans/',
 			jsonObject,
+			options
+		);
+	}
+	saveNewTaskInKanban(kanbanId:string,task:Task):Observable<Task>{
+		let headers = new HttpHeaders({'Content-Type': 'application/json'});
+		let options = {headers:headers};
+		return this.httpClient.post<Task>(
+			this.kanbanAppUrl + '/kanbans/' + kanbanId + '/tasks/',
+			task,
 			options
 		);
 	}
