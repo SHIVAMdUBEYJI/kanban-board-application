@@ -18,8 +18,7 @@ export class TaskDialogComponent implements OnInit{
 
 	form:FormGroup;
 
-	// @ts-ignore
-	constructor(private formBuilder:FormBuilder, private dialogRef:MatDialogRef<TaskDialogComponent>, @Inject(MAT_DIALOG_DATA) data, private kanbanService:KanbanServiceService, private taskService:TaskServiceService) {
+	constructor(private formBuilder:FormBuilder, private dialogRef:MatDialogRef<TaskDialogComponent>, @Inject(MAT_DIALOG_DATA) private data:any, private kanbanService:KanbanServiceService, private taskService:TaskServiceService) {
 
 		this.dialogTitle = data.title;
 		this.kanbanId = data.kanbanId;

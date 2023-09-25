@@ -14,6 +14,9 @@ const routes: Routes = [
 	},
 	{
 		path: 'kanbans/:id', component: KanbanComponent
+	},
+	{
+		path:'kanban-home' ,component:KanbanHomeComponent
 	}
 
 ];

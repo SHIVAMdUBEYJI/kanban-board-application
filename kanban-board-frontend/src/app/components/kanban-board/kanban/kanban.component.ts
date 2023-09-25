@@ -26,7 +26,7 @@ export class KanbanComponent implements OnInit {
 		this.getKanban();
 	}
 
-	drop(event: CdkDragDrop<Task[]>) {
+	drop(event: CdkDragDrop<Task[], any>) {
 		if (event.previousContainer === event.container) {
 			moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
 		} else {
@@ -73,7 +73,7 @@ export class KanbanComponent implements OnInit {
 		this.dones = kanban.tasks.filter(t => t.status === 'DONE')
 	}
 
-	private updateTaskStatusAfterDragDrop(event: CdkDragDrop<Task[]>) {
+	private updateTaskStatusAfterDragDrop(event: CdkDragDrop<Task[], any>) {
 		let taskId = event.item.element.nativeElement.id;
 		let containerId = event.container.id;
 

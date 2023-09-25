@@ -74,7 +74,7 @@ public class KanbanServiceImpl implements KanbanService {
 
     private Kanban convertDTOToKanban(KanbanDTO kanbanDTO) {
         Kanban kanban = new Kanban();
-        kanban.setTitle(kanban.getTitle());
+        kanban.setTitle(kanbanDTO.getTitle());
         return kanban;
     }
 

@@ -8,8 +8,8 @@ import {Observable} from "rxjs";
 })
 export class UserService implements OnInit {
 
-	registerURL: string = `http://localhost:8081/home/register`
-	loginURL: string = `http://localhost:8081/home/login`
+	registerURL: string = `http://localhost:9000/home/register`
+	loginURL: string = `http://localhost:9000/home/login`
 
 	constructor(private httpClient: HttpClient) {
 		this.httpClient = httpClient;

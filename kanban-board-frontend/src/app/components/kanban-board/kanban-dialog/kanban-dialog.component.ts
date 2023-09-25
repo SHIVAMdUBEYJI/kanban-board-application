@@ -9,7 +9,7 @@ import {KanbanServiceService} from "../../../services/kanban-service.service";
 	styleUrls: ['./kanban-dialog.component.css']
 })
 export class KanbanDialogComponent implements OnInit {
-	private title: any;
+	title: any;
 	form: FormGroup;
 
 	constructor(private formBuilder: FormBuilder, private dialogRef: MatDialogRef<KanbanDialogComponent>, @Inject(MAT_DIALOG_DATA) private data:any, private kanbanService: KanbanServiceService) {

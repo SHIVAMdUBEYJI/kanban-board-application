@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/kanbans")
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class KanbanController {
 
     private final KanbanService kanbanService;
@@ -64,7 +64,7 @@ public class KanbanController {
     public ResponseEntity<?> createKanban(@RequestBody KanbanDTO kanbanDTO) {
         try {
             return new ResponseEntity<>(kanbanService.saveKanban(kanbanDTO), HttpStatus.CREATED);
-        } catch (Exception e) {
+        } catch (Exception exception) {
             return errorResponse();
         }
     }

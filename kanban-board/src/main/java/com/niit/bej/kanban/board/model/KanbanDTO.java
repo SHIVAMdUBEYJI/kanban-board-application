@@ -14,9 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class KanbanDTO {
 
-    @ApiModelProperty(position = 1)
     private String title;
 
-    @ApiModelProperty(position = 2)
-    private List<Task> tasks;
 }

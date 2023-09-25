@@ -17,18 +17,18 @@ export class KanbanServiceService {
 	}
 
 	retrieveAllKanbanBoards(): Observable<Kanban[]> {
-		return this.httpClient.get<Kanban[]>(this.kanbanAppUrl + '/kanbans/');
+		return this.httpClient.get<Kanban[]>(this.kanbanAppUrl + '/kanbans/getAll');
 	}
 
 	retrieveKanbanById(id: String): Observable<Kanban>{
-		return this.httpClient.get<Kanban>(this.kanbanAppUrl + '/kanbans/' +id);
+		return this.httpClient.get<Kanban>(this.kanbanAppUrl + 'api/v1/kanbans/{id}' +id);
 	}
 	saveNewKanban(title:string): Observable<string> {
 		let headers = new HttpHeaders({'Content-Type': 'application/json'});
 		let options = {headers : headers};
 		let jsonObject = this.prepareTitleJsonObject(title);
 		return this.httpClient.post<string>(
-			this.kanbanAppUrl + '/kanbans/',
+			this.kanbanAppUrl + 'kanbans/create',
 			jsonObject,
 			options
 		);
