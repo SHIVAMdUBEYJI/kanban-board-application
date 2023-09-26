@@ -1,4 +1,4 @@
 export const environment = {
-	production: true,
+	production: false,
 	kanbanAppUrl: 'http://localhost:9000'
 };

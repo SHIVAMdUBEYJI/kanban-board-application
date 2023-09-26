@@ -9,7 +9,11 @@ import {KanbanDialogComponent} from "../kanban-dialog/kanban-dialog.component";
 })
 export class KanbanHomeComponent implements OnInit {
 
-	kanbanList !: Kanban[];
+	kanbanList : Kanban[] = [
+		new Kanban(1,"to-do",[]),
+		new Kanban(2,"In-Progress",[]),
+		new Kanban(3,"done",[])
+	] ;
 
 	constructor(private kanbanService: KanbanServiceService,
 				private dialog: MatDialog) {
@@ -23,7 +27,7 @@ export class KanbanHomeComponent implements OnInit {
 		const dialogConfig = new MatDialogConfig();
 		dialogConfig.autoFocus = true;
 		dialogConfig.data = {
-			kanban: new Kanban()
+			kanban: new Kanban(),
 		};
 		dialogConfig.disableClose =false;
 		dialogConfig.id = 'kanban-dialog';

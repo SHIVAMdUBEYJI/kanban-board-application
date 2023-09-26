@@ -13,7 +13,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/kanbans")
-//@CrossOrigin(origins = "http://localhost:4200")
 public class KanbanController {
 
     private final KanbanService kanbanService;
@@ -98,7 +97,7 @@ public class KanbanController {
         }
     }
 
-    @GetMapping("/{kanbanId}/tasks/")
+    @GetMapping("/{kanbanId}/tasks/all")
     public ResponseEntity<?> getAllTasksInKanban(@PathVariable Long kanbanId) {
         try {
             Optional<Kanban> optionalKanban = this.kanbanService.getKanbanById(kanbanId);

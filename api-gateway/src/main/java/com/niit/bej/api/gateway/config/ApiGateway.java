@@ -10,8 +10,8 @@ public class ApiGateway {
     @Bean
     public RouteLocator routeUrl(RouteLocatorBuilder routeLocatorBuilder) {
         return routeLocatorBuilder.routes()
-                .route(p -> p.path("/home/**").uri("http://localhost:8081"))
-                .route(p -> p.path("/api/v1/kanbans/**").uri("http://localhost:8082"))
-                .route(p -> p.path("/api/v1/tasks/**").uri("http://localhost:8082")).build();
+                .route(p -> p.path("/home/*").uri("lb://user-auth-service"))
+                .route(p -> p.path("/api/v1/kanbans/**","/api/v1/tasks/**").uri("lb://kanban-board-service")).build();
+
     }
 }

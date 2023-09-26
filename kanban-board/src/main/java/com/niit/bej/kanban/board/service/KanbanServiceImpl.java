@@ -66,6 +66,7 @@ public class KanbanServiceImpl implements KanbanService {
     }
 
     @Override
+    @Transactional
     public Kanban addNewTaskToKanban(Long kanbanId, TaskDTO taskDTO) {
         Kanban kanban = this.kanbanRepository.findById(kanbanId).get();
         kanban.addTask(convertDTOToTask(taskDTO));

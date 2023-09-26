@@ -1,12 +1,12 @@
 <div class="container">
     <div class="row mt-4">
         <div class="col">
-            <h2 class="fs-4 text-center">
+            <h2 class="fs-4 text-center text-primary">
                 Registration Form
             </h2>
             <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
-                <div class="m-2">
-                    <mat-form-field class="col-12">
+                <div class="m-2 bg-dark p-4">
+                    <mat-form-field class="col-12" >
                         <mat-label>username</mat-label>
                         <input class="form-control"
                                formControlName="username"
@@ -24,7 +24,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="m-2">
+                <div class="m-2 bg-dark p-4">
                     <mat-form-field class="col-12">
                         <mat-label>password</mat-label>
                         <input class="form-control"
@@ -49,7 +49,7 @@
                     </mat-form-field>
                 </div>
                 <div class="mt-4 d-flex justify-content-around">
-                    <button [disabled]="registerForm.invalid" class="col-2 rounded-pill" color="primary"
+                    <button [disabled]="registerForm.invalid" class="col-4 rounded-pill" color="danger"
                             mat-raised-button type="submit">Register
                     </button>
                 </div>

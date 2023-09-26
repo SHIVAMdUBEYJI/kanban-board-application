@@ -14,7 +14,7 @@ import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
 })
 export class KanbanComponent implements OnInit {
 
-	kanban !: Kanban;
+	kanban : Kanban = new Kanban(1,"title",[]) ;
 	todos: Task[] = [];
 	inProgress: Task[] = [];
 	dones: Task[] = [];
@@ -36,7 +36,7 @@ export class KanbanComponent implements OnInit {
 	}
 
 	openDialogForNewTask(): void {
-		this.openDialog('Create New Task', new Task(1,"hgc","jbjk","hj","ghj"));
+		this.openDialog('Create New Task', new Task());
 	}
 
 	// openTaskDialog(event: { srcElement: { id: any; }; }): void {
@@ -54,23 +54,33 @@ export class KanbanComponent implements OnInit {
 	}
 
 
-	private getKanban(): void {
-		const id = this.route.snapshot.paramMap.get('id');
-		if(id !==null){
-			this.kanbanService.retrieveKanbanById(id).subscribe(response => {
+	// private getKanban(): void {
+	// 	const id= this.route.snapshot.paramMap.getAll("id");
+	// 	if(id !==null){
+	// 		this.kanbanService.retrieveKanbanById(id).subscribe(response => {
+	// 			this.kanban = response;
+	// 			this.splitTaskByStatus(response);
+	// 		})
+	// 	}else {
+	// 		console.error('No valid ID found in the route.');
+	// 	}
+	//
+	// }
+
+	private getKanban(): void{
+		const id: string | null= this.route.snapshot.paramMap.get('id');
+		this.kanbanService.retrieveKanbanById(id).subscribe(
+			response =>{
 				this.kanban = response;
 				this.splitTaskByStatus(response);
-			})
-		}else {
-			console.error('No valid ID found in the route.');
-		}
-
+			}
+		)
 	}
 
 	private splitTaskByStatus(kanban: Kanban): void {
-		this.todos = kanban.tasks.filter(t => t.status === 'TODO');
-		this.inProgress = kanban.tasks.filter(t => t.status === 'INPROGRESS');
-		this.dones = kanban.tasks.filter(t => t.status === 'DONE')
+		this.todos = kanban.tasks!.filter(t => t.status === 'TODO');
+		this.inProgress = kanban.tasks!.filter(t => t.status === 'INPROGRESS');
+		this.dones = kanban.tasks!.filter(t => t.status === 'DONE');
 	}
 
 	private updateTaskStatusAfterDragDrop(event: CdkDragDrop<Task[], any>) {
@@ -99,7 +109,7 @@ export class KanbanComponent implements OnInit {
 		dialogConfig.data = {
 			title: title,
 			task: task,
-			kanbanId: this.kanban.id
+			kanban :this.kanban.id
 		};
 		this.dialog.open(TaskDialogComponent, dialogConfig)
 	}

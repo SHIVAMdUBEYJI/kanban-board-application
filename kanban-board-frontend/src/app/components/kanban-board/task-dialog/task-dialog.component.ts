@@ -13,7 +13,7 @@ import {TaskServiceService} from "../../../services/task-service.service";
 export class TaskDialogComponent implements OnInit{
 
 	dialogTitle:string;
-	kanbanId :string;
+	kanbanId :number =2;
 	task:Task;
 
 	form:FormGroup;
@@ -21,7 +21,7 @@ export class TaskDialogComponent implements OnInit{
 	constructor(private formBuilder:FormBuilder, private dialogRef:MatDialogRef<TaskDialogComponent>, @Inject(MAT_DIALOG_DATA) private data:any, private kanbanService:KanbanServiceService, private taskService:TaskServiceService) {
 
 		this.dialogTitle = data.title;
-		this.kanbanId = data.kanbanId;
+		//this.kanbanId = data.kanbanId;
 		this.task = data.task;
 
 		this.form = formBuilder.group({
@@ -35,14 +35,16 @@ export class TaskDialogComponent implements OnInit{
 	}
 
 	save(){
+	   //console.log(this.kanbanId = this.data.kanbanId);
+		console.log(this.kanbanId);
 		this.mapFormToTaskModel();
 		if(!this.task.id){
+			console.log(this.kanbanId);
 			this.kanbanService.saveNewTaskInKanban(this.kanbanId,this.task).subscribe();
 		}else {
 			this.taskService.updateTask(this.task).subscribe();
 		}
 		this.dialogRef.close();
-		window.location.reload();
 	}
 
 	close(){

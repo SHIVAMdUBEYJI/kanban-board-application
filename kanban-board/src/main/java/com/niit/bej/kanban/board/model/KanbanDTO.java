@@ -16,4 +16,5 @@ public class KanbanDTO {
 
     private String title;
 
+
 }
