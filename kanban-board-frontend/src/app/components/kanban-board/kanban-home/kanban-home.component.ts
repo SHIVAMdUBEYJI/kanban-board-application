@@ -3,6 +3,7 @@ import {Kanban} from "../../../models/kanban/kanban.model";
 import {KanbanServiceService} from "../../../services/kanban-service.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {KanbanDialogComponent} from "../kanban-dialog/kanban-dialog.component";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
 	selector: 'app-kanban-home', templateUrl: './kanban-home.component.html', styleUrls: ['./kanban-home.component.css']
@@ -10,12 +11,10 @@ import {KanbanDialogComponent} from "../kanban-dialog/kanban-dialog.component";
 export class KanbanHomeComponent implements OnInit {
 
 	kanbanList : Kanban[] = [
-		new Kanban(1,"to-do",[]),
-		new Kanban(2,"In-Progress",[]),
-		new Kanban(3,"done",[])
 	] ;
 
 	constructor(private kanbanService: KanbanServiceService,
+				private router: Router,
 				private dialog: MatDialog) {
 	}
 
@@ -38,6 +37,8 @@ export class KanbanHomeComponent implements OnInit {
 		this.kanbanService.retrieveAllKanbanBoards()
 			.subscribe(response => {
 			this.kanbanList = response;
+			console.log(response);
 		})
 	}
+
 }

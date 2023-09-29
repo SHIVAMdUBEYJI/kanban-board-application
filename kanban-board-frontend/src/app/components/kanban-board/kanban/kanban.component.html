@@ -1,61 +1,79 @@
 <div class="page-container">
-	<div class="page-title">
+	<div class="page-title text-center mat-display-4 bg-dark">
 		<h1>{{kanban.title}}</h1>
 	</div>
-	<div>
-		<button  mat-raised-button (click)="openDialogForNewTask()"> + Create Task</button>
+	<div class="text-center">
+		<button mat-raised-button (click)="openDialogForNewTask()" color="accent"> + Create Task</button>
 	</div>
-	<div class="kanban-board">
-		<div class="list-container">
+	<div class="kanban-board mb-4">
+		<div class="list-container text-center bg-primary mt-4 fst-italic">
 			<h2> To do </h2>
 			<div
 				(cdkDropListDropped)="drop($event)"
 				[cdkDropListConnectedTo]="['inProgress','done']"
 				[cdkDropListData]="todos"
 				cdkDropList
+				#todoList ="cdkDropList"
 				class="board-list"
 				id="todo">
 				<div (dblclick)="openTaskDialog($event)" *ngFor="let task of todos" [style.background-color]="task.color"
 					 cdkDrag
 					 class="sticky-note"
 					 id="{{task.id}}">
-					{{task.title}}
+					<mat-card-header>
+						{{"TITLE " +task.title}}
+					</mat-card-header>
+					<mat-card-content>
+						{{"DESCRIPTION :" +task.description}}
+					</mat-card-content>
 				</div>
 			</div>
 		</div>
 
-		<div class="list-container">
+		<div class="list-container bg-danger text-center mt-4 fst-italic">
 			<h2>In Progress</h2>
 			<div
 				(cdkDropListDropped)="drop($event)"
 				[cdkDropListConnectedTo]="['todo','done']"
 				[cdkDropListData]="inProgress"
 				cdkDropList
+				#inProgressList ="cdkDropList"
 				class="board-list"
 				id="inProgress">
 				<div (dblclick)="openTaskDialog($event)" *ngFor="let task of inProgress" [style.background-color]="task.color"
 					 cdkDrag
 					 class="sticky-note"
 					 id="{{task.id}}">
-					{{task.title}}
+					<mat-card-header>
+						{{"TITLE " +task.title}}
+					</mat-card-header>
+					<mat-card-content>
+						{{"DESCRIPTION :" +task.description}}
+					</mat-card-content>
 				</div>
 			</div>
 		</div>
 
-		<div class="list-container">
+		<div class="list-container text-center bg-dark mt-4 fst-italic">
 			<h2>Done</h2>
 			<div
 				(cdkDropListDropped)="drop($event)"
 				[cdkDropListConnectedTo]="['todo','inProgress']"
-				[cdkDropListData]="dones"
+				[cdkDropListData]="done"
 				cdkDropList
+				#doneList="cdkDropList"
 				class="board-list"
 				id="done">
-				<div (dblclick)="openTaskDialog($event)" *ngFor="let task of dones" [style.background-color]="task.color"
+				<div (dblclick)="openTaskDialog($event)" *ngFor="let task of done" [style.background-color]="task.color"
 					 cdkDrag
 					 class="sticky-note"
 					 id="{{task.id}}">
-					{{task.title}}
+					<mat-card-header>
+						{{"TITLE " +task.title}}
+					</mat-card-header>
+					<mat-card-content>
+						{{"DESCRIPTION :" +task.description}}
+					</mat-card-content>
 				</div>
 			</div>
 		</div>

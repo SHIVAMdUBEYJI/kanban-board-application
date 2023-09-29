@@ -23,6 +23,8 @@ import { KanbanHomeComponent } from './components/kanban-board/kanban-home/kanba
 import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
+import {MatCardModule} from "@angular/material/card";
+import { AddColumnComponent } from './kanban-board/add-column/add-column.component';
 
 @NgModule({
   declarations: [
@@ -33,28 +35,30 @@ import {MatSelectModule} from "@angular/material/select";
     KanbanComponent,
     KanbanDialogComponent,
     TaskDialogComponent,
-    KanbanHomeComponent
+    KanbanHomeComponent,
+    AddColumnComponent
   ],
-	imports: [
-		BrowserModule,
-		AppRoutingModule,
-		BrowserAnimationsModule,
-		MatToolbarModule,
-		MatButtonModule,
-		MatSidenavModule,
-		MatIconModule,
-		MatListModule,
-		MatInputModule,
-		ReactiveFormsModule,
-		HttpClientModule,
-		ToastrModule.forRoot({
-			positionClass: 'toast-top-right'
-		}),
-		CdkDropList,
-		CdkDrag,
-		MatDialogModule,
-		MatSelectModule
-	],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        ToastrModule.forRoot({
+            positionClass: 'toast-top-right'
+        }),
+        CdkDropList,
+        CdkDrag,
+        MatDialogModule,
+        MatSelectModule,
+        MatCardModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

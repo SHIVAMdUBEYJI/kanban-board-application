@@ -20,7 +20,7 @@ export class TaskServiceService {
 		return this.httpClient.put<Task>(this.kanbanAppUrl + '/api/v1/tasks/' + task.id, task, options);
 	}
 
-	getTaskById(id: string): Observable<Task> {
+	getTaskById(id: number): Observable<Task> {
 		return this.httpClient.get<Task>(this.kanbanAppUrl + '/api/v1/tasks/' + id);
 	}
 }

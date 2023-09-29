@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit} from '@angular/core';
 import {Task} from "../../../models/task/task.model";
 import {Kanban} from "../../../models/kanban/kanban.model";
 import {KanbanServiceService} from "../../../services/kanban-service.service";
 import {TaskServiceService} from "../../../services/task-service.service";
-import {ActivatedRoute} from "@angular/router";
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {ActivatedRoute, Params} from "@angular/router";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
 
@@ -14,12 +14,18 @@ import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
 })
 export class KanbanComponent implements OnInit {
 
-	kanban : Kanban = new Kanban(1,"title",[]) ;
+	kanban : Kanban = new Kanban() ;
 	todos: Task[] = [];
 	inProgress: Task[] = [];
-	dones: Task[] = [];
+	done: Task[] = [];
+	id:string =''
 
-	constructor(private kanbanService: KanbanServiceService, private taskService: TaskServiceService, private route: ActivatedRoute, private dialog: MatDialog) {
+	constructor(private kanbanService: KanbanServiceService,
+				private taskService: TaskServiceService,
+				private route: ActivatedRoute,
+				private dialog: MatDialog,
+				) {
+
 	}
 
 	ngOnInit(): void {
@@ -36,6 +42,7 @@ export class KanbanComponent implements OnInit {
 	}
 
 	openDialogForNewTask(): void {
+		console.log(this.id);
 		this.openDialog('Create New Task', new Task());
 	}
 
@@ -47,7 +54,7 @@ export class KanbanComponent implements OnInit {
 	// 	});
 	// }
 	openTaskDialog(event: MouseEvent):void{
-		const taskId = (event.target as HTMLElement).id;
+		const taskId:number = Number((event.target as HTMLElement).id);
 		this.taskService.getTaskById(taskId).subscribe(response =>{
 			this.openDialog('Update Task',response);
 		})
@@ -68,24 +75,28 @@ export class KanbanComponent implements OnInit {
 	// }
 
 	private getKanban(): void{
-		const id: string | null= this.route.snapshot.paramMap.get('id');
-		this.kanbanService.retrieveKanbanById(id).subscribe(
-			response =>{
-				this.kanban = response;
-				this.splitTaskByStatus(response);
+		this.route.params.subscribe((params:Params)=>{
+			if(params['id']){
+				this.id = params['id']
+				this.kanbanService.retrieveKanbanById(this.id).subscribe(
+					response=>{
+						this.kanban = response;
+						this.splitTaskByStatus(response);
+					}
+				)
 			}
-		)
+		})
 	}
 
 	private splitTaskByStatus(kanban: Kanban): void {
 		this.todos = kanban.tasks!.filter(t => t.status === 'TODO');
 		this.inProgress = kanban.tasks!.filter(t => t.status === 'INPROGRESS');
-		this.dones = kanban.tasks!.filter(t => t.status === 'DONE');
+		this.done = kanban.tasks!.filter(t => t.status === 'DONE');
 	}
 
 	private updateTaskStatusAfterDragDrop(event: CdkDragDrop<Task[], any>) {
-		let taskId = event.item.element.nativeElement.id;
-		let containerId = event.container.id;
+		let taskId:number = Number(event.item.element.nativeElement.id);
+		let containerId:string = (event.container.id);
 
 		this.taskService.getTaskById(taskId).subscribe(response => {
 			this.updateTaskStatus(response, containerId);
@@ -109,8 +120,11 @@ export class KanbanComponent implements OnInit {
 		dialogConfig.data = {
 			title: title,
 			task: task,
-			kanban :this.kanban.id
+			kanban : this.id
 		};
-		this.dialog.open(TaskDialogComponent, dialogConfig)
+		console.log(this.id);
+		const dialogRef =this.dialog.open(TaskDialogComponent, dialogConfig);
+		dialogRef.afterClosed().subscribe(result =>{});
 	}
+
 }

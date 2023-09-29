@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {KanbanServiceService} from "../../../services/kanban-service.service";
 import {TaskServiceService} from "../../../services/task-service.service";
+import {Kanban} from "../../../models/kanban/kanban.model";
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
   selector: 'app-task-dialog',
@@ -13,15 +15,15 @@ import {TaskServiceService} from "../../../services/task-service.service";
 export class TaskDialogComponent implements OnInit{
 
 	dialogTitle:string;
-	kanbanId :number =2;
 	task:Task;
+	id:string =''
 
 	form:FormGroup;
 
-	constructor(private formBuilder:FormBuilder, private dialogRef:MatDialogRef<TaskDialogComponent>, @Inject(MAT_DIALOG_DATA) private data:any, private kanbanService:KanbanServiceService, private taskService:TaskServiceService) {
+	constructor(private formBuilder:FormBuilder,private route:ActivatedRoute,private dialogRef:MatDialogRef<TaskDialogComponent>, @Inject(MAT_DIALOG_DATA) public data:any, private kanbanService:KanbanServiceService, private taskService:TaskServiceService) {
 
 		this.dialogTitle = data.title;
-		//this.kanbanId = data.kanbanId;
+		this.id = data.id;
 		this.task = data.task;
 
 		this.form = formBuilder.group({
@@ -29,18 +31,18 @@ export class TaskDialogComponent implements OnInit{
 			description:[this.task.description,Validators.required],
 			color:[this.task.color,Validators.required]
 		});
+
 	}
 
 	ngOnInit(): void {
 	}
 
 	save(){
-	   //console.log(this.kanbanId = this.data.kanbanId);
-		console.log(this.kanbanId);
+		console.log(this.data.kanban);
 		this.mapFormToTaskModel();
 		if(!this.task.id){
-			console.log(this.kanbanId);
-			this.kanbanService.saveNewTaskInKanban(this.kanbanId,this.task).subscribe();
+			console.log(this.data.kanban);
+			this.kanbanService.saveNewTaskInKanban(this.data.kanban,this.task).subscribe();
 		}else {
 			this.taskService.updateTask(this.task).subscribe();
 		}

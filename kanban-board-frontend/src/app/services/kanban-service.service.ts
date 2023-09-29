@@ -23,7 +23,7 @@ export class KanbanServiceService {
 	}
 
 	retrieveKanbanById(id: string | null): Observable<Kanban>{
-		return this.httpClient.get<Kanban>(this.kanbanAppUrl + '/api/v1/kanbans/{id}' +id);
+		return this.httpClient.get<Kanban>(this.kanbanAppUrl + '/api/v1/kanbans/' +id);
 	}
 	saveNewKanban(title:string): Observable<string> {
 		let headers = new HttpHeaders({'Content-Type': 'application/json'});
