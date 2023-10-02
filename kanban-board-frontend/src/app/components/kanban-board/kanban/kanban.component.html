@@ -77,5 +77,10 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="add-column">
+			<input type="text" [(ngModel)]="newColumnName" placeholder="New Column Name" />
+			<button (click)="addColumn(newColumnName)">Add Column</button>
+		</div>
 	</div>
 </div>

@@ -13,7 +13,7 @@ import { MatListModule } from '@angular/material/list';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import {MatInputModule} from "@angular/material/input";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import { KanbanComponent } from './components/kanban-board/kanban/kanban.component';
@@ -24,7 +24,7 @@ import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
 import {MatCardModule} from "@angular/material/card";
-import { AddColumnComponent } from './kanban-board/add-column/add-column.component';
+
 
 @NgModule({
   declarations: [
@@ -36,9 +36,9 @@ import { AddColumnComponent } from './kanban-board/add-column/add-column.compone
     KanbanDialogComponent,
     TaskDialogComponent,
     KanbanHomeComponent,
-    AddColumnComponent
   ],
     imports: [
+		FormsModule,
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,

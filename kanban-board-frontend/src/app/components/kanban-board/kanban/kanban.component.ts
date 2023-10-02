@@ -19,13 +19,13 @@ export class KanbanComponent implements OnInit {
 	inProgress: Task[] = [];
 	done: Task[] = [];
 	id:string =''
-
+	newColumnName:any
+	columns:any=['To-do','In-progress','Done']
 	constructor(private kanbanService: KanbanServiceService,
 				private taskService: TaskServiceService,
 				private route: ActivatedRoute,
 				private dialog: MatDialog,
 				) {
-
 	}
 
 	ngOnInit(): void {
@@ -73,6 +73,7 @@ export class KanbanComponent implements OnInit {
 	// 	}
 	//
 	// }
+
 
 	private getKanban(): void{
 		this.route.params.subscribe((params:Params)=>{
@@ -126,5 +127,13 @@ export class KanbanComponent implements OnInit {
 		const dialogRef =this.dialog.open(TaskDialogComponent, dialogConfig);
 		dialogRef.afterClosed().subscribe(result =>{});
 	}
+
+	addColumn(newColumn: string){
+		if (!this.columns.includes(newColumn)) {
+			console.log("complete")
+			this.columns.push(newColumn);
+		}
+	}
+
 
 }
