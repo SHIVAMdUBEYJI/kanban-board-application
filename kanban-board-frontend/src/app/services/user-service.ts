@@ -27,6 +27,28 @@ export class UserService implements OnInit {
 		user.email = user?.email?.toLowerCase();
 		return this.httpClient.post(`${this.endPointURL}/register`,user);
 	}
+	loginUser(user:User):void {
+		user.email = user?.email?.toLowerCase();
+		this.httpClient.post(`${this.endPointURL}/login`,user).subscribe({
+			next: (response:any) =>{
+				this.isLoggedIn = true;
+				localStorage.setItem('token',response.token);
+				localStorage.setItem('user_email',user.email!);
+				this.getUserProfile();
+				this.snackBar.open("Login Successfully !!","Done",{duration: 3000});
+				this.router.navigateByUrl("").then(()=>{
+					setTimeout(()=>{
+						window.location.reload()
+					},100);
+				})
+			},
+			error:(err)=>{
+				if(err.status == 404){
+					this.snackBar.open("Login Failed !!  Email or Password is Incorrect","Ok",{duration:3000} )
+				}
+			}
+		});
+	}
 
 
 }
