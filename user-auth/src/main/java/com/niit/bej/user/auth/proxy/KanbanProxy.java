@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient
 public interface KanbanProxy {
-    @PostMapping("/save-kanban")
+    @PostMapping("kanban/save-kanban")
     ResponseEntity<?> saveKanban(@RequestBody User user);
 }
