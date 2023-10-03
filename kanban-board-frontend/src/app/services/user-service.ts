@@ -1,5 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../models/user/user.model";
 import {Router} from "@angular/router";
@@ -60,6 +60,20 @@ export class UserService implements OnInit {
 				window.location.reload()
 			},100)
 		})
+	}
+
+	getUserProfile(){
+		return this.httpClient.get<User>(
+			`${this.endPointURL}/guard/email/${localStorage.getItem('user_email')}`,
+			{headers: new HttpHeaders({Authorization: `Bearer ${localStorage.getItem('token')}`})}
+				).subscribe({
+			next:(response) =>{
+				this.currentUser = response ;
+				this.isLoggedIn = true;
+				localStorage.setItem('user_firstname',response.firstName!);
+				console.log(this.currentUser)
+			}
+		});
 	}
 
 
