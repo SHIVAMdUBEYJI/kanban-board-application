@@ -3,24 +3,14 @@ server:
   port: 8082
   error:
     include-message: always
-
 spring:
   application:
     name: kanban-board-service
-
-  datasource:
-    url: jdbc:mysql://kanban-database-container:3306/kanban_database?createDatabaseIfNotExist=true
-    username: root
-    password: Saraneswar4896
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+  rabbitmq:
+    host: rabbitmq-container
+  data:
+    mongodb:
+      uri: mongodb://mongo:27017/kanban_database?createIfNotExists=true
 
 eureka:
   client:

@@ -10,15 +10,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/home")
 public class UserController {
     private final UserServiceImpl userService;
 
+    private final JwtSecurityTokenGenerator jwtSecurityTokenGenerator;
 
     @Autowired
     public UserController(UserServiceImpl userService, JwtSecurityTokenGenerator jwtSecurityTokenGenerator) {
         this.userService = userService;
+        this.jwtSecurityTokenGenerator = jwtSecurityTokenGenerator;
+
     }
 
     @PostMapping("/register")
@@ -29,6 +34,19 @@ public class UserController {
             throw new UserAlreadyExistsException("already exists");
         } catch (Exception exception) {
             return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> getByLogin(@RequestBody User user) throws UserNotFoundException {
+        try {
+            this.userService.login(user.getEmail(), user.getPassword());
+            Map<String, String> secretKey = this.jwtSecurityTokenGenerator.generateToken(user);
+            return new ResponseEntity<>(secretKey, HttpStatus.OK);
+        } catch (UserNotFoundException exception) {
+            throw new UserNotFoundException("not found");
+        } catch (Exception exception) {
+            return new ResponseEntity<>("Network Error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
