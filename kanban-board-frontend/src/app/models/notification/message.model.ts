@@ -1,2 +1,4 @@
-export class Message {
+export type Message = {
+	message?: string;
+	messageRead?: boolean;
 }

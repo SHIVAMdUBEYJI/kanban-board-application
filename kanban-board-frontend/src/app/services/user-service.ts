@@ -1,28 +1,32 @@
 import {Injectable, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {User} from "../models/user.model";
 import {Observable} from "rxjs";
+import {User} from "../models/user/user.model";
+import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class UserService implements OnInit {
 
-	registerURL: string = `http://localhost:9000/home/register`
-	loginURL: string = `http://localhost:9000/home/login`
+	endPointURL:string = 'http://localhost:9000/home';
+	currentUser? :User;
+	isLoggedIn:boolean = false;
 
-	constructor(private httpClient: HttpClient) {
-		this.httpClient = httpClient;
+	constructor(
+		private httpClient: HttpClient,
+		private router:Router,
+		private snackBar:MatSnackBar
+	) {
 	}
-
 	ngOnInit(): void {
 	}
 
-	registerUser(user: User): Observable<User> {
-		return this.httpClient.post<User>(`${this.registerURL}`, user);
+	registerUser(user:User):Observable<any>{
+		user.email = user?.email?.toLowerCase();
+		return this.httpClient.post(`${this.endPointURL}/register`,user);
 	}
 
-	loginUser(user: User): Observable<User> {
-		return this.httpClient.post<User>(`${this.loginURL}`,user);
-	}
+
 }
