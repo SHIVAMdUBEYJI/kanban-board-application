@@ -5,8 +5,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-@FeignClient(name = " kanban-board-service",url = " kanban-board-service:8082")
+@FeignClient(name = "kanban-board-service",url = "kanban-board-service:8082")
 public interface KanbanProxy {
-    @PostMapping("kanban/save-kanban")
+    @PostMapping("/kanban/save-kanban")
     ResponseEntity<?> saveKanban(@RequestBody User user);
 }

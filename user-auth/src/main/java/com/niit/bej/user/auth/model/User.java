@@ -10,7 +10,6 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user_table")
 public class User {
     private String firstName;
     private String lastName;
@@ -21,4 +20,7 @@ public class User {
     private String imageURL;
 
 
+    public String getUsername() {
+        return null;
+    }
 }
