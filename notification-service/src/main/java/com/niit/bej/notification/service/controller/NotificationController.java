@@ -16,8 +16,25 @@ public class NotificationController {
     public NotificationController(NotificationService notificationService) {
         this.notificationService = notificationService;
     }
+
     @PostMapping("saveNotification")
-    public ResponseEntity<?> saveNotification(@RequestBody Notification notification){
+    public ResponseEntity<?> saveNotification(@RequestBody Notification notification) {
         return new ResponseEntity<>(this.notificationService.saveNotification(notification), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getByEmail/{email}")
+    public ResponseEntity<?> getByEmailId(@PathVariable String email) {
+        return new ResponseEntity<>(this.notificationService.getByEmail(email), HttpStatus.OK);
+    }
+
+    @PutMapping("/updateNotification")
+    public ResponseEntity<?> updateNotification(@RequestBody Notification notification) {
+        return new ResponseEntity<>(this.notificationService.updateNotification(notification), HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/delete/{email}")
+    public ResponseEntity<?> deleteNotification(@PathVariable String email) {
+        this.notificationService.deleteNotification(email);
+        return new ResponseEntity<>("User Notification Successfully", HttpStatus.OK);
     }
 }
