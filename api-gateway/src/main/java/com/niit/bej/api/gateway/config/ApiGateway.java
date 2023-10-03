@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApiGateway {
     @Bean
-    public RouteLocator routeUrl(RouteLocatorBuilder routeLocatorBuilder) {
+    public RouteLocator routeLocator(RouteLocatorBuilder routeLocatorBuilder){
         return routeLocatorBuilder.routes()
-                .route(p -> p.path("/home/*").uri("lb://user-auth-service"))
-                .route(p -> p.path("/api/v1/kanbans/**","/api/v1/tasks/**").uri("lb://kanban-board-service")).build();
-
+                .route(p -> p.path("/kanban/**").uri("lb://kanban-board-service"))
+                .route(p ->p.path("/home/**").uri("lb://user-auth-service"))
+                .route(p ->p.path("/notification/**").uri("lb://notification-service")).build();
     }
 }

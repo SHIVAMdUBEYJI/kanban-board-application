@@ -1,40 +1,19 @@
 package com.niit.bej.kanban.board.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import io.swagger.annotations.ApiModelProperty;
-import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+import java.time.LocalDate;
 
 @Data
-@Entity
+@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "task")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 public class Task {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @ApiModelProperty(position = 1)
-    private Long id;
-
-    @ApiModelProperty(position = 2)
-    private String title;
-
-    @ApiModelProperty(position = 3)
+    private String name;
     private String description;
-
-    @ApiModelProperty(position = 4)
-    private String color;
-
-    @Enumerated(EnumType.STRING)
-    @ApiModelProperty(position = 5)
-    private TaskStatus status;
-
+    private String priority;
+    private LocalDate startDate;
+    private LocalDate dueDate;
+    private String assigneeEmail;
 }
