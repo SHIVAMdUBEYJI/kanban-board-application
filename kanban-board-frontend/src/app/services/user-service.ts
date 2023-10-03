@@ -50,5 +50,17 @@ export class UserService implements OnInit {
 		});
 	}
 
+	logoutUser(){
+		localStorage.removeItem('token');
+		localStorage.removeItem('user_email');
+		localStorage.removeItem('user_firstname');
+		this.isLoggedIn = false;
+		this.router.navigateByUrl("").then(()=>{
+			setTimeout(()=>{
+				window.location.reload()
+			},100)
+		})
+	}
+
 
 }
