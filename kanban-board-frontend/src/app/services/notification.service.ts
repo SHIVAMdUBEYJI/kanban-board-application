@@ -24,4 +24,25 @@ export class NotificationService {
 				console.log(error.text);
 			})
 	}
+	getNotification() {
+		this.httpClient.get<Notification>(`${this.endPointURL}/getByEmail/${localStorage.getItem('user_email')}`)
+			.subscribe({
+				next: (response) => this.currentUserNotifications = response,
+				error: (err) => console.log(err)
+			})
+	}
+	updateNotification(notification: Notification) {
+		this.httpClient.put<Notification>(`${this.endPointURL}/updateNotification`, notification)
+			.subscribe({
+				next: (response) => this.currentUserNotifications = response,
+				error: (err) => console.log(err)
+			})
+	}
+	deleteNotification() {
+		this.httpClient.delete(`${this.endPointURL}/delete/${localStorage.getItem('user_email')}`)
+			.subscribe({
+				next: () => console.log("Notification deleted"),
+				error: (err) => console.log(err)
+			})
+	}
 }
