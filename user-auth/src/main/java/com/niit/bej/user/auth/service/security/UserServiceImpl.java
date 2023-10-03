@@ -9,6 +9,7 @@ import com.niit.bej.user.auth.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,11 +59,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByEmail(String email) throws UserNotFoundException {
-        return null;
+        User user = this.userRepository.findUserByEmail(email);
+        if(user == null){
+            throw new UserNotFoundException("cannot find the user by this email")
+        }
+        return user;
     }
 
     @Override
     public List<String> findAllEmails() {
-        return null;
+        List<User> userList = this.userRepository.findAll();
+        List<String> emails = new ArrayList<>();
+        for (User user:userList){
+            emails.add(user.getEmail());
+        }
+        return emails;
     }
 }
