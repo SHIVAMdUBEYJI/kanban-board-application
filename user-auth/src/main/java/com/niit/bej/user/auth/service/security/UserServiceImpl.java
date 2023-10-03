@@ -28,7 +28,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(User user) throws UserAlreadyExistsException {
 
-        return null;
+        if (this.userRepository.existsById(user.getEmail())) {
+            throw new UserAlreadyExistsException("User already found");
+        }
+        kanbanProxy.saveKanban(user);
+        notificationProxy.saveNotification(user);
+        return userRepository.save(user);
     }
 
     @Override
