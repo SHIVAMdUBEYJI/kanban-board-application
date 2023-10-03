@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: notification-service
+  data:
+    mongodb:
+      database: notification_db
+      uri: mongodb://mongo:27017/notification_db?createIfNotExists=true
+  rabbitmq:
+    host: rabbitmq-container
+
+server:
+  port: 8084
+
+  error:
+    include-message: always
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka-server-service:8761/eureka
