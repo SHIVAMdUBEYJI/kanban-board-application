@@ -4,7 +4,6 @@ import com.niit.bej.user.auth.exception.InvalidCredentialsException;
 import com.niit.bej.user.auth.exception.UserAlreadyExistsException;
 import com.niit.bej.user.auth.exception.UserNotFoundException;
 import com.niit.bej.user.auth.model.User;
-import com.niit.bej.user.auth.service.UserService;
 import com.niit.bej.user.auth.service.security.SecurityTokenGenerator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +49,7 @@ public class UserController {
     @GetMapping("/all")
     public ResponseEntity<?> getAllRegisteredUsers() {
         try {
-            List<User> userList = this.userService.getAllUsers();
+            List<User> userList = this.userService.();
             return new ResponseEntity<>(userList, HttpStatus.OK);
         } catch (UserNotFoundException exception) {
             return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
