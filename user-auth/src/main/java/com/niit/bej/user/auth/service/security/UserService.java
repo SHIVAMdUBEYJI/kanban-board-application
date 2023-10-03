@@ -7,7 +7,6 @@ import com.niit.bej.user.auth.model.User;
 import java.util.List;
 
 public interface UserService {
-
     User register(User user) throws UserAlreadyExistsException;
 
     User updateUser(User user,String email);
@@ -19,4 +18,5 @@ public interface UserService {
     User findUserByEmail(String email) throws UserNotFoundException;
 
     List<String> findAllEmails();
+
 }

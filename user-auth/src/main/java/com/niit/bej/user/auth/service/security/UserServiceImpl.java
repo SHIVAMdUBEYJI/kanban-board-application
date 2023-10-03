@@ -15,9 +15,9 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     private final KanbanProxy kanbanProxy;
     private final NotificationProxy notificationProxy;
-
     private final UserRepository userRepository;
 
     @Autowired
@@ -51,17 +51,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void login(String email, String password) throws UserNotFoundException {
-     Optional<User> userByEmailAndPassword = this.userRepository.findUserByEmailAndPassword(email, password);
-     if(userByEmailAndPassword.isEmpty()){
-         throw new UserNotFoundException("not found");
-     }
+        Optional<User> userByEmailAndPassword = this.userRepository.findUserByEmailAndPassword(email, password);
+        if (userByEmailAndPassword.isEmpty()) {
+            throw new UserNotFoundException("not found");
+        }
     }
 
     @Override
     public User findUserByEmail(String email) throws UserNotFoundException {
         User user = this.userRepository.findUserByEmail(email);
-        if(user == null){
-            throw new UserNotFoundException("cannot find the user by this email")
+        if (user == null) {
+            throw new UserNotFoundException("cannot find the user by this email");
         }
         return user;
     }
@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
     public List<String> findAllEmails() {
         List<User> userList = this.userRepository.findAll();
         List<String> emails = new ArrayList<>();
-        for (User user:userList){
+        for (User user : userList) {
             emails.add(user.getEmail());
         }
         return emails;

@@ -14,13 +14,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/home")
 public class UserController {
     private final UserServiceImpl userService;
-    private final JwtSecurityTokenGenerator jwtSecurityTokenGenerator;
 
 
     @Autowired
     public UserController(UserServiceImpl userService, JwtSecurityTokenGenerator jwtSecurityTokenGenerator) {
         this.userService = userService;
-        this.jwtSecurityTokenGenerator = jwtSecurityTokenGenerator;
     }
 
     @PostMapping("/register")
@@ -58,7 +56,7 @@ public class UserController {
 
     @GetMapping("/guard/all-emails")
     public ResponseEntity<?> getAllEmails() {
-        return new ResponseEntity<>(this.userService.findAllEmails(), HttpStatus.OK)
+        return new ResponseEntity<>(this.userService.findAllEmails(), HttpStatus.OK);
     }
 
 }
