@@ -1,58 +1,36 @@
 package com.niit.bej.user.auth.controller;
 
-import com.niit.bej.user.auth.exception.InvalidCredentialsException;
 import com.niit.bej.user.auth.exception.UserAlreadyExistsException;
-import com.niit.bej.user.auth.exception.UserNotFoundException;
 import com.niit.bej.user.auth.model.User;
-import com.niit.bej.user.auth.service.security.SecurityTokenGenerator;
+import com.niit.bej.user.auth.service.security.JwtSecurityTokenGenerator;
+import com.niit.bej.user.auth.service.security.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/home")
 public class UserController {
-    private final UserService userService;
-    private final SecurityTokenGenerator securityTokenGenerator;
+    private final UserServiceImpl userService;
+    private final JwtSecurityTokenGenerator jwtSecurityTokenGenerator;
 
-    public UserController(UserService userService, SecurityTokenGenerator securityTokenGenerator) {
+
+    @Autowired
+    public UserController(UserServiceImpl userService, JwtSecurityTokenGenerator jwtSecurityTokenGenerator) {
         this.userService = userService;
-        this.securityTokenGenerator = securityTokenGenerator;
+        this.jwtSecurityTokenGenerator = jwtSecurityTokenGenerator;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User user) {
+    public ResponseEntity<?> register(@RequestBody User user) throws UserAlreadyExistsException {
         try {
-            User registeredUser = this.userService.register(user);
-            return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+            return new ResponseEntity<>(this.userService.register(user), HttpStatus.CREATED);
         } catch (UserAlreadyExistsException exception) {
-            return new ResponseEntity<>(exception.getMessage(), HttpStatus.CONFLICT);
-        }
-    }
-
-  @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user) {
-        try {
-            boolean loginUser = this.userService.login(user);
-            if (loginUser) {
-                Map<String, String> jwtTokenMap = securityTokenGenerator.generateToken(user);
-                return new ResponseEntity<>(jwtTokenMap, HttpStatus.OK);
-            } else throw new InvalidCredentialsException("Please check your Username and Password");
-        } catch (InvalidCredentialsException | UserNotFoundException exception) {
-            return new ResponseEntity<>("Please check your credentials", HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity<?> getAllRegisteredUsers() {
-        try {
-            List<User> userList = this.userService.();
-            return new ResponseEntity<>(userList, HttpStatus.OK);
-        } catch (UserNotFoundException exception) {
-            return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+            throw new UserAlreadyExistsException("already exists");
+        } catch (Exception exception) {
+            return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
