@@ -44,5 +44,23 @@ export class KanbanServiceService {
 			})
 	}
 
+	getKanbanByEmail(email: string) {
+		return this.httpClient.get<Kanban>(`${this.endPointURL}/get-kanban/${email}`);
+	}
+
+	updateKanban(kanban: Kanban) {
+		return this.httpClient.put<Kanban>(`${this.endPointURL}/update-kanban`, kanban)
+			.subscribe({
+				next: (response: Kanban) => this.currentUserKanban = response, error: (err) => console.log(err)
+			});
+	}
+
+	deleteKanban() {
+		return this.httpClient.delete(`${this.endPointURL}/delete-kanban/${localStorage.getItem('user_email')}`).subscribe({
+			next: () => console.log("Kanban deleted")
+		})
+	}
+
+
 
 }
