@@ -1,1 +1,173 @@
-<p>kanban-board works!</p>
+<mat-sidenav-container class="sidenav-container">
+
+	<mat-sidenav class="sidenav" mode="side" opened>
+		<mat-nav-list>
+			<div class="sidenav_heading">
+				<h1>Boards</h1>
+			</div>
+			<hr class="divider">
+			<div *ngFor="let board of currentUserKanban?.boards">
+				<a (click)="displayBoard(board)" class="board_name" mat-list-item>{{board.boardName}}</a>
+			</div>
+			<hr *ngIf="currentUserKanban?.boards?.length != 0" class="divider">
+			<div (click)="addBoardToKanban()" class="add_board_button">
+				<button mat-button><span class="material-symbols-outlined">add_card</span>Add New Board</button>
+			</div>
+		</mat-nav-list>
+	</mat-sidenav>
+
+	<mat-sidenav-content class="sidebar-content">
+		<!-- Add content here -->
+
+		<!--    <div class="dashboard_instructions_container">-->
+		<!--      For No Board-->
+		<div *ngIf="boardToDisplay === undefined" class="dashboard_instructions">
+			<h1>Hello {{currentUserFirstName}} ! </h1>
+			<h2>Welcome to your dashboard!</h2>
+			<ul class="about__content-details-para">
+				<li>
+					Click on the "<a (click)="addBoardToKanban()">Add Board</a>" button to create a new board.
+				</li>
+				<li>
+					If you have created a board previously, you can select it from the previous board name.
+				</li>
+				<li>
+					You can also personalize your Profile by clicking on the "<a routerLink="/profile">Profile</a>" in
+					the header
+				</li>
+			</ul>
+		</div>
+		<!--    </div>-->
+
+		<!--    Board Header-->
+		<div class="board_container">
+			<div *ngIf="boardToDisplay != null" class="board_heading">
+				<div class="board_heading_name">
+					<h1> Board Name : {{boardToDisplay.boardName}}</h1>
+				</div>
+				<div class="board_buttons">
+					<div (click)="editBoardName()" matTooltip="Edit Board Name">
+						<span class="material-symbols-outlined">edit</span>
+					</div>
+					<div (click)="deleteBoard(boardToDisplay.boardName)" matTooltip="Delete Board">
+						<span class="material-symbols-outlined">delete</span>
+					</div>
+				</div>
+			</div>
+
+			<!--        Add Members -->
+			<div class="board_members_main">
+				<div *ngIf="boardToDisplay != null" class="board_members">
+					<h2>Contributors : </h2>
+				</div>
+				<div *ngFor="let member of boardMembers" class="board_members">
+					<img [matTooltip]="member.firstName!" [src]="member.imageURL" alt="member image">
+				</div>
+				<div (click)="addMembersToBoard()" *ngIf="boardToDisplay != null" class="board_members"
+					 matTooltip="Add contributor to board">
+					<img
+						alt="add_member"
+						src="https://res.cloudinary.com/dduwkdctl/image/upload/v1673872688/Kanban%20Project/Add_Member_a9af5n.png">
+				</div>
+
+
+				<!--        Add Column    -->
+				<div (click)="addColumnToBoard()" *ngIf="boardToDisplay != null" class="board_add_column"
+					 matTooltip="Add Column">
+					<img
+						alt="add_column"
+						src="https://res.cloudinary.com/dduwkdctl/image/upload/v1673873692/Kanban%20Project/Add_Column_fq0aht.png">
+					<h2>Add Column</h2>
+				</div>
+			</div>
+		</div>
+
+		<hr *ngIf="boardToDisplay != null" class="divider">
+
+		<!--      For No column-->
+		<div *ngIf="boardToDisplay?.columns?.length! === 0" class="dashboard_instructions">
+			<h1>Hello {{currentUserFirstName}} ! </h1>
+			<h2>Start making columns in your board {{boardToDisplay?.boardName}}</h2>
+			<ul class="about__content-details-para">
+				<li>
+					Click on the "<a (click)="addColumnToBoard()">Add Column</a>" button to create a new Column.
+				</li>
+				<li>
+					Click on the "<a (click)="addMembersToBoard()">Add Contributor</a>" button to add a Member to This
+					Board.
+				</li>
+				<li>
+					Start adding tasks to your columns and plan your work.
+				</li>
+			</ul>
+		</div>
+
+
+		<div cdkDropListGroup>
+			<!--            Columns     -->
+			<div *ngFor="let column of boardToDisplay?.columns" class="column_container">
+				<div class="column_header">
+					<div class="column_header_name">
+						<h3>{{column.columnName}}</h3>
+					</div>
+					<div class="column_button">
+						<button (click)="editColumnName(column)" mat-button>
+							<mat-icon>edit</mat-icon>
+						</button>
+						<button (click)="deleteColumn(column)" mat-button>
+							<mat-icon>delete</mat-icon>
+						</button>
+					</div>
+				</div>
+
+				<hr>
+				<div
+					(cdkDropListDropped)="drop($event)"
+					[cdkDropListData]="column.tasks"
+					cdkDropList class="task_list">
+					<!--                    Tasks     -->
+					<div *ngFor="let task of column.tasks" [cdkDragDisabled]="cannotDrag(task)" cdkDrag
+						 class="task_container">
+
+						<div class="grid_one">
+							<div class="task_name">{{task?.name}}</div>
+							<div class="task_desc">{{task?.description}}</div>
+						</div>
+						<div class="priority">
+							<p *ngIf="task?.priority === 'Low'"><i class="fa-solid fa-circle low"></i></p>
+							<p *ngIf="task?.priority === 'Medium'"><i class="fa-solid fa-circle medium"></i></p>
+							<p *ngIf="task?.priority === 'High'"><i class="fa-solid fa-circle high"></i></p>
+						</div>
+						<div class="date">
+							<div><span><b>Started On</b> - {{task?.startDate?.toDateString()}}</span></div>
+							<div><span><b>Due Date</b> - {{task?.dueDate?.toDateString()}}</span></div>
+						</div>
+
+						<div class="edit">
+							<div class="edit-icons">
+								<button (click)="editTask(task, column?.columnName!)">
+									<mat-icon>edit</mat-icon>
+								</button>
+								<button (click)="deleteTask(task)">
+									<mat-icon>delete</mat-icon>
+								</button>
+							</div>
+							<div class="assignee">
+								<div *ngIf="this.boardToDisplay?.members?.length !== 0" class="assignee-details">
+									<img *ngIf="task?.assigneeImageURL !== undefined" [matTooltip]="task?.assigneeName!"
+										 [src]="task?.assigneeImageURL" alt="Profile Image">
+									<div *ngIf="task?.assigneeImageURL !== undefined"><b>Assigned To</b></div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div (click)="addTaskToColumn(column)" class="add_task">
+						<i class="fa fa-add"></i>Add Task
+					</div>
+				</div>
+			</div>
+		</div>
+	</mat-sidenav-content>
+</mat-sidenav-container>
+

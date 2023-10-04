@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
+
 
 @Component({
-  selector: 'app-pop-up',
-  templateUrl: './pop-up.component.html',
-  styleUrls: ['./pop-up.component.css']
+	selector: 'app-add-board-popup',
+	templateUrl: './add-board-popup.component.html'
 })
-export class PopUpComponent {
+export class AddBoardPopupComponent implements OnInit{
+	ngOnInit(): void {
+	}
 
 }
