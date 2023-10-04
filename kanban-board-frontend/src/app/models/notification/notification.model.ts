@@ -1,6 +1,6 @@
 import {Message} from "./message.model";
 
-export class Notification {
+export type Notification ={
     email?: string ;
     messages?: Message[] ;
 }

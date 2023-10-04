@@ -6,7 +6,6 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {KanbanServiceService} from "../../services/kanban-service.service";
 import {UserService} from "../../services/user-service";
-import {AddBoardPopupComponent} from "./pop-up/pop-up.component";
 import {AddColumnPopupComponent} from "./pop-up/add-column-popup/add-column-popup.component";
 import {Column} from "../../models/kanban/column.model";
 import {AddTaskPopupComponent} from "./pop-up/add-task-popup/add-task-popup.component";
@@ -14,6 +13,7 @@ import {AddMemberPopupComponent} from "./pop-up/add-member-popup/add-member-popu
 import {Task} from "../../models/kanban/task.model";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {DialogData} from "./dialog.data";
+import {AddBoardPopupComponent} from "./pop-up/add-board-popup/add-board-popup.component";
 
 @Component({
     selector: 'app-kanban-board', templateUrl: './kanban-board.component.html', styleUrls: ['./kanban-board.component.css']

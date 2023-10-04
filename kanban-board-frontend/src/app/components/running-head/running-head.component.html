@@ -36,7 +36,7 @@
 						<mat-menu #notification="matMenu">
 							<div *ngIf="currentUserNotification?.messages?.length !== 0 && noOfUnreadNotifications !== 0">
 								<div
-									*ngFor="let messages of currentUserNotification?.messages?.reverse()?.slice(0, noOfUnreadNotifications)"
+									*ngFor="let messages of this.currentUserNotification?.messages?.reverse()?.slice(0, noOfUnreadNotifications)"
 									class="notification">
 									{{messages.message}}
 								</div>
