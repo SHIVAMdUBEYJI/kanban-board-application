@@ -18,7 +18,7 @@ export class NotificationComponent implements OnInit {
 		throw new Error('Method not implemented.');
 	}
 
-	//deleteNotification(message: Message) {
+	deleteNotification(message: Message) {}
 		//this.currentUserNotification?.messages?.splice(this.currentUserNotification?.messages?.indexOf(message), 1);
 		//this.notificationService.updateNotification(this.currentUserNotification!);
 	//}

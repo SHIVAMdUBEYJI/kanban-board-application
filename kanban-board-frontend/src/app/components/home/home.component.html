@@ -3,17 +3,13 @@
         <div class="about_content">
             <div class="hero_image">
                 <div *ngIf="!isLoggedIn; else elseBlock">
-                    <h1>My Work Planner brings all your tasks, teammates, and tools together</h1>
-                    <p>Collaborate, manage projects, and reach new productivity peaks.
-                        <br>
-                        Keep everything in the same place—even if your team isn’t.
-                    </p>
+                    <p>Kanban Board brings all your tasks, teammates, and tools together</p>
                     <div class="hero_buttons">
-                        <button class="button button--primary" color="primary" mat-raised-button routerLink="register">
+                        <button class="button button--primary" color="primary" mat-raised-button routerLink='/register'>
                             Sign up -
                             it's free!
                         </button>
-                        <button class="button button--secondary" color="accent" mat-raised-button routerLink="login">Log
+                        <button class="button button--secondary" color="accent" mat-raised-button routerLink='/login'>Log
                             in
                         </button>
                     </div>
@@ -33,7 +29,6 @@
                         </button>
                     </div>
                 </ng-template>
-
             </div>
             <div class="hero_background">
                 <img
