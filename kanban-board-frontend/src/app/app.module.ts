@@ -33,6 +33,9 @@ import { ErrorNotFoundComponent } from './components/error-not-found/error-not-f
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
 import { PopUpComponent } from './components/kanban-board/pop-up/pop-up/pop-up.component';
 import { AddBoardPopupComponent } from './components/kanban-board/pop-up/add-board-popup/add-board-popup.component';
+import { AddColumnPopupComponent } from './components/kanban-board/pop-up/add-column-popup/add-column-popup.component';
+import { AddMemberPopupComponent } from './components/kanban-board/pop-up/add-member-popup/add-member-popup.component';
+import { AddTaskPopupComponent } from './components/kanban-board/pop-up/add-task-popup/add-task-popup.component';
 
 
 @NgModule({
@@ -52,6 +55,9 @@ import { AddBoardPopupComponent } from './components/kanban-board/pop-up/add-boa
     KanbanBoardComponent,
     PopUpComponent,
     AddBoardPopupComponent,
+    AddColumnPopupComponent,
+    AddMemberPopupComponent,
+    AddTaskPopupComponent,
   ],
 	imports: [
 		FormsModule,
