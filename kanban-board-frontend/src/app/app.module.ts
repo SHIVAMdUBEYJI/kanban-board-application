@@ -27,6 +27,7 @@ import {MatCardModule} from "@angular/material/card";
 import { RunningHeadComponent } from './components/running-head/running-head.component';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatBadgeModule} from "@angular/material/badge";
+import { NotificationComponent } from './components/notification/notification.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import {MatBadgeModule} from "@angular/material/badge";
     TaskDialogComponent,
     KanbanHomeComponent,
     RunningHeadComponent,
+    NotificationComponent,
   ],
 	imports: [
 		FormsModule,
