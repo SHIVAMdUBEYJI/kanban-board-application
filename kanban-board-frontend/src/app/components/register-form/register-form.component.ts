@@ -10,7 +10,7 @@ import {UserService} from "../../services/user-service";
     selector: 'app-register-form', templateUrl: './register-form.component.html', styleUrls: ['./register-form.component.css']
 })
 export class RegisterFormComponent implements OnInit {
-	registerForm = this.fb.group({
+	registerForm = this.formBuilder.group({
 		firstName: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern('[a-zA-Z ]*')]],
 		lastName: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern('[a-zA-Z ]*')]],
 		email: [null, [Validators.required, Validators.pattern(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i)]],
@@ -20,7 +20,7 @@ export class RegisterFormComponent implements OnInit {
 	}, {validators: [this.mustMatchValidator]});
 
 	constructor(
-		private fb: FormBuilder,
+		private formBuilder: FormBuilder,
 		private userService: UserService,
 		private snackBar: MatSnackBar,
 		private notificationService: NotificationService,
@@ -31,9 +31,9 @@ export class RegisterFormComponent implements OnInit {
         throw new Error('Method not implemented.');
     }
 
-	mustMatchValidator(fg: AbstractControl) {
-		const passwordValue = fg.get("password")?.value;
-		const confirmPasswordValue = fg.get("confirmPassword")?.value;
+	mustMatchValidator(abstractControl: AbstractControl) {
+		const passwordValue = abstractControl.get("password")?.value;
+		const confirmPasswordValue = abstractControl.get("confirmPassword")?.value;
 		if (!passwordValue || !confirmPasswordValue) {
 			return null;
 		}
