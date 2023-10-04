@@ -52,7 +52,7 @@
 }
 
 @media only screen and (max-width: 900px) {
-	.about__content {
+	.login_content  {
 		grid-template-columns: auto;
 	}
 
@@ -61,7 +61,7 @@
 	}
 }
 
-.hero_background {
+.login_background {
 	display: flex;
 	justify-content: center;
 	align-items: center;

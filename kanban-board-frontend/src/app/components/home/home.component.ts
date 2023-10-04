@@ -1,19 +1,22 @@
-import { Component, inject } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+	selector: 'app-home', templateUrl: './home.component.html', styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  private breakpointObserver = inject(BreakpointObserver);
+export class HomeComponent implements OnInit {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
+	isLoggedIn: boolean = false;
+	firstName?: string;
+
+	constructor() {
+	}
+
+	ngOnInit(): void {
+		if (`${localStorage.getItem('token')}` !== "null") {
+			setTimeout(() => {
+				this.firstName = `${localStorage.getItem('user_firstname')}`;
+			}, 100);
+			this.isLoggedIn = true;
+		}
+	}
 }

@@ -1,27 +1,42 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      role="navigation"
-      mode="side"
-      opened="false">
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-		<a routerLink="/register" mat-list-item (click)="drawer.toggle()">Register</a>
-		<a routerLink="/login" mat-list-item (click)="drawer.toggle()">Login</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="true">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>Capstone-Project</span>
-    </mat-toolbar>
-    <!-- Add Content Here -->
-	  <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<div class="home">
+	<section class="home-hero">
+		<div class="about_content">
+			<div class="hero_image">
+				<div *ngIf="!isLoggedIn; else elseBlock">
+					<h1>My Work Planner brings all your tasks, teammates, and tools together</h1>
+					<p>Collaborate, manage projects, and reach new productivity peaks.
+						<br>
+						Keep everything in the same place—even if your team isn’t.
+					</p>
+					<div class="hero_buttons">
+						<button class="button button--primary" color="primary" mat-raised-button routerLink="register">Sign up -
+							it's free!
+						</button>
+						<button class="button button--secondary" color="accent" mat-raised-button routerLink="login">Log in</button>
+					</div>
+				</div>
+				<ng-template #elseBlock class="hero_image">
+					<h1>
+						Hello {{firstName}} !
+					</h1>
+					<p>
+						Welcome to Kanban Board
+						<br>
+						Go to your Boards and assign your tasks
+					</p>
+					<div class="hero_buttons">
+						<button class="button button--primary" color="primary" mat-raised-button routerLink="/dashboard">Boards
+						</button>
+					</div>
+				</ng-template>
+
+			</div>
+			<div class="hero_background">
+				<img
+					alt="hero image"
+					src="https://res.cloudinary.com/dduwkdctl/image/upload/v1674188551/Kanban%20Project/home_main_jbkz3d.webp"
+					style="width: 60%">
+			</div>
+		</div>
+	</section>
+</div>
