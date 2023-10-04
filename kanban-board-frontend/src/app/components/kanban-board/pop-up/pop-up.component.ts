@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {DialogData} from "../dialog.data";
 import {KanbanServiceService} from "../../../services/kanban-service.service";
 import {Board} from "../../../models/kanban/board.model";
+import {Column} from "../../../models/kanban/column.model";
 
 @Component({
 	selector: 'app-add-board-popup',
@@ -43,7 +44,34 @@ export class AddBoardPopupComponent implements OnInit {
 	templateUrl: './add-column-popup.component.html',
 	styleUrls: ['./add-column-popup.component.css']
 })
-export class AddColumnPopupComponent {
+export class AddColumnPopupComponent implements OnInit{
+	boardToDisplay?: Board;
+	isColumnValid?: boolean;
+	columnNames: String[] = [];
+	messageToDisplay?: string;
+
+	constructor(
+		public dialogRef: MatDialogRef<AddColumnPopupComponent>,
+		@Inject(MAT_DIALOG_DATA) public data: DialogData) {
+
+	}
+
+	checkColumnName() {
+		this.isColumnValid = !this.columnNames.includes(this.data.columnName, 0);
+	}
+
+	onNoClick() {
+		this.dialogRef.close(null);
+	}
+
+	ngOnInit(): void {
+		this.boardToDisplay = this.data.boardToDisplay;
+		this.messageToDisplay = this.data.messageToDisplay;
+		this.boardToDisplay.columns?.forEach((c: Column) => {
+			this.columnNames.push(c.columnName!);
+		});
+		this.columnNames.push("");
+	}
 
 }
 
