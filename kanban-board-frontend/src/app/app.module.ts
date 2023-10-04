@@ -30,6 +30,7 @@ import {MatBadgeModule} from "@angular/material/badge";
 import { NotificationComponent } from './components/notification/notification.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ErrorNotFoundComponent } from './components/error-not-found/error-not-found.component';
+import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ErrorNotFoundComponent } from './components/error-not-found/error-not-f
     NotificationComponent,
     UserProfileComponent,
     ErrorNotFoundComponent,
+    KanbanBoardComponent,
   ],
 	imports: [
 		FormsModule,
