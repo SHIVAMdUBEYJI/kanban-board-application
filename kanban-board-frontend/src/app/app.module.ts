@@ -31,6 +31,7 @@ import { AddColumnPopupComponent } from './components/kanban-board/pop-up/add-co
 import { AddMemberPopupComponent } from './components/kanban-board/pop-up/add-member-popup/add-member-popup.component';
 import { AddTaskPopupComponent } from './components/kanban-board/pop-up/add-task-popup/add-task-popup.component';
 import { DeleteAccountPopupComponent } from './components/user-profile/delete-account-popup/delete-account-popup.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { DeleteAccountPopupComponent } from './components/user-profile/delete-ac
 		MatSelectModule,
 		MatCardModule,
 		MatMenuModule,
-		MatBadgeModule
+		MatBadgeModule,
+		MatTooltipModule
 	],
   providers: [],
   bootstrap: [AppComponent]
