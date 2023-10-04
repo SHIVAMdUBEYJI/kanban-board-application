@@ -25,6 +25,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
 import {MatCardModule} from "@angular/material/card";
 import { RunningHeadComponent } from './components/running-head/running-head.component';
+import {MatMenuModule} from "@angular/material/menu";
+import {MatBadgeModule} from "@angular/material/badge";
 
 
 @NgModule({
@@ -39,28 +41,30 @@ import { RunningHeadComponent } from './components/running-head/running-head.com
     KanbanHomeComponent,
     RunningHeadComponent,
   ],
-    imports: [
+	imports: [
 		FormsModule,
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatListModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        ToastrModule.forRoot({
-            positionClass: 'toast-top-right'
-        }),
-        CdkDropList,
-        CdkDrag,
-        MatDialogModule,
-        MatSelectModule,
-        MatCardModule
-    ],
+		BrowserModule,
+		AppRoutingModule,
+		BrowserAnimationsModule,
+		MatToolbarModule,
+		MatButtonModule,
+		MatSidenavModule,
+		MatIconModule,
+		MatListModule,
+		MatInputModule,
+		ReactiveFormsModule,
+		HttpClientModule,
+		ToastrModule.forRoot({
+			positionClass: 'toast-top-right'
+		}),
+		CdkDropList,
+		CdkDrag,
+		MatDialogModule,
+		MatSelectModule,
+		MatCardModule,
+		MatMenuModule,
+		MatBadgeModule
+	],
   providers: [],
   bootstrap: [AppComponent]
 })
