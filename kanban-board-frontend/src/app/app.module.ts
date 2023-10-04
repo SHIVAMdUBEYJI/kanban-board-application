@@ -32,6 +32,8 @@ import { AddMemberPopupComponent } from './components/kanban-board/pop-up/add-me
 import { AddTaskPopupComponent } from './components/kanban-board/pop-up/add-task-popup/add-task-popup.component';
 import { DeleteAccountPopupComponent } from './components/user-profile/delete-account-popup/delete-account-popup.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { NotificationModel } from './models/notification/notification.model';
+import { SecureComponent } from './components/secure/secure.component';
 
 
 @NgModule({
@@ -50,6 +52,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     AddMemberPopupComponent,
     AddTaskPopupComponent,
     DeleteAccountPopupComponent,
+    NotificationModel,
+    SecureComponent,
   ],
 	imports: [
 		FormsModule,
