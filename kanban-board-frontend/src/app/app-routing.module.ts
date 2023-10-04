@@ -6,7 +6,6 @@ import {LoginFormComponent} from "./components/login-form/login-form.component";
 import {HomeComponent} from "./components/home/home.component";
 import {KanbanBoardComponent} from "./components/kanban-board/kanban-board.component";
 import {UserProfileComponent} from "./components/user-profile/user-profile.component";
-import {NotificationService} from "./services/notification.service";
 import {NotificationComponent} from "./components/notification/notification.component";
 import {ErrorNotFoundComponent} from "./components/error-not-found/error-not-found.component";
 
