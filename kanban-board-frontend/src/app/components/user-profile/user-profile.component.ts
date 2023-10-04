@@ -6,6 +6,7 @@ import {UserService} from "../../services/user-service";
 import {KanbanServiceService} from "../../services/kanban-service.service";
 import {NotificationService} from "../../services/notification.service";
 import {ImageService} from "../../services/image.service";
+import setTimeout from "$GLOBAL$";
 
 @Component({
 	selector: 'app-user-profile',
@@ -60,7 +61,7 @@ export class UserProfileComponent implements OnInit {
 	}
 
 	openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-		this.dialog.open(DeleteAccount, {
+		this.dialog.open(DeleteAccountPopupDialog, {
 			width: '300px', enterAnimationDuration, exitAnimationDuration,
 		});
 	}
@@ -70,8 +71,8 @@ export class UserProfileComponent implements OnInit {
 @Component({
 	selector: 'delete-account', templateUrl: './delete-account.html',
 })
-export class DeleteAccount {
-	constructor(public dialogRef: MatDialogRef<DeleteAccount>, private kanbanService: KanbanServiceService, private notificationService: NotificationService, public userService: UserService) {
+export class DeleteAccountPopupDialog implements OnInit{
+	constructor(public dialogRef: MatDialogRef<DeleteAccountPopupDialog>, private kanbanService: KanbanServiceService, private notificationService: NotificationService, public userService: UserService) {
 	}
 
 	onNoClick() {
@@ -85,6 +86,9 @@ export class DeleteAccount {
 			this.notificationService.deleteNotification();
 			this.userService.logoutUser();
 		}, 1000);
+	}
+
+	ngOnInit(): void {
 	}
 
 }
