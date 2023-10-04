@@ -1,0 +1,86 @@
+.login {
+	background-image: url("https://res.cloudinary.com/dduwkdctl/image/upload/v1673931280/Kanban%20Project/wave_oawig5.svg");
+	background-repeat: no-repeat;
+	min-height: 70rem;
+}
+
+.login_form {
+	margin-top: 150px;
+	max-width: 400px;
+	box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, 0.34);
+	text-align: center;
+	background-color: azure;
+	border-radius: 20px;
+}
+
+@media all and (max-width: 700px) {
+	.login_form {
+		max-width: 400px;
+	}
+}
+
+@media all and (max-width: 450px) {
+	.login_form {
+		max-width: 300px;
+	}
+}
+
+.full-width {
+	width: 80%;
+	padding-top: 30px;
+}
+
+.login_form h2 {
+	padding-top: 20px;
+}
+.home {
+	height: auto;
+	min-height: 80rem;
+	max-height: 120rem;
+	position: relative
+}
+
+.login_image {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.login_content {
+	display: grid;
+	grid-template-columns: auto auto;
+}
+
+@media only screen and (max-width: 900px) {
+	.about__content {
+		grid-template-columns: auto;
+	}
+
+	.login_form {
+		margin: 0 auto 40px auto;
+	}
+}
+
+.hero_background {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-image: url("https://res.cloudinary.com/dduwkdctl/image/upload/v1673931218/Kanban%20Project/blob_2_bchup7.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	height: 600px;
+	animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+	0% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-20px);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}

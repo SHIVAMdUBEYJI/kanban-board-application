@@ -1,11 +1,11 @@
 <div class="login">
 
-	<section class="home-hero">
-		<div class="about__content">
-			<div class="hero_image">
+	<section class="home">
+		<div class="login_content">
+			<div class="login_image">
 				<div class="hero_background">
 					<img
-						alt="hero image"
+						alt="login_image"
 						src="https://res.cloudinary.com/dduwkdctl/image/upload/v1674188542/Kanban%20Project/Login_s6p4vh.png"
 						style="width: 50%">
 				</div>
@@ -13,20 +13,20 @@
 			<div>
 				<form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="login_form">
 					<h2>Enter your login credentials</h2>
-					<!--        Email       -->
 					<mat-form-field appearance="fill" class="full-width">
-						<input formControlName="email" id="email" matInput name="email" placeholder="Email" type="email"/>
-						<mat-error *ngIf="logInForm.controls['email'].hasError('required')">
+						<input formControlName="email" id="email" matInput name="email" placeholder="Email"
+							   type="email"/>
+						<mat-error *ngIf="loginForm.controls['email'].hasError('required')">
 							Email is <strong>required</strong>
 						</mat-error>
-						<mat-error *ngIf="logInForm.controls['email'].hasError('pattern')">
+						<mat-error *ngIf="loginForm.controls['email'].hasError('pattern')">
 							Please provide proper email
 						</mat-error>
 					</mat-form-field>
 					<mat-form-field appearance="fill" class="full-width">
 						<input formControlName="password" id="password" matInput name="password" placeholder="Password"
 							   type="password"/>
-						<mat-error *ngIf="logInForm.controls['password'].hasError('required')">
+						<mat-error *ngIf="loginForm.controls['password'].hasError('required')">
 							Password is <strong>required</strong>
 						</mat-error>
 					</mat-form-field>

@@ -7,7 +7,7 @@ import {UserService} from "../../services/user-service";
 })
 export class LoginFormComponent implements OnInit {
 
-	logInForm = this.formBuilder.group({
+	loginForm = this.formBuilder.group({
 		email: [null, [Validators.required, Validators.pattern(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i)]],
 		password: [null, [Validators.required, Validators.minLength(8)]]
 	});
@@ -19,8 +19,8 @@ export class LoginFormComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		if (this.logInForm.valid && this.logInForm.value != null) {
-			this.userService.loginUser(this.logInForm.value);
+		if (this.loginForm.valid && this.loginForm.value != null) {
+			this.userService.loginUser(this.loginForm.value);
 		}
 	}
 
