@@ -1,41 +1,41 @@
 <div class="login">
 
-	<section class="home">
-		<div class="login_content">
-			<div class="login_image">
-				<div class="login_background">
-					<img
-						alt="login_image"
-						src="https://res.cloudinary.com/dduwkdctl/image/upload/v1674188542/Kanban%20Project/Login_s6p4vh.png"
-						style="width: 50%">
-				</div>
-			</div>
-			<div>
-				<form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="login_form">
-					<h2>Enter your login credentials</h2>
-					<mat-form-field appearance="fill" class="full-width">
-						<input formControlName="email" id="email" matInput name="email" placeholder="Email"
-							   type="email"/>
-						<mat-error *ngIf="loginForm.controls['email'].hasError('required')">
-							Email is <strong>required</strong>
-						</mat-error>
-						<mat-error *ngIf="loginForm.controls['email'].hasError('pattern')">
-							Please provide proper email
-						</mat-error>
-					</mat-form-field>
-					<mat-form-field appearance="fill" class="full-width">
-						<input formControlName="password" id="password" matInput name="password" placeholder="Password"
-							   type="password"/>
-						<mat-error *ngIf="loginForm.controls['password'].hasError('required')">
-							Password is <strong>required</strong>
-						</mat-error>
-					</mat-form-field>
-					<br><br>
-					<button color="primary" mat-button mat-raised-button type="submit">Login</button>
-					<br>
-					<div style="padding: 20px">Not a member? <a routerLink="/register">Register</a></div>
-				</form>
-			</div>
-		</div>
-	</section>
+    <section class="home">
+        <div class="login_content">
+            <div class="login_image">
+                <div class="login_background">
+                    <img
+                            alt="login_image"
+                            src="https://res.cloudinary.com/dduwkdctl/image/upload/v1674188542/Kanban%20Project/Login_s6p4vh.png"
+                            style="width: 50%">
+                </div>
+            </div>
+            <div>
+                <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="login_form">
+                    <h2>Enter your login credentials</h2>
+                    <mat-form-field appearance="fill" class="full-width">
+                        <input formControlName="email" id="email" matInput name="email" placeholder="Email"
+                               type="email"/>
+                        <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+                            Email is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="loginForm.controls['email'].hasError('pattern')">
+                            Please provide proper email
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="full-width">
+                        <input formControlName="password" id="password" matInput name="password" placeholder="Password"
+                               type="password"/>
+                        <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+                            Password is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <br><br>
+                    <button color="primary" mat-button mat-raised-button type="submit">Login</button>
+                    <br>
+                    <div style="padding: 20px">Not a member? <a routerLink="/register">Register</a></div>
+                </form>
+            </div>
+        </div>
+    </section>
 </div>
