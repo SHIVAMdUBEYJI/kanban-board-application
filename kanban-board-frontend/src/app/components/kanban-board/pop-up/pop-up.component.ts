@@ -85,7 +85,7 @@ export class AddMemberPopupComponent implements OnInit {
 	allEmails?: string[];
 	isEmailValid?: boolean;
 
-	constructor(public dialogRef: MatDialogRef<AddMemberPopupComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private authentication: AuthenticationService) {
+	constructor(public dialogRef: MatDialogRef<AddMemberPopupComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private userService: UserService) {
 	}
 
 	onNoClick() {
@@ -98,7 +98,7 @@ export class AddMemberPopupComponent implements OnInit {
 
 	ngOnInit(): void {
 		setTimeout(() => {
-			this.authentication.getAllEmails().subscribe({
+			this.userService.getAllEmails().subscribe({
 				next: (result: string[] | undefined) => {
 					this.allEmails = result;
 				}

@@ -36,6 +36,7 @@ import { AddBoardPopupComponent } from './components/kanban-board/pop-up/add-boa
 import { AddColumnPopupComponent } from './components/kanban-board/pop-up/add-column-popup/add-column-popup.component';
 import { AddMemberPopupComponent } from './components/kanban-board/pop-up/add-member-popup/add-member-popup.component';
 import { AddTaskPopupComponent } from './components/kanban-board/pop-up/add-task-popup/add-task-popup.component';
+import { DeleteAccountPopupComponent } from './components/user-profile/delete-account-popup/delete-account-popup.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { AddTaskPopupComponent } from './components/kanban-board/pop-up/add-task
     AddColumnPopupComponent,
     AddMemberPopupComponent,
     AddTaskPopupComponent,
+    DeleteAccountPopupComponent,
   ],
 	imports: [
 		FormsModule,
