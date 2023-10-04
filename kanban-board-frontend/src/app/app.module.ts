@@ -24,6 +24,7 @@ import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
 import {MatCardModule} from "@angular/material/card";
+import { RunningHeadComponent } from './components/running-head/running-head.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {MatCardModule} from "@angular/material/card";
     KanbanDialogComponent,
     TaskDialogComponent,
     KanbanHomeComponent,
+    RunningHeadComponent,
   ],
     imports: [
 		FormsModule,

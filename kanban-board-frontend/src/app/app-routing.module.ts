@@ -6,8 +6,12 @@ import {KanbanHomeComponent} from "./components/kanban-board/kanban-home/kanban-
 import {KanbanComponent} from "./components/kanban-board/kanban/kanban.component";
 import {TaskDialogComponent} from "./components/kanban-board/task-dialog/task-dialog.component";
 import {KanbanDialogComponent} from "./components/kanban-board/kanban-dialog/kanban-dialog.component";
+import {HomeComponent} from "./components/home/home.component";
 
 const routes: Routes = [
+	{
+		path:"",component:HomeComponent
+	},
 	{
 		path:'register',component:RegisterFormComponent
 	},
@@ -15,13 +19,9 @@ const routes: Routes = [
 		path:'login',component:LoginFormComponent
 	},
 	{
+	},
+	{
 		path: 'kanbans/:id', component: KanbanComponent
-	},
-	{
-		path:'kanban-home' ,component:KanbanHomeComponent
-	},
-	{
-	   path :'tasks',component:TaskDialogComponent
 	},
 	{
 		path:'kanban-dialog',component:KanbanDialogComponent
