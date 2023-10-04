@@ -3,6 +3,8 @@ import {UserService} from "../../services/user-service";
 import {NotificationService} from "../../services/notification.service";
 import {Router} from "@angular/router";
 import {User} from "../../models/user/user.model";
+import {Message} from "../../models/notification/message.model";
+
 @Component({
 	selector: 'app-running-head',
 	templateUrl: './running-head.component.html',

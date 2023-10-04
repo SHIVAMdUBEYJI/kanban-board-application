@@ -1,0 +1,345 @@
+.sidenav-container {
+	height: 100%;
+	width: 100%;
+	display: grid;
+	background-image: url("https://res.cloudinary.com/dduwkdctl/image/upload/v1673931280/Kanban%20Project/wave_oawig5.svg");
+	background-repeat: no-repeat;
+}
+
+.sidenav {
+	margin-top: 80px;
+	width: 200px;
+	background-color: rgba(253, 166, 20, 0.5) !important;
+	border-radius: 0 20px 0 0;
+}
+
+.sidebar-content {
+	margin-top: 80px;
+	min-height: 850px;
+}
+
+.board_name {
+	color: black;
+	font-size: 25px;
+	padding-left: 20px;
+	user-select: none;
+}
+
+.board_name:active {
+	color: white;
+
+}
+
+
+.sidenav {
+	background-color: #e0dddd;
+}
+
+.girds {
+	display: flex;
+	justify-content: center;
+	color: black;
+}
+
+
+.sidenav_heading {
+	margin-top: 15px;
+	text-align: center;
+}
+
+.sidenav_heading h1 {
+	font-weight: 450;
+	font-size: 30px;
+}
+
+.add_board_button {
+	margin-top: 5px;
+}
+
+.add_board_button  button span{
+	margin-right: 15px;
+	margin-left: 10px;
+}
+
+
+/*----------------*/
+
+.material-symbols-outlined {
+	cursor: pointer;
+}
+
+
+/*Board Heading*/
+.board_container {
+	color: white;
+	padding-top: 15px;
+	padding-left: 5px;
+	margin: 10px 0 0 50px;
+}
+
+.board_heading div {
+	display: inline-block;
+}
+
+.board_heading_name h1{
+	font-size: 30px;
+	margin-top: 10px;
+}
+
+.board_buttons div{
+	margin-left: 20px;
+}
+
+.board_add_column {
+	text-align: center;
+	color: black;
+	cursor: pointer;
+	position: fixed;
+	bottom: 50px;
+	right: 70px;
+}
+
+.board_add_column img {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	filter: invert(100%);
+}
+
+
+
+/*Members*/
+.board_members h2{
+	margin-top: 5px;
+}
+
+.board_members img {
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	margin-left: 10px;
+}
+
+.board_members span{
+	font-size: 45px;
+	margin-left: 10px;
+	color: #444444;
+}
+
+.board_members_main {
+	display: flex;
+}
+
+
+/*HR Line*/
+.divider {
+	margin: 20px 0;
+	box-shadow: 1px 1px 15px black;
+}
+
+
+/*Column*/
+.column_container {
+	background: whitesmoke;
+	width: 350px;
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	border-radius: 15px;
+	margin: 10px;
+	box-shadow: 1px 1px 10px black;
+}
+
+.column_header{
+	display: grid;
+	grid-template-columns: 60% 40%;
+	margin: 10px 5px ;
+}
+
+.column_header_name h3{
+	font-size: 20px;
+}
+
+.add_task {
+	margin: 10px 0;
+	font-size: 20px;
+}
+
+.add_task:hover {
+	cursor: pointer;
+}
+
+
+.add_task i{
+	margin-right: 8px;
+}
+
+
+/*Task*/
+.task_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #F5F5F5;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+	padding: 16px;
+	border-radius: 8px;
+	width: auto;
+	margin: 16px;
+}
+
+.task_container .grid_one {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.task_container .task_name {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 8px;
+	color: #4d63db;
+}
+
+.task_container .task_desc {
+	font-size: 18px;
+	margin-bottom: 8px;
+	color: #333;
+}
+
+.task_container .priority {
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.task_container .priority i {
+	font-size: 18px;
+	margin-right: 8px;
+}
+
+.task_container .priority i.low {
+	color: #28A745;
+}
+
+.task_container .priority i.medium {
+	color: #FFC107;
+}
+
+.task_container .priority i.high {
+	color: #DC3545;
+}
+
+.task_container .date {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.task_container .date span {
+	font-size: 18px;
+	margin-bottom: 8px;
+	color: #333;
+}
+
+.task_container img {
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	/*margin-right: 8px;*/
+}
+
+.task_container .edit {
+	display: flex;
+	align-items: center;
+}
+
+.task_container .edit button {
+	background-color: transparent;
+	cursor: pointer;
+	border: none;
+	margin-right: 8px;
+	color: #333;
+}
+
+.task_container .assignee-details {
+	/*display: flex;*/
+	align-items: center;
+}
+
+.assignee-details div{
+	margin-bottom: 10px;
+}
+
+.assignee{
+	margin-left: 70px;
+}
+
+.task_container .edit-icons {
+	margin-left: -50px;
+	margin-top: 10px;
+}
+
+.task_container .edit-icons button {
+	margin-right: 10px;
+}
+
+
+.dashboard_instructions {
+	width: 600px;
+	margin: 100px auto 0 auto;
+}
+
+.dashboard_instructions ul li {
+	list-style-type: square;
+}
+
+.about__content-details-para {
+	font-size: 1.8rem;
+	max-width: 70rem;
+	line-height: 1.7;
+	margin-bottom: 1rem
+}
+
+.about__content-details-para:last-child {
+	margin-bottom: 4rem
+}
+
+.dashboard_instructions h1 {
+	font-size: 4rem;
+	text-align: center;
+}
+
+.dashboard_instructions h2 {
+	font-size: 3rem;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.dashboard_instructions a {
+	cursor: pointer;
+	text-decoration: underline;
+	color: black;
+	font-weight: 500;
+}
+
+@media all and (max-width: 900px) {
+	.dashboard_instructions {
+		width: auto;
+		padding: 15px 10px 0 25px;
+	}
+
+	.sidenav {
+		width: 150px;
+	}
+
+	.board_container{
+		color: black;
+	}
+
+	.column_container {
+		width: auto;
+	}
+}
+
