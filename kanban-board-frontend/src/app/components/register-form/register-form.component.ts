@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {NotificationService} from "../../services/notification.service";
@@ -7,7 +7,9 @@ import {User} from "../../models/user/user.model";
 import {UserService} from "../../services/user-service";
 
 @Component({
-    selector: 'app-register-form', templateUrl: './register-form.component.html', styleUrls: ['./register-form.component.css']
+	selector: 'app-register-form',
+	templateUrl: './register-form.component.html',
+	styleUrls: ['./register-form.component.css']
 })
 export class RegisterFormComponent implements OnInit {
 	registerForm = this.formBuilder.group({
@@ -19,17 +21,12 @@ export class RegisterFormComponent implements OnInit {
 		mobileNumber: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^[6-9][0-9]{9}/)]],
 	}, {validators: [this.mustMatchValidator]});
 
-	constructor(
-		private formBuilder: FormBuilder,
-		private userService: UserService,
-		private snackBar: MatSnackBar,
-		private notificationService: NotificationService,
-		private router: Router) {
+	constructor(private formBuilder: FormBuilder, private userService: UserService, private snackBar: MatSnackBar, private notificationService: NotificationService, private router: Router) {
 	}
 
 	ngOnInit(): void {
-        throw new Error('Method not implemented.');
-    }
+		throw new Error('Method not implemented.');
+	}
 
 	mustMatchValidator(abstractControl: AbstractControl) {
 		const passwordValue = abstractControl.get("password")?.value;
@@ -56,8 +53,7 @@ export class RegisterFormComponent implements OnInit {
 			next: () => {
 				this.snackBar.open("Registered Successfully!", "Close", {duration: 3000});
 				this.router.navigateByUrl('/login');
-			},
-			error: (err: { status: number; }) => {
+			}, error: (err: { status: number; }) => {
 				if (err.status === 409) {
 					this.snackBar.open("Email already exists!", "Close", {duration: 3000});
 				} else {
@@ -67,5 +63,4 @@ export class RegisterFormComponent implements OnInit {
 		});
 		this.notificationService.sendMail(user);
 	}
-
 }

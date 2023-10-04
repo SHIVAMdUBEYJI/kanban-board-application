@@ -1,32 +1,28 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {UserService} from "../../services/user-service";
-import {Router} from "@angular/router";
 
 @Component({
 	selector: 'app-login-form', templateUrl: './login-form.component.html', styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
 
-	loginForm!: FormGroup;
+	logInForm = this.formBuilder.group({
+		email: [null, [Validators.required, Validators.pattern(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i)]],
+		password: [null, [Validators.required, Validators.minLength(8)]]
+	});
 
-	constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) {
-		this.userService = userService;
+	constructor(private userService: UserService, private formBuilder: FormBuilder) {
 	}
 
 	ngOnInit(): void {
-		this.loginForm = this.formBuilder.group({
-			username: [''], password: ['']
-		})
 	}
 
-	login() {
-		this.userService.loginUser(this.loginForm.value).subscribe(response => {
-			alert("login successfully")
-			this.loginForm.reset();
-			this.router.navigate(['kanban-home']);
-		}, error => {
-			alert("Invalid access")
-		})
+	onSubmit(): void {
+		if (this.logInForm.valid && this.logInForm.value != null) {
+			this.userService.loginUser(this.logInForm.value);
+		}
 	}
+
+
 }

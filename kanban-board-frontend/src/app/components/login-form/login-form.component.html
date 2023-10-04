@@ -1,62 +1,41 @@
-<div class="container">
-	<div class="row mt-4">
-		<div class="col">
-			<h2 class="fs-4 text-center">
-				Login Form
-			</h2>
-			<form [formGroup]="loginForm" (ngSubmit)="login()"
-				  class="needs-validation" novalidate
-			>
-				<div class="m-2">
-					<mat-form-field class="col-12">
-						<mat-label>username</mat-label>
-						<input class="form-control"
-							   formControlName="username"
-							   id="user-name"
-							   matInput
-							   name="username"
-							   placeholder="username"
-							   required
-							   type="text"/>
-						<mat-error
-							*ngIf="loginForm.controls['username'].hasError('required')"
-							class="invalid-feedback">
-							User Name cannot be Empty
-						</mat-error>
-					</mat-form-field>
-				</div>
-				<div class="m-2">
-					<mat-form-field class="col-12">
-						<mat-label>password</mat-label>
-						<input class="form-control"
-							   formControlName="password"
-							   id="password"
-							   matInput
-							   minlength="8"
-							   name="password"
-							   placeholder="password"
-							   required
-							   type="password"/>
-						<mat-error
-							*ngIf="loginForm.controls['password'].hasError('minlength')"
-						>
-							Password cannot be less than 8 characters
-						</mat-error>
-						<mat-error
-							*ngIf="loginForm.controls['password'].hasError('required')"
-						>
-							Password cannot be Empty
-						</mat-error>
-					</mat-form-field>
-				</div>
-				<div class="mt-4 d-flex justify-content-around">
-					<button  [disabled]="loginForm.invalid" class="col-2 rounded-pill" color="primary"
-							 mat-raised-button type="submit">Login
-					</button>
-				</div>
-			</form>
-			<a routerLink="/register">New User? Click to Register!! </a>
-		</div>
-	</div>
-</div>
+<div class="login">
 
+	<section class="home-hero">
+		<div class="about__content">
+			<div class="hero_image">
+				<div class="hero_background">
+					<img
+						alt="hero image"
+						src="https://res.cloudinary.com/dduwkdctl/image/upload/v1674188542/Kanban%20Project/Login_s6p4vh.png"
+						style="width: 50%">
+				</div>
+			</div>
+			<div>
+				<form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="login_form">
+					<h2>Enter your login credentials</h2>
+					<!--        Email       -->
+					<mat-form-field appearance="fill" class="full-width">
+						<input formControlName="email" id="email" matInput name="email" placeholder="Email" type="email"/>
+						<mat-error *ngIf="logInForm.controls['email'].hasError('required')">
+							Email is <strong>required</strong>
+						</mat-error>
+						<mat-error *ngIf="logInForm.controls['email'].hasError('pattern')">
+							Please provide proper email
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field appearance="fill" class="full-width">
+						<input formControlName="password" id="password" matInput name="password" placeholder="Password"
+							   type="password"/>
+						<mat-error *ngIf="logInForm.controls['password'].hasError('required')">
+							Password is <strong>required</strong>
+						</mat-error>
+					</mat-form-field>
+					<br><br>
+					<button color="primary" mat-button mat-raised-button type="submit">Login</button>
+					<br>
+					<div style="padding: 20px">Not a member? <a routerLink="/register">Register</a></div>
+				</form>
+			</div>
+		</div>
+	</section>
+</div>
