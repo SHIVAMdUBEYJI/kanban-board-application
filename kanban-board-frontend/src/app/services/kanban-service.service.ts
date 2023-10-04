@@ -61,6 +61,16 @@ export class KanbanServiceService {
 		})
 	}
 
+	addMemberToBoard(kanban: Kanban, email: string) {
+		return this.httpClient.put<Kanban>(`${this.endPointURL}/add-member-to-board/${email}`, kanban);
+	}
 
-
+	sendMessageToMember(message: string, email: string) {
+		let messageDTO = {
+			email: email, message: message
+		};
+		return this.httpClient.put(`${this.endPointURL}/send-message`, messageDTO).subscribe({
+			next: () => this.notificationService.getNotification(), error: (err) => console.log(err)
+		});
+	}
 }
