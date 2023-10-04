@@ -28,6 +28,8 @@ import { RunningHeadComponent } from './components/running-head/running-head.com
 import {MatMenuModule} from "@angular/material/menu";
 import {MatBadgeModule} from "@angular/material/badge";
 import { NotificationComponent } from './components/notification/notification.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ErrorNotFoundComponent } from './components/error-not-found/error-not-found.component';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { NotificationComponent } from './components/notification/notification.co
     KanbanHomeComponent,
     RunningHeadComponent,
     NotificationComponent,
+    UserProfileComponent,
+    ErrorNotFoundComponent,
   ],
 	imports: [
 		FormsModule,
