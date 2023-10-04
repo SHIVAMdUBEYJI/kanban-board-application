@@ -6,10 +6,6 @@ import {Board} from "../models/kanban/board.model";
 import {Column} from "../models/kanban/column.model";
 import {Task} from '../models/kanban/task.model';
 
-
-class kanban {
-}
-
 @Injectable({
 	providedIn: 'root'
 })
@@ -21,7 +17,7 @@ export class KanbanServiceService {
 	constructor(private httpClient: HttpClient, private notificationService: NotificationService) {
 	}
 
-	saveKanban(Kanban: kanban) {
+	saveKanban(kanban: Kanban) {
 		return this.httpClient.post<Kanban>(`${this.endPointURL}/save-kanban`, kanban);
 	}
 
