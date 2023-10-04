@@ -31,6 +31,8 @@ import { NotificationComponent } from './components/notification/notification.co
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ErrorNotFoundComponent } from './components/error-not-found/error-not-found.component';
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
+import { PopUpComponent } from './components/kanban-board/pop-up/pop-up/pop-up.component';
+import { AddBoardPopupComponent } from './components/kanban-board/pop-up/add-board-popup/add-board-popup.component';
 
 
 @NgModule({
@@ -48,6 +50,8 @@ import { KanbanBoardComponent } from './components/kanban-board/kanban-board.com
     UserProfileComponent,
     ErrorNotFoundComponent,
     KanbanBoardComponent,
+    PopUpComponent,
+    AddBoardPopupComponent,
   ],
 	imports: [
 		FormsModule,
