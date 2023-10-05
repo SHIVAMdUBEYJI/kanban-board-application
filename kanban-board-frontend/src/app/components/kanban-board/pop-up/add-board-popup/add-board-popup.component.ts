@@ -28,7 +28,9 @@ export class AddBoardPopupComponent implements OnInit{
 	}
 
 	ngOnInit(): void {
+		console.log(this.currentUserKanban)
 		this.currentUserKanban = this.kanbanService.currentUserKanban;
+		console.log(this.currentUserKanban)
 		this.messageToDisplay = this.data.messageToDisplay;
 		this.currentUserKanban?.boards?.forEach((b: Board) => {
 			this.boardNames.push(b.boardName!);

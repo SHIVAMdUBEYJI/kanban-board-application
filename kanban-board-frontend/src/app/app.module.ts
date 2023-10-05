@@ -33,6 +33,8 @@ import { AddTaskPopupComponent } from './components/kanban-board/pop-up/add-task
 import { DeleteAccountPopupComponent } from './components/user-profile/delete-account-popup/delete-account-popup.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+
 
 
 @NgModule({
@@ -76,7 +78,9 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 		MatMenuModule,
 		MatBadgeModule,
 		MatTooltipModule,
-		MatDatepickerModule
+		MatDatepickerModule,
+		MatSnackBarModule,
+
 	],
   providers: [],
   bootstrap: [AppComponent]

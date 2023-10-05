@@ -11,7 +11,7 @@ import {Task} from '../models/kanban/task.model';
 })
 export class KanbanServiceService {
 
-	endPointURL: string = 'http://losthost:9000/kanban';
+	endPointURL: string = 'http://losthost:9002/kanban';
 	currentUserKanban?: Kanban;
 
 	constructor(private httpClient: HttpClient, private notificationService: NotificationService) {
@@ -45,7 +45,8 @@ export class KanbanServiceService {
 	}
 
 	updateKanban(kanban: Kanban) {
-		return this.httpClient.put<Kanban>(`${this.endPointURL}/update-kanban`, kanban)
+		console.log(kanban)
+		return this.httpClient.put<Kanban>(`http://localhost:9002/kanban/update-kanban`, kanban)
 			.subscribe({
 				next: (response: Kanban) => this.currentUserKanban = response, error: (err) => console.log(err)
 			});

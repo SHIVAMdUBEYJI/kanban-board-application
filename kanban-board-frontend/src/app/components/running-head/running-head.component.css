@@ -23,14 +23,15 @@
 
 .header__logo-img {
 	display: block;
-	height: 5rem;
+	height: 3rem;
 	margin-right: 1.5rem;
 }
 
 .header__logo-sub {
-	font-size: 1.8rem;
+	font-size: 1.5rem;
 	font-weight: 500;
-	letter-spacing: 1px
+	letter-spacing: 0.5px
+
 }
 
 .header__links {
@@ -46,11 +47,11 @@
 	letter-spacing: 1px;
 	font-weight: 500;
 	transition: color .3s;
-	color: azure;
+	color: black;
 }
 
 .header__link:hover {
-	color: #facf0f
+	color: silver;
 }
 
 @media only screen and (max-width: 56.25em) {

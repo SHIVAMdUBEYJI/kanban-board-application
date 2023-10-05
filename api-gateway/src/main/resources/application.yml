@@ -1,5 +1,5 @@
 server:
-  port: 9000
+  port: 9002
   error:
     include-message: always
 
@@ -16,6 +16,7 @@ spring:
             allowedOrigins: '*'
             allowedHeaders: '*'
             allowedMethods: '*'
+
 eureka:
   client:
     register-with-eureka: true

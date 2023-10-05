@@ -10,7 +10,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class UserService implements OnInit {
 
-	endPointURL: string = 'http://localhost:9000/home';
+	endPointURL: string = 'http://localhost:9002/home';
 	currentUser?: User;
 	isLoggedIn: boolean = false;
 

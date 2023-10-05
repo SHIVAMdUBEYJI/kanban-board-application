@@ -55,8 +55,11 @@ export class KanbanBoardComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe({
             next: (result: string) => {
+                console.log(this.currentUserKanban)
                 if (result !== null) {
                     this.currentUserKanban?.boards?.push({boardName: result, columns: [], members: []});
+                    console.log("working33")
+                    console.log(this.currentUserKanban);
                     this.kanbanService.updateKanban(this.currentUserKanban!);
                 }
             }

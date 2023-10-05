@@ -47,7 +47,7 @@ services:
     build: api-gateway/
     container_name: api-gateway-service-container
     ports:
-      - "9000:9000"
+      - "9002:9002"
     networks: [ kanban-board-application-network ]
     depends_on: [ eureka-server-service ]
 

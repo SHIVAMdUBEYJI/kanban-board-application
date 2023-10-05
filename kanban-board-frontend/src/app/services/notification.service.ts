@@ -10,7 +10,7 @@ import {Notification} from "../models/notification/Notification";
 })
 export class NotificationService {
 
-	endPointURL: string = "http://localhost:9000/notification";
+	endPointURL: string = "http://localhost:9002/notification";
 	currentUserNotifications?: Notification;
 
 	constructor(private httpClient: HttpClient) {

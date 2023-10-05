@@ -51,11 +51,6 @@
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>txw2</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-netflix-eureka-client</artifactId>
-            <version>3.1.4</version>
-        </dependency>
     </dependencies>
 
     <dependencyManagement>

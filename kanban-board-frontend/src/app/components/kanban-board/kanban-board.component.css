@@ -2,7 +2,7 @@
 	height: 100%;
 	width: 100%;
 	display: grid;
-	background-image: url("https://res.cloudinary.com/dduwkdctl/image/upload/v1673931280/Kanban%20Project/wave_oawig5.svg");
+	background-image: url("https://unsplash.com/photos/HfOhKhS5WIk");
 	background-repeat: no-repeat;
 }
 
@@ -71,7 +71,7 @@
 
 /*Board Heading*/
 .board_container {
-	color: white;
+	color: black;
 	padding-top: 15px;
 	padding-left: 5px;
 	margin: 10px 0 0 50px;
@@ -307,12 +307,13 @@
 }
 
 .dashboard_instructions h1 {
-	font-size: 4rem;
+	color: #4d63db;
+	font-size: 2rem;
 	text-align: center;
 }
 
 .dashboard_instructions h2 {
-	font-size: 3rem;
+	font-size: 2rem;
 	text-align: center;
 	margin-bottom: 50px;
 }
