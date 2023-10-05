@@ -11,7 +11,6 @@ export class LoginGuard implements CanActivate {
 
 	constructor(private userService: UserService, private router: Router, private snackbar: MatSnackBar) {
 	}
-
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 		if (this.userService.isLoggedIn || localStorage.getItem('token') != null) {
 			return true;

@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user/user.model";
 import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
+import {Notification} from "../models/notification/Notification";
+
 
 @Injectable({
 	providedIn: 'root'

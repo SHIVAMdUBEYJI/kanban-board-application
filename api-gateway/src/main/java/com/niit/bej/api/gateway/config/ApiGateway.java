@@ -11,7 +11,7 @@ public class ApiGateway {
     public RouteLocator routeLocator(RouteLocatorBuilder routeLocatorBuilder){
         return routeLocatorBuilder.routes()
                 .route(p -> p.path("/kanban/**").uri("lb://kanban-board-service"))
-                .route(p ->p.path("/home/**").uri("lb://user-auth-service"))
+                .route(p ->p.path("/home/*").uri("lb://user-auth-service"))
                 .route(p ->p.path("/notification/**").uri("lb://notification-service")).build();
     }
 }

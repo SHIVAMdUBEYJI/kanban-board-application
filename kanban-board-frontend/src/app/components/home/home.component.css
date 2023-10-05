@@ -65,7 +65,7 @@
 .hero_background {
 	margin-top: 80px;
 	display: flex;
-	justify-content: start;
+	justify-content: flex-start;
 	align-items: center;
 	background-image: url("https://res.cloudinary.com/dduwkdctl/image/upload/v1673931218/Kanban%20Project/blob_2_bchup7.svg");
 	background-repeat: no-repeat;
@@ -87,50 +87,6 @@
 		transform: translateY(-0px);
 	}
 }
-
-/* About */
-.about {
-	background: white;
-	padding: 12rem 0;
-}
-
-@media only screen and (max-width: 56.25em) {
-	.about {
-		padding: 8rem 0
-	}
-}
-
-.about__content-title {
-	font-weight: 700;
-	font-size: 2.8rem;
-	margin-bottom: 3rem
-}
-
-@media only screen and (max-width: 37.5em) {
-	.about__content-title {
-		font-size: 2.4rem
-	}
-}
-
-.about__content-details-para {
-	font-size: 1.8rem;
-	color: #666;
-	max-width: 70rem;
-	line-height: 1.7;
-	margin-bottom: 1rem
-}
-
-.about__content-details-para:last-child {
-	margin-bottom: 4rem
-}
-
-.about__content-details-para a {
-	text-decoration: underline;
-	font-weight: 700;
-	color: #DC3545;
-	margin: 0 3px
-}
-
 .skills_image {
 	height: 60px;
 }
@@ -178,34 +134,5 @@
 	color: #111
 }
 
-.about_heading::after {
-	content: '';
-	position: absolute;
-	top: calc(100% + 1.5rem);
-	height: 5px;
-	width: 3rem;
-	background: #4d63db;
-	left: 50%;
-	transform: translateX(-50%);
-	border-radius: 5px
-}
-
-@media only screen and (max-width: 37.5em) {
-	.about_heading::after {
-		top: calc(100% + 1.2rem)
-	}
-}
-
-.about_left img{
-	padding-left: 20px;
-}
-
-@media all and (max-width: 700px) {
-	.about_left img{
-		padding-left: 0 !important;
-		width: 95%;
-	}
-
-}
 
 
