@@ -23,18 +23,22 @@ import { RunningHeadComponent } from './components/running-head/running-head.com
 import {MatMenuModule} from "@angular/material/menu";
 import {MatBadgeModule} from "@angular/material/badge";
 import { NotificationComponent } from './components/notification/notification.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import {DeleteAccountPopupComponent, UserProfileComponent} from './components/user-profile/user-profile.component';
 import { ErrorNotFoundComponent } from './components/error-not-found/error-not-found.component';
 import { KanbanBoardComponent } from './components/kanban-board/kanban-board.component';
-import { AddBoardPopupComponent } from './components/kanban-board/pop-up/add-board-popup/add-board-popup.component';
-import { AddColumnPopupComponent } from './components/kanban-board/pop-up/add-column-popup/add-column-popup.component';
-import { AddMemberPopupComponent } from './components/kanban-board/pop-up/add-member-popup/add-member-popup.component';
-import { AddTaskPopupComponent } from './components/kanban-board/pop-up/add-task-popup/add-task-popup.component';
-import { DeleteAccountPopupComponent } from './components/user-profile/delete-account-popup/delete-account-popup.component';
+import {
+	AddBoardPopupComponent,
+	AddColumnPopupComponent,
+	AddMemberPopupComponent,
+	AddTaskPopupComponent,
+} from "./components/kanban-board/pop-up/pop-up-component";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-
+import {MatRadioModule} from '@angular/material/radio';
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import {LayoutModule} from "@angular/cdk/layout";
+import {MatNativeDateModule} from "@angular/material/core";
 
 
 @NgModule({
@@ -62,6 +66,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 		MatToolbarModule,
 		MatButtonModule,
 		MatSidenavModule,
+		DragDropModule,
+		MatRadioModule,
 		MatIconModule,
 		MatListModule,
 		MatInputModule,
@@ -80,6 +86,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 		MatTooltipModule,
 		MatDatepickerModule,
 		MatSnackBarModule,
+		LayoutModule,
+		MatNativeDateModule
 
 	],
   providers: [],

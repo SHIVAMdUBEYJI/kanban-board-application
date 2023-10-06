@@ -13,17 +13,16 @@ import java.util.Map;
 public class JwtSecurityTokenGenerator implements SecurityTokenGenerator {
     @Override
     public Map<String, String> generateToken(User user) {
-        Map<String, Object> claimsMap = new HashMap<>();
-        claimsMap.put("username", user.getUsername());
-        String jsonWebToken = Jwts.builder()
+        String jwtToken;
+        jwtToken = Jwts.builder()
+                .setSubject(user.getEmail())
                 .setIssuedAt(new Date())
-                .setIssuer("user-auth-service")
-                .setSubject(user.getUsername())
-                .signWith(SignatureAlgorithm.HS256, "password")
-                .setClaims(claimsMap)
+                .signWith(SignatureAlgorithm.HS256, "secretKey") // Verify Signature
                 .compact();
-        return Map.of(
-                "token", jsonWebToken,
-                "message", user.getUsername() + " logged in Successfully !!");
+
+        Map<String, String> map = new HashMap<>();
+        map.put("token", jwtToken);
+        map.put("message", "User Successfully logged in");
+        return map;
     }
 }

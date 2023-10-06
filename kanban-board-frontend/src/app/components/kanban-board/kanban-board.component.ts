@@ -6,14 +6,17 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {KanbanServiceService} from "../../services/kanban-service.service";
 import {UserService} from "../../services/user-service";
-import {AddColumnPopupComponent} from "./pop-up/add-column-popup/add-column-popup.component";
+import {AddBoardPopupComponent,
+        AddColumnPopupComponent,
+        AddMemberPopupComponent,
+        AddTaskPopupComponent}
+	from "./pop-up/pop-up-component";
 import {Column} from "../../models/kanban/column.model";
-import {AddTaskPopupComponent} from "./pop-up/add-task-popup/add-task-popup.component";
-import {AddMemberPopupComponent} from "./pop-up/add-member-popup/add-member-popup.component";
+
 import {Task} from "../../models/kanban/task.model";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {DialogData} from "./dialog.data";
-import {AddBoardPopupComponent} from "./pop-up/add-board-popup/add-board-popup.component";
+
 
 @Component({
     selector: 'app-kanban-board', templateUrl: './kanban-board.component.html', styleUrls: ['./kanban-board.component.css']
@@ -47,24 +50,24 @@ export class KanbanBoardComponent implements OnInit {
         this.getNumberOfTasksAssignedToUser();
     }
 
-    addBoardToKanban() {
-        const dialogRef = this.dialog.open(AddBoardPopupComponent, {
-            width: '250px', data: {
-                boardName: null, messageToDisplay: "Add"
-            }, disableClose: true
-        });
-        dialogRef.afterClosed().subscribe({
-            next: (result: string) => {
-                console.log(this.currentUserKanban)
-                if (result !== null) {
-                    this.currentUserKanban?.boards?.push({boardName: result, columns: [], members: []});
-                    console.log("working33")
-                    console.log(this.currentUserKanban);
-                    this.kanbanService.updateKanban(this.currentUserKanban!);
-                }
-            }
-        });
-    }
+    addBoardToKanban(){
+		const dialogRef =this.dialog.open(AddBoardPopupComponent,{
+			width: '250px',
+			data:{
+				boardName:null,
+				messageToDisplay:"Add"
+			},
+			disableClose:true
+		});
+		dialogRef.afterClosed().subscribe({
+			next:(result: string)=>{
+				if(result ! == null){
+					this.currentUserKanban?.boards?.push({boardName:result,columns:[],members:[]});
+					this.kanbanService.updateKanban(this.currentUserKanban!);
+				}
+			}
+		});
+	}
 
     addColumnToBoard() {
         const dialogRef = this.dialog.open(AddColumnPopupComponent, {
@@ -239,6 +242,7 @@ export class KanbanBoardComponent implements OnInit {
     }
 
     ngOnInit(): void {
+		console.log("checking:" +this.currentUserKanban)
         this.kanbanService.getCurrentUserKanban();
         setTimeout(() => {
             this.currentUserKanban = this.kanbanService.currentUserKanban;

@@ -11,7 +11,7 @@ import {Task} from '../models/kanban/task.model';
 })
 export class KanbanServiceService {
 
-	endPointURL: string = 'http://losthost:9002/kanban';
+	endPointURL: string = 'http://localhost:9002/kanban';
 	currentUserKanban?: Kanban;
 
 	constructor(private httpClient: HttpClient, private notificationService: NotificationService) {
@@ -25,13 +25,13 @@ export class KanbanServiceService {
 		return this.httpClient.get<Kanban>(`${this.endPointURL}/get-kanban/${localStorage.getItem('user_email')}`)
 			.subscribe({
 				next: (response: Kanban) => {
-					response.boards?.forEach((b: Board) => {
-						b.columns?.forEach((c: Column) => {
-							c.tasks?.forEach((t: Task) => {
-								t.startDate = new Date(t.startDate!);
-								t.startDate = new Date(t.startDate?.getFullYear()!, t.startDate?.getMonth()!, t.startDate?.getDate()! + 1);
-								t.dueDate = new Date(t.dueDate!);
-								t.dueDate = new Date(t.dueDate?.getFullYear()!, t.dueDate?.getMonth()!, t.dueDate?.getDate()! + 1);
+					response.boards?.forEach((board: Board) => {
+						board.columns?.forEach((column: Column) => {
+							column.tasks?.forEach((task: Task) => {
+								task.startDate = new Date(task.startDate!);
+								task.startDate = new Date(task.startDate?.getFullYear()!, task.startDate?.getMonth()!, task.startDate?.getDate()! + 1);
+								task.dueDate = new Date(task.dueDate!);
+								task.dueDate = new Date(task.dueDate?.getFullYear()!, task.dueDate?.getMonth()!, task.dueDate?.getDate()! + 1);
 							})
 						})
 					})
