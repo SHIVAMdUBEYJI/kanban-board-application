@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user/user.model";
-import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 import {Notification} from "../models/notification/Notification";
+import * as nodemailer from 'nodemailer';
+
 
 
 @Injectable({
@@ -13,19 +14,42 @@ export class NotificationService {
 	endPointURL: string = "http://localhost:9002/notification";
 	currentUserNotifications?: Notification;
 
+	// private transporter: nodemailer.Transporter;
+
 	constructor(private httpClient: HttpClient) {
+		// this.transporter = nodemailer.createTransport({
+		// 	service:'gmail',
+		// 	auth:{
+		// 		user:'saran201496@gmail.com',
+		// 		pass:'Saraneswar@4896'
+		// 	}
+		// });
 	}
 
-	sendMail(user: User) {
-		emailjs.send('service_spywz99', 'template_swzyasm', {
-			email: user.email, firstName: user.firstName
-		}, 'U5Dd7D-6H0Gi074Pr')
-			.then((result: EmailJSResponseStatus) => {
-				console.log(result.text);
-			}, (error: { text: any; }) => {
-				console.log(error.text);
-			})
-	}
+	// async sendMail(user: User) {
+	// 	const emailContent =`
+	// 	<p>Hello ${user.firstName} ${user.lastName},</p>
+    //     <p>Thank You for registeration with us</p>
+    //     <p>Your login credentials:</p>
+    //     <p>Email: ${user.email}</p>
+    //     <p>Password: ${user.password}</p>
+    //     <p>Regards,</p>
+    //     <p>the TEAM</p>`;
+	//
+    // const toEmail = user.email || '';
+	// const mailOptions = {
+	// 	from: 'saran201496@gmail.com',
+	// 	to: toEmail,
+	// 	subject: 'Registration confirmation',
+	// 	html: emailContent,
+	// };
+	// try {
+	// 	const info = await this.transporter.sendMail(mailOptions);
+	// 	console.log('Email sent: ' +info.response);
+	// }catch (error){
+	// 	console.log('Error sending email: '+ error);
+	// }
+	// }
 	getNotification() {
 		this.httpClient.get<Notification>(`${this.endPointURL}/getByEmail/${localStorage.getItem('user_email')}`)
 			.subscribe({

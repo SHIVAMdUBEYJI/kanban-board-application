@@ -52,7 +52,7 @@ services:
     depends_on: [ eureka-server-service ]
 
   notification-service:
-    image: notifivationimage
+    image: notification_image
     container_name: notification-container
     build: notification-service/
     restart: always
