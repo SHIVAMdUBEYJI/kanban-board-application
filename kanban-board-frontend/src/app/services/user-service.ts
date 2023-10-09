@@ -26,6 +26,7 @@ export class UserService implements OnInit {
 	}
 
 	loginUser(user: User): void {
+		console.log(user)
 		user.email = user?.email?.toLowerCase();
 		this.httpClient.post(`${this.endPointURL}/login`, user).subscribe({
 			next: (response: any) => {

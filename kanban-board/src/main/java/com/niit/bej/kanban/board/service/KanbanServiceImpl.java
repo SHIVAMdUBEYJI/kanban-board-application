@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -37,18 +38,23 @@ public class KanbanServiceImpl implements KanbanService {
     @Override
     public Kanban updateKanban(Kanban kanban) {
         List<Board> kanbanBoards = kanban.getBoards();
+
         for (Board board : kanbanBoards) {
             if (!board.getMembers().isEmpty()) {
+                String boardName = board.getBoardName();
                 List<String> boardMembers = board.getMembers();
-                for (String members : boardMembers) {
-                    Kanban kanbanByEmail = this.kanbanRepository.findKanbanByEmail(members);
+
+                for (String member : boardMembers) {
+                    Kanban kanbanByEmail = this.kanbanRepository.findKanbanByEmail(member);
+
                     if (kanbanByEmail != null) {
                         List<Board> kanbanByEmailBoards = kanbanByEmail.getBoards();
+
                         for (Board kanbanByEmailBoard : kanbanByEmailBoards) {
-                            if (kanbanByEmailBoard.getBoardName().equals(board.getBoardName())) {
-                                kanbanByEmailBoard.setBoardName(board.getBoardName());
+                            if (kanbanByEmailBoard.getBoardName().equals(boardName)) {
+                                kanbanByEmailBoard.setBoardName(boardName);
                                 kanbanByEmailBoard.setColumns(board.getColumns());
-                                kanbanByEmailBoard.setMembers(board.getMembers());
+                                kanbanByEmailBoard.setMembers(boardMembers);
                                 this.kanbanRepository.save(kanbanByEmail);
                             }
                         }
@@ -67,29 +73,39 @@ public class KanbanServiceImpl implements KanbanService {
     @Override
     public Kanban addMemberToBoardByEmail(Kanban kanban, String email) {
         Kanban kanbanByEmail = this.kanbanRepository.findKanbanByEmail(email);
+
         if (kanbanByEmail != null) {
-            List<Board> boards = kanban.getBoards();
-            for (Board board : boards) {
-                if (board.getMembers().contains(email)) {
-                    if (kanbanByEmail.getBoards().contains(board)) {
-                        continue;
-                    }
-                    if (!board.getMembers().contains(kanban.getEmail())) {
-                        board.getMembers().add(kanban.getEmail());
-                    }
-                    kanbanByEmail.getBoards().add(board);
-                    this.kanbanRepository.save(kanban);
-                    this.kanbanRepository.save(kanbanByEmail);
-                    this.updateKanban(kanban);
+            List<Board> kanbanBoards = kanban.getBoards();
+            List<Board> kanbanByEmailBoards = kanbanByEmail.getBoards();
+
+            for (Board board : kanbanBoards) {
+                if (board.getMembers().contains(email) && !kanbanByEmailBoards.contains(board)) {
+                    board.getMembers().add(email);
+                    kanbanByEmailBoards.add(board);
                 }
             }
+            this.kanbanRepository.save(kanban);
+            this.kanbanRepository.save(kanbanByEmail);
+            this.updateKanban(kanban);
         }
+
         return kanban;
     }
 
     @Override
     public List<String> getAllEmailsInBoard(String email, String boardName) {
         Query query = new Query(Criteria.where("email").is(email).and("boards.boardName").is(boardName));
-        return mongoTemplate.find(query, Kanban.class).get(0).getBoards().get(0).getMembers();
+
+        Kanban kanban = mongoTemplate.findOne(query, Kanban.class);
+
+        if (kanban != null && !kanban.getBoards().isEmpty()) {
+            for (Board board : kanban.getBoards()) {
+                if (board.getBoardName().equals(boardName)) {
+                    return board.getMembers();
+                }
+            }
+        }
+
+        return Collections.emptyList();
     }
 }

@@ -3,7 +3,6 @@ package com.niit.bej.kanban.board.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,8 +13,4 @@ public class Board {
     private  List<String> members;
 
 
-    public Board() {
-        this.columns = new ArrayList<>();
-        this.members = new ArrayList<>();
-    }
 }

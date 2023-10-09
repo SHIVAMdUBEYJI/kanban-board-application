@@ -61,9 +61,25 @@ export class KanbanBoardComponent implements OnInit {
 		});
 		dialogRef.afterClosed().subscribe({
 			next:(result: string)=>{
-				if(result ! == null){
-					this.currentUserKanban?.boards?.push({boardName:result,columns:[],members:[]});
-					this.kanbanService.updateKanban(this.currentUserKanban!);
+				console.log("result :" +result);
+				if(result !== null){
+					console.log("result :"+result)
+					//this.currentUserKanban?.boards?.push({boardName:result,columns:[],members:[]});
+					if (this.currentUserKanban) {
+						if (!this.currentUserKanban.boards) {
+							this.currentUserKanban.boards = [];
+						}
+						this.currentUserKanban.boards.push({ boardName: result, columns: [], members: [] });
+					}
+					console.log(this.currentUserKanban);
+					this.kanbanService.updateKanban(this.currentUserKanban!).subscribe(
+						(response:Kanban)=>{
+							this.currentUserKanban = response;
+						},
+						(error)=> {
+							console.error('Error',error);
+						}
+					)
 				}
 			}
 		});

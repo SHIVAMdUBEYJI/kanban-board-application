@@ -15,7 +15,7 @@ export class LoginGuard implements CanActivate {
 		if (this.userService.isLoggedIn || localStorage.getItem('token') != null) {
 			return true;
 		} else {
-			this.snackbar.open("You must be logged in to access this page", "Close", {duration: 3000});
+			this.snackbar.open("You must be logged in to access this page", "Close", {duration: 2000});
 			this.router.navigateByUrl("login");
 			return false;
 		}

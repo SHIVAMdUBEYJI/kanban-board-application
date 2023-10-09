@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user/user.model";
 import {Notification} from "../models/notification/Notification";
-import * as nodemailer from 'nodemailer';
+
 
 
 
@@ -21,7 +21,7 @@ export class NotificationService {
 		// 	service:'gmail',
 		// 	auth:{
 		// 		user:'saran201496@gmail.com',
-		// 		pass:'Saraneswar@4896'
+		// 		pass:'S'
 		// 	}
 		// });
 	}

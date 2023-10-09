@@ -13,7 +13,7 @@ import {User} from "../../../models/user/user.model";
 	templateUrl: './add-board-popup.component.html',
 })
 export class AddBoardPopupComponent implements OnInit{
-	currentUserKanban?: Kanban;
+	currentUserKanban?: Kanban |undefined;
 	isBoardNameValid?: boolean;
 	boardNames: String[] = [];
 	messageToDisplay?: string;
@@ -30,14 +30,13 @@ export class AddBoardPopupComponent implements OnInit{
 	}
 
 	ngOnInit(): void {
-		console.log(this.currentUserKanban)
 		this.currentUserKanban = this.kanbanService.currentUserKanban;
-		console.log(this.currentUserKanban)
 		this.messageToDisplay = this.data.messageToDisplay;
-		this.currentUserKanban?.boards?.forEach((b: Board) => {
-			this.boardNames.push(b.boardName!);
-		});
-		this.boardNames.push("");
+		this.messageToDisplay = this.data.messageToDisplay;
+		if (this.currentUserKanban?.boards) {
+			this.boardNames = this.currentUserKanban.boards.map((board: Board) => board.boardName || '');
+		}
+		this.boardNames.push('');
 	}
 }
 

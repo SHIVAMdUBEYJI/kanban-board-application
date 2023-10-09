@@ -45,11 +45,7 @@ export class KanbanServiceService {
 	}
 
 	updateKanban(kanban: Kanban) {
-		console.log(kanban)
-		return this.httpClient.put<Kanban>(`http://localhost:9002/kanban/update-kanban`, kanban)
-			.subscribe({
-				next: (response: Kanban) => this.currentUserKanban = response, error: (err) => console.log(err)
-			});
+		return this.httpClient.put<Kanban>(`${this.endPointURL}/update-kanban`,kanban);
 	}
 
 	deleteKanban() {
