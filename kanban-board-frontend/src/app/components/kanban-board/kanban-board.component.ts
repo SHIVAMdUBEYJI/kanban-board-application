@@ -36,16 +36,47 @@ export class KanbanBoardComponent implements OnInit {
 	constructor(private kanbanService: KanbanServiceService, public dialog: MatDialog, private userService: UserService, private snackBar: MatSnackBar) {
 	}
 
+	// fetchDetailsOfBoardMembers() {
+	// 	this.boardMembers = [];
+	// 	this.boardToDisplay?.members?.forEach((memberEmail: string) => {
+	// 		this.userService.getUserByEmail(memberEmail).subscribe({
+	// 			next: (response: User) => {
+	// 				this.boardMembers.push(response);
+	// 			}
+	// 		})
+	// 	})
+	// }
 	fetchDetailsOfBoardMembers() {
 		this.boardMembers = [];
-		this.boardToDisplay?.members?.forEach((memberEmail: string) => {
-			this.userService.getUserByEmail(memberEmail).subscribe({
-				next: (response: User) => {
-					this.boardMembers.push(response);
-				}
-			})
-		})
+
+		// Ensure this.boardToDisplay?.members is an array of strings
+		const members = this.boardToDisplay?.members as string[] | undefined;
+
+		if (members) {
+			// Create an array of promises for fetching user details
+			const promises = members.map((memberEmail: string) => {
+				return this.userService.getUserByEmail(memberEmail).toPromise();
+			});
+
+			// Use Promise.all to handle all promises
+			Promise.all(promises).then((responses: (User | undefined)[]) => {
+				responses.forEach((response: User | undefined, index: number) => {
+					// Check if the response is defined and if the corresponding email is not already in the boardMembers array
+					if (response) {
+						const memberEmail = members[index];
+						const isMemberExists = this.boardMembers.some(member => member.email === memberEmail);
+
+						if (!isMemberExists) {
+							// If not, push the response to boardMembers
+							this.boardMembers.push(response);
+						}
+					}
+				});
+			});
+		}
 	}
+
+
 
 	displayBoard(board: Board) {
 		this.boardToDisplay = board;
@@ -151,14 +182,15 @@ export class KanbanBoardComponent implements OnInit {
 		});
 		dialogRef.beforeClosed().subscribe({
 			next: (result: string) => {
+				console.log(result);
 				if (result !== null) {
-					this.currentUserKanban?.boards?.forEach((b: Board) => {
-						if (b.boardName === this.boardToDisplay?.boardName) {
-							if (b.members?.includes(result)) {
-								this.snackBar.open("Member already exists in this board", "Close", {duration: 3000});
+					this.currentUserKanban?.boards?.forEach((board: Board) => {
+						if (board.boardName === this.boardToDisplay?.boardName) {
+							if (board.members?.includes(result)) {
+								this.snackBar.open("Member already exists in this board", "Close", {duration: 2000});
 							} else {
-								b.members?.push(result);
-								this.snackBar.open("Member added successfully", "Close", {duration: 3000});
+								board.members?.push(result);
+								this.snackBar.open("Member added successfully", "Close", {duration: 2000});
 								this.kanbanService.sendMessageToMember(`You have been added to the board ${this.boardToDisplay?.boardName} by ${localStorage.getItem('user_firstname')}`, result);
 								this.kanbanService.addMemberToBoard(this.currentUserKanban!, result).subscribe({
 									next: (result) => console.log(result)
@@ -173,14 +205,14 @@ export class KanbanBoardComponent implements OnInit {
 	}
 
 	fetchDetailsOfTaskAssignee() {
-		this.currentUserKanban?.boards?.forEach((b: Board) => {
-			b.columns?.forEach((c: Column) => {
-				c.tasks?.forEach((t: Task) => {
-					if (t.assigneeEmail != null && t.assigneeEmail !== "") {
-						this.userService.getUserByEmail(t.assigneeEmail!).subscribe({
+		this.currentUserKanban?.boards?.forEach((board: Board) => {
+			board.columns?.forEach((column: Column) => {
+				column.tasks?.forEach((task: Task) => {
+					if (task.assigneeEmail != null && task.assigneeEmail !== "") {
+						this.userService.getUserByEmail(task.assigneeEmail!).subscribe({
 							next: (response) => {
-								t.assigneeName = response.firstName;
-								t.assigneeImageURL = response.imageURL;
+								task.assigneeName = response.firstName;
+								task.assigneeImageURL = response.imageURL;
 							}
 						})
 					}
@@ -191,18 +223,18 @@ export class KanbanBoardComponent implements OnInit {
 
 	deleteBoard(boardName: string | undefined) {
 		let boardMembers: string[] = []
-		this.currentUserKanban?.boards?.forEach((b: Board) => {
-			if (b.boardName === boardName) {
-				boardMembers = b.members!;
+		this.currentUserKanban?.boards?.forEach((board: Board) => {
+			if (board.boardName === boardName) {
+				boardMembers = board.members!;
 			}
 		});
 		if (boardMembers.length != 0) {
 			boardMembers.forEach((member: string) => {
 				this.kanbanService.getKanbanByEmail(member).subscribe({
 					next: (result: Kanban) => {
-						result.boards?.forEach((b: Board) => {
-							if (b.boardName === boardName) {
-								result.boards?.splice(result.boards.indexOf(b), 1);
+						result.boards?.forEach((board: Board) => {
+							if (board.boardName === boardName) {
+								result.boards?.splice(result.boards.indexOf(board), 1);
 								this.kanbanService.saveKanban(result).subscribe({
 									error: (err) => console.log(err)
 								});
@@ -215,8 +247,8 @@ export class KanbanBoardComponent implements OnInit {
 				});
 			})
 		} else {
-			this.currentUserKanban?.boards?.forEach((b: Board, index: number) => {
-				if (b.boardName === boardName) {
+			this.currentUserKanban?.boards?.forEach((board: Board, index: number) => {
+				if (board.boardName === boardName) {
 					this.currentUserKanban?.boards?.splice(index, 1);
 				}
 			});
@@ -228,11 +260,11 @@ export class KanbanBoardComponent implements OnInit {
 	}
 
 	deleteColumn(column: Column) {
-		this.currentUserKanban?.boards?.forEach((b: Board) => {
-			if (b.boardName === this.boardToDisplay?.boardName) {
-				b.columns?.forEach((c: Column, index: number) => {
-					if (c.columnName === column.columnName) {
-						b.columns?.splice(index, 1);
+		this.currentUserKanban?.boards?.forEach((board: Board) => {
+			if (board.boardName === this.boardToDisplay?.boardName) {
+				board.columns?.forEach((column1: Column, index: number) => {
+					if (column1.columnName === column.columnName) {
+						board.columns?.splice(index, 1);
 					}
 				})
 			}
@@ -241,12 +273,12 @@ export class KanbanBoardComponent implements OnInit {
 	}
 
 	deleteTask(task: Task) {
-		this.currentUserKanban?.boards?.forEach((b: Board) => {
-			if (b.boardName === this.boardToDisplay?.boardName) {
-				b.columns?.forEach((c: Column) => {
-					c.tasks?.forEach((t: Task, index: number) => {
+		this.currentUserKanban?.boards?.forEach((board: Board) => {
+			if (board.boardName === this.boardToDisplay?.boardName) {
+				board.columns?.forEach((column: Column) => {
+					column.tasks?.forEach((t: Task, index: number) => {
 						if (t.name === task.name) {
-							c.tasks?.splice(index, 1);
+							column.tasks?.splice(index, 1);
 						}
 					})
 				})

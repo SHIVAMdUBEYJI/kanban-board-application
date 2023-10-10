@@ -89,9 +89,23 @@ export class AddMemberPopupComponent implements OnInit{
 		this.dialogRef.close(null);
 	}
 
-	checkEmail() {
+	// checkEmail() {
+	// 	this.isEmailValid = this.allEmails?.includes(this.data.email, 0);
+	// }
+	// addEmail(newEmail: string) {
+	// 	// Assuming `this.allEmails` is an array
+	// 	this.allEmails?.push(newEmail);
+	// }
+	checkAndAddEmail(newEmail: string) {
 		this.isEmailValid = this.allEmails?.includes(this.data.email, 0);
+
+		if (!this.isEmailValid) {
+			// Assuming `this.allEmails` is an array
+			this.allEmails?.push(newEmail);
+		}
 	}
+
+
 
 	ngOnInit(): void {
 		setTimeout(() => {

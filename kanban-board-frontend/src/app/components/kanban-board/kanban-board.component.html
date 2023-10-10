@@ -149,13 +149,22 @@
 									<mat-icon>delete</mat-icon>
 								</button>
 							</div>
+<!--							<div class="assignee">-->
+<!--								<div *ngIf="this.boardToDisplay?.members?.length !== 0" class="assignee-details">-->
+<!--									<img *ngIf="task?.assigneeImageURL !== undefined" [matTooltip]="task?.assigneeName!"-->
+<!--										 [src]="task?.assigneeImageURL" alt="Profile Image">-->
+<!--									<div *ngIf="task?.assigneeImageURL !== undefined"><b>Assigned To</b></div>-->
+<!--								</div>-->
+<!--							</div>-->
 							<div class="assignee">
-								<div *ngIf="this.boardToDisplay?.members?.length !== 0" class="assignee-details">
-									<img *ngIf="task?.assigneeImageURL !== undefined" [matTooltip]="task?.assigneeName!"
-										 [src]="task?.assigneeImageURL" alt="Profile Image">
-									<div *ngIf="task?.assigneeImageURL !== undefined"><b>Assigned To</b></div>
+								<div *ngIf="boardToDisplay?.members?.length !== 0" class="assignee-details">
+									<div *ngFor="let member of boardToDisplay?.members">
+										<img *ngIf="task?.assigneeImageURL !== undefined" [matTooltip]="member" [src]="task?.assigneeImageURL" alt="Profile Image">
+										<div *ngIf="task?.assigneeImageURL !== undefined"><b>Assigned To</b></div>
+									</div>
 								</div>
 							</div>
+
 						</div>
 
 					</div>
