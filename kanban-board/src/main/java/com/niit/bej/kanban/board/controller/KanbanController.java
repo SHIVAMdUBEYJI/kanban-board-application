@@ -21,7 +21,6 @@ public class KanbanController {
         this.messageService = messageService;
     }
 
-
     @PostMapping("/save-kanban")
     public ResponseEntity<?> saveKanban(@RequestBody Kanban kanban) {
         return new ResponseEntity<>(this.kanbanService.saveKanban(kanban), HttpStatus.CREATED);
