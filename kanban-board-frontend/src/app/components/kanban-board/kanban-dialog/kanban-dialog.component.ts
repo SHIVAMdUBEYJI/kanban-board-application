@@ -24,7 +24,7 @@ export class KanbanDialogComponent implements OnInit {
 	close() {
 		this.dialogRef.close();
 	}
-
+	
 	save() {
 		this.title = this.form.get('title')?.value;
 		if (this.title) {
