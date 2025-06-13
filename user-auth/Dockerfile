@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 FROM openjdk
 
-LABEL authors="Saranyan.E"
+LABEL authors="shivam dubey"
 
 COPY target/*.jar /user-auth-service.jar
 

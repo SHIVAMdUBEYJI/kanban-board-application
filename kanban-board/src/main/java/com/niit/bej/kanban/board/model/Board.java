@@ -3,14 +3,13 @@ package com.niit.bej.kanban.board.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 public class Board {
-    private  String boardName;
-    private  List<Column> columns;
-    private  List<String> members;
-
-
+    private String boardName;
+    private List<Column> columns;
+    private List<String> members;
 }

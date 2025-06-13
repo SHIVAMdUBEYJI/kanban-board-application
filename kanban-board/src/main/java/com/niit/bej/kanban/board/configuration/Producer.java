@@ -19,3 +19,8 @@ public class Producer {
       RABBIT_TEMPLATE.convertAndSend(DIRECT_EXCHANGE.getName(),MessageConfig.MESSAGE_KEY,messageDTO);
     }
 }
+
+
+
+//We need to use A common repository like micro-service which can come in use when we want same model/Entity classes across all
+// of  our microservices

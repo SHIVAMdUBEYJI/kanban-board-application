@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     public void login(String email, String password) throws UserNotFoundException {
         Optional<User> userByEmailAndPassword = this.userRepository.findUserByEmailAndPassword(email, password);
         if (userByEmailAndPassword.isEmpty()) {
-            throw new UserNotFoundException("not found");
+            throw new UserNotFoundException(" User not found");
         }
     }
 

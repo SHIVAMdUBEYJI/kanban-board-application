@@ -8,11 +8,10 @@ spring:
   application:
     name: user-auth-service
 
-
   datasource:
     url: jdbc:mysql://mysql-database-container:3306/users_database?createDatabaseIfNotExist=true
     username: root
-    password: Saraneswar4896
+    password: 66886388babu  
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

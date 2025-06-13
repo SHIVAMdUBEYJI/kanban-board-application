@@ -14,7 +14,7 @@ public interface KanbanService {
 
     void deleteKanbanByEmail(String email);
 
-    Kanban addMemberToBoardByEmail(Kanban kanban,String email);
+    Kanban addMemberToBoardByEmail(Kanban kanban, String email);
 
-   List<String>getAllEmailsInBoard(String email,String boardName);
+    List<String> getAllEmailsInBoard(String email, String boardName);
 }

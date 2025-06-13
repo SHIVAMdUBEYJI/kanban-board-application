@@ -3,7 +3,7 @@ package com.niit.bej.kanban.board.service;
 import com.niit.bej.kanban.board.model.Board;
 import com.niit.bej.kanban.board.model.Kanban;
 import com.niit.bej.kanban.board.repository.KanbanRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -13,17 +13,18 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class KanbanServiceImpl implements KanbanService {
 
     private final KanbanRepository kanbanRepository;
 
     private final MongoTemplate mongoTemplate;
 
-    @Autowired
-    public KanbanServiceImpl(KanbanRepository kanbanRepository, MongoTemplate mongoTemplate) {
-        this.kanbanRepository = kanbanRepository;
-        this.mongoTemplate = mongoTemplate;
-    }
+//    @Autowired
+//    public KanbanServiceImpl(KanbanRepository kanbanRepository, MongoTemplate mongoTemplate) {
+//        this.kanbanRepository = kanbanRepository;
+//        this.mongoTemplate = mongoTemplate;
+//    }
 
     @Override
     public Kanban getKanbanByEmail(String email) {
@@ -88,7 +89,6 @@ public class KanbanServiceImpl implements KanbanService {
             this.kanbanRepository.save(kanbanByEmail);
             this.updateKanban(kanban);
         }
-
         return kanban;
     }
 
@@ -105,7 +105,6 @@ public class KanbanServiceImpl implements KanbanService {
                 }
             }
         }
-
         return Collections.emptyList();
     }
 }

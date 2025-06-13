@@ -1,8 +1,8 @@
 FROM ubuntu:latest
 
-FROM openjdk
+FROM openjdk:latest
 
-LABEL authors="Saranyan.E"
+LABEL authors="shivam dubey"
 
 COPY target/*.jar /kanban-board-service.jar
 
