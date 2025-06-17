@@ -1,75 +1,75 @@
-version: "3"
-services:
-  eureka-server-service:
-    build: eureka-server/
-    container_name: eureka-service-container
-    networks: [ kanban-board-application-network  ]
-    ports:
-      - "8761:8761"
-
-  mysql-database-service:
-    image: mysql
-    container_name: mysql-database-container
-    ports:
-      - "3307:3306"
-    networks: [ kanban-board-application-network ]
-    environment:
-      MYSQL_DATABASE: users_database
-      MYSQL_ROOT_PASSWORD: Saraneswar4896
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-
-  mongodb-database-service:
-    image: mongo
-    container_name: mongo
-    ports:
-      - "27018:27017"
-    networks: [ kanban-board-application-network ]
-
-  user-auth-service:
-    build: user-auth/
-    container_name: user-auth-service-container
-    ports:
-      - "8081:8081"
-    networks: [ kanban-board-application-network ]
-    depends_on: [ mysql-database-service,eureka-server-service ,api-gateway-service]
-    restart: always
-
-  kanban-board-service:
-    build: kanban-board/
-    container_name: kanban-board-container
-    ports:
-      - "8082:8082"
-    networks: [ kanban-board-application-network]
-    depends_on: [ mongodb-database-service ,eureka-server-service,rabbitmqService,api-gateway-service]
-    restart: always
-
-  api-gateway-service:
-    build: api-gateway/
-    container_name: api-gateway-service-container
-    ports:
-      - "9002:9002"
-    networks: [ kanban-board-application-network ]
-    depends_on: [ eureka-server-service ]
-
-  notification-service:
-    image: notification_image
-    container_name: notification-container
-    build: notification-service/
-    restart: always
-    networks: [ kanban-board-application-network]
-    ports:
-      - "8084:8084"
-    depends_on: [ mongodb-database-service,api-gateway-service,rabbitmqService ]
-
-  rabbitmqService:
-    image:  rabbitmq:management
-    container_name: rabbitmq-container
-    ports:
-      - "5672:15672"
-      - "15672:15672"
-    networks: [ kanban-board-application-network]
-    restart: always
-
-networks:
-  kanban-board-application-network:
-    driver: bridge
+#version: "3"
+#services:
+#  eureka-server-service:
+#    build: eureka-server/
+#    container_name: eureka-service-container
+#    networks: [ kanban-board-application-network  ]
+#    ports:
+#      - "8761:8761"
+#
+#  mysql-database-service:
+#    image: mysql
+#    container_name: mysql-database-container
+#    ports:
+#      - "3307:3306"
+#    networks: [ kanban-board-application-network ]
+#    environment:
+#      MYSQL_DATABASE: users_database
+#      MYSQL_ROOT_PASSWORD: Saraneswar4896
+#      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+#
+#  mongodb-database-service:
+#    image: mongo
+#    container_name: mongo
+#    ports:
+#      - "27018:27017"
+#    networks: [ kanban-board-application-network ]
+#
+#  user-auth-service:
+#    build: user-auth/
+#    container_name: user-auth-service-container
+#    ports:
+#      - "8081:8081"
+#    networks: [ kanban-board-application-network ]
+#    depends_on: [ mysql-database-service,eureka-server-service ,api-gateway-service]
+#    restart: always
+#
+#  kanban-board-service:
+#    build: kanban-board/
+#    container_name: kanban-board-container
+#    ports:
+#      - "8082:8082"
+#    networks: [ kanban-board-application-network]
+#    depends_on: [ mongodb-database-service ,eureka-server-service,rabbitmqService,api-gateway-service]
+#    restart: always
+#
+#  api-gateway-service:
+#    build: api-gateway/
+#    container_name: api-gateway-service-container
+#    ports:
+#      - "9002:9002"
+#    networks: [ kanban-board-application-network ]
+#    depends_on: [ eureka-server-service ]
+#
+#  notification-service:
+#    image: notification_image
+#    container_name: notification-container
+#    build: notification-service/
+#    restart: always
+#    networks: [ kanban-board-application-network]
+#    ports:
+#      - "8084:8084"
+#    depends_on: [ mongodb-database-service,api-gateway-service,rabbitmqService ]
+#
+#  rabbitmqService:
+#    image:  rabbitmq:management
+#    container_name: rabbitmq-container
+#    ports:
+#      - "5672:15672"
+#      - "15672:15672"
+#    networks: [ kanban-board-application-network]
+#    restart: always
+#
+#networks:
+#  kanban-board-application-network:
+#    driver: bridge
