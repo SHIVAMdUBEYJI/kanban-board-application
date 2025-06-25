@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(User user) throws UserAlreadyExistsException {
 
-        if (this.userRepository.existsById(user.getEmail())) {
+        if (userRepository.existsById(user.getEmail())) {
             throw new UserAlreadyExistsException("User already found");
         }
         kanbanProxy.saveKanban(user);
@@ -40,18 +40,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user, String email) {
-        return this.userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
     public void deleteUser(String email) {
-        this.userRepository.deleteById(email);
+       userRepository.deleteById(email);
 
     }
 
     @Override
     public void login(String email, String password) throws UserNotFoundException {
-        Optional<User> userByEmailAndPassword = this.userRepository.findUserByEmailAndPassword(email, password);
+        Optional<User> userByEmailAndPassword = userRepository.findUserByEmailAndPassword(email, password);
         if (userByEmailAndPassword.isEmpty()) {
             throw new UserNotFoundException("not found");
         }
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByEmail(String email) throws UserNotFoundException {
-        User user = this.userRepository.findUserByEmail(email);
+        User user = userRepository.findUserByEmail(email);
         if (user == null) {
             throw new UserNotFoundException("cannot find the user by this email");
         }
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<String> findAllEmails() {
-        List<User> userList = this.userRepository.findAll();
+        List<User> userList =userRepository.findAll();
         List<String> emails = new ArrayList<>();
         for (User user : userList) {
             emails.add(user.getEmail());
