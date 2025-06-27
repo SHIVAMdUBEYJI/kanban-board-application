@@ -1,4 +1,4 @@
-version: "3"
+
 services:
   eureka-server-service:
     build: eureka-server/
@@ -25,18 +25,14 @@ services:
       - "8081:8081"
     networks: [ kanban-board-application-new-network ]
     depends_on: [ mysql-database-service,eureka-server-service ]
-    restart: always
 
-  kanban-database-service:
-    image: mysql
-    container_name: kanban-database-container
+
+  mongo:
+    image: mongo
+    container_name: mongo-database-container
     ports:
-      - "3308:3306"
+      - "27018:27017"
     networks: [ kanban-board-application-new-network ]
-    environment:
-      MYSQL_DATABASE: kanban_database
-      MYSQL_ROOT_PASSWORD: 66886388babu
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
 
 
   kanban-board-service:
@@ -45,17 +41,26 @@ services:
     ports:
       - "8082:8082"
     networks: [ kanban-board-application-new-network ]
-    depends_on: [ kanban-database-service ,eureka-server-service]
+    depends_on: [ mongo ,eureka-server-service]
     restart: always
 
   api-gateway-service:
     build: api-gateway/
     container_name: api-gateway-service-container
     ports:
-      - "9000:9000"
+      - "9002:9002"
     networks: [ kanban-board-application-new-network ]
     depends_on: [ eureka-server-service ]
 
+
+  notification-service:
+    build: notification-service/
+    container_name: notification-service-container
+    ports:
+      - "8084:8084"
+    networks: [ kanban-board-application-new-network ]
+    depends_on: [ eureka-server-service ]
+    restart: always
 
 networks:
   kanban-board-application-new-network:

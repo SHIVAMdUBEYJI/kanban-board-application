@@ -17,6 +17,16 @@ spring:
             allowedHeaders: '*'
             allowedMethods: '*'
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: true
+
+
 eureka:
   client:
     register-with-eureka: true

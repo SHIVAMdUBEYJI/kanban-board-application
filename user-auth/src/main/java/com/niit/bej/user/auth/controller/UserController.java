@@ -33,7 +33,6 @@ public class UserController {
 
     }
 
-
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) throws UserAlreadyExistsException {
         try {
